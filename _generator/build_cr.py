@@ -26,13 +26,21 @@ ANNO_STYLE = '''<style>
 .rev-lead blockquote{margin:0;font-size:16.5px;line-height:1.6;color:var(--navy);font-weight:500}
 .rev-lead .stars{color:#F2A93B;letter-spacing:2px;font-size:15px;margin-bottom:8px}
 .rev-lead cite{display:block;margin-top:12px;font-style:normal;font-size:13px;color:var(--steel);font-weight:600}
+.cr-gallery{padding:56px 0}
+.cr-gwrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:24px}
+.cr-photo{margin:0;border-radius:14px;overflow:hidden;border:1px solid #E4EBF1;background:#fff}
+.cr-photo img{display:block;width:100%;height:230px;object-fit:cover}
+.cr-photo figcaption{font-size:12.5px;color:var(--steel);padding:10px 14px;line-height:1.5}
+.cr-photo.inline{max-width:560px;margin:24px 0}
+.cr-photo.inline img{height:auto;max-height:520px}
 </style>'''
 
 # --- Realūs klientų atsiliepimai iš paslaugos.lt profilio (Audrius Karnišauskas | Kraulis).
 #     Įvertinimas 5,0 (7 atsiliepimai). Rašyba lengvai sutvarkyta, prasmė nekeista.
-# Siūlomos garantijos trukmės (Audriaus pasirinkimas — keičiama vienoje vietoje):
-G_MONT = "24 mėn."   # montavimo (įrengimo) darbams
-G_REM  = "6 mėn."    # remonto darbams
+# Garantija (Audrius patvirtino 2026-07): darbams — nuo 3 iki 24 mėn. (pagal darbų pobūdį).
+G_GAR = "nuo 3 iki 24 mėn."
+# Įrangos gamintojo garantijos pratęsimas, kai montuoja kvalifikuoti specialistai:
+G_PRAT = "iki gamintojo numatyto termino (dažnai 3, kai kuriais atvejais 5 metai)"
 # Aptarnaujama teritorija (iš paslaugos.lt profilio: „Vilnius, +100 km aplink“):
 TERITORIJA = "Vilniuje ir apie 100 km aplink"
 
@@ -52,6 +60,31 @@ def reviews_block(items=None, title="Ką sako klientai", kick="Atsiliepimai", su
     srch=(f'<p class="cr-revsrc">Tikri klientų atsiliepimai iš <a href="{PASLAUGOS_URL}" target="_blank" rel="noopener">Paslaugos.lt profilio</a> — įvertinimas 5,0 (7 atsiliepimai).</p>') if src else ''
     s=f'<p>{sub}</p>' if sub else ''
     return f'<section class="cr-revs"><div class="wrap"><div class="sh"><div><span class="kick">{kick}</span><h2>{title}</h2></div>{s}</div><div class="cr-revwrap">{cards}</div>{srch}</div></section>'
+
+# --- Realių darbų nuotraukos (Audrius pateikė 2026-07). Failai dedami į content-review/img/.
+#     Kol failo nėra, <img> pasislepia (onerror), puslapis nesulūžta.
+PHOTOS = {
+ "termovizija":  ("01-termovizija-kondicionierius.jpg","Kondicionieriaus termovizinė nuotrauka — matomas šaldymo pasiskirstymas","Termovizinė patikra: matome, kaip realiai veikia įranga."),
+ "olimpia":      ("02-olimpia-lauko-blokas.jpg","Sumontuotas Olimpia Splendid kondicionieriaus lauko blokas ant mūrinės sienos","Tvarkingas lauko bloko montavimas."),
+ "rekuperatorius":("03-rekuperatorius.jpg","Rekuperatoriaus įrenginys su prijungtais oro ortakiais","Rekuperacinė vėdinimo sistema."),
+ "testo":        ("04-testo-matavimo-iranga.jpg","Profesionali „testo“ oro srauto matavimo įranga","Matuojame profesionalia „testo“ įranga — ne iš akies."),
+ "toshiba":      ("05-toshiba-servisas.jpg","Toshiba šilumos siurblio servisas su vakuuminiu siurbliu ir manometrais","Šilumos siurblio servisas su vakuumavimo ir slėgio matavimo įranga."),
+ "matavimas":    ("06-oro-srauto-matavimas.jpg","Specialistas matuoja oro srautą prie lubų difuzoriaus","Oro srautų matavimas kiekvienoje patalpoje — balansavimo pagrindas."),
+ "trane":        ("07-trane-agregatas.jpg","TRANE pramoninis vandens aušinimo agregatas techninėje patalpoje","Dirbame ir su sudėtingomis verslo sistemomis."),
+}
+
+def img_fig(key, cls=""):
+    fn,alt,cap = PHOTOS[key]
+    c=f'<figcaption>{cap}</figcaption>' if cap else ''
+    return (f'<figure class="cr-photo {cls}"><img src="img/{fn}" alt="{alt}" loading="lazy" '
+            f'onerror="this.closest(\'figure\').style.display=\'none\'">{c}</figure>')
+
+def photo_strip(keys, title="Iš mūsų darbų", kick="Realūs objektai", sub=None):
+    figs="".join(img_fig(k) for k in keys)
+    s=f'<p>{sub}</p>' if sub else ''
+    return (f'<section class="cr-gallery"><div class="wrap"><div class="sh"><div>'
+            f'<span class="kick">{kick}</span><h2>{title}</h2></div>{s}</div>'
+            f'<div class="cr-gwrap">{figs}</div></div></section>')
 
 def review_lead(who, meta, quote):
     return f'<div class="wrap"><div class="rev-lead"><div class="stars">★★★★★</div><blockquote>„{quote}"</blockquote><cite>— {who}, {meta} · <a href="{PASLAUGOS_URL}" target="_blank" rel="noopener">Paslaugos.lt</a></cite></div></div>'

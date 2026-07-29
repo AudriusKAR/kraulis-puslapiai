@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import io, os
 from urllib.parse import quote
-from build_cr import page_cr, anno, OUT_CR, reviews_block, review_lead, REVIEWS, G_MONT, G_REM, TERITORIJA
+from build_cr import (page_cr, anno, OUT_CR, reviews_block, review_lead, REVIEWS,
+    G_GAR, G_PRAT, TERITORIJA, img_fig, photo_strip)
 from build_v2 import MAIL, TEL, TELH, CSS
 from build_v2_content import ic, crumbs, titlebar, chips, cta, btn, faq
 H=("Pradžia","Pagrindinis.html")
@@ -122,7 +123,7 @@ duk+=faq([
   ("Kiek kainuoja diagnostika ir paslaugos?",["Gedimo diagnostika — nuo 69 €. Profilaktinė priežiūra — nuo 99 €. Rekuperacijos balansavimas — nuo 149 €.","Kainos „nuo“; tikslią suderiname prieš darbus."]),
   ("Kur teikiate paslaugas?",f"Montavimą, priežiūrą ir remontą — {TERITORIJA}. E-parduotuvės prekes pristatome visoje Lietuvoje."),
   ("Per kiek laiko atsakote į užklausą?","Į užklausas atsakome per 1–2 darbo dienas. Skubūs darbai derinami individualiai."),
-  ("Kokia darbų garantija?",[f"Montavimo darbams — {G_MONT}, remonto darbams — {G_REM}. Jei per šį laiką kas nors veikia ne taip dėl mūsų darbo — grįžtame ir sutvarkome.","Įrangai galioja gamintojo garantija (trukmė pagal gamintoją ir modelį; daliai pailgėja, kai sumontuoja atestuoti specialistai)."]),
+  ("Kokia darbų garantija?",[f"Darbams — garantija {G_GAR}, priklausomai nuo darbų pobūdžio. Jei per šį laiką kas nors veikia ne taip dėl mūsų darbo — grįžtame ir sutvarkome.",f"Įrangai galioja gamintojo garantija pagal įstatymus; kai įrangą sumontuoja mūsų kvalifikuoti specialistai, ji pailgėja {G_PRAT}."]),
   ("Ar turite reikiamus atestatus darbams?","Taip. Kraulis turi visus veiklai reikalingus atestatus, įskaitant F-dujų (freono) tvarkymo ir elektrosaugos. Tai būtina teisėtam ir saugiam darbui su ŠVOK įranga."),
   ("Ar remontuojate geoterminius šilumos siurblius?","Taip. Dirbame su oras–oras, oras–vanduo ir geoterminiais (žemė–vanduo) šilumos siurbliais."),
   ("Kaip dažnai reikia prižiūrėti įrangą?","Priklauso nuo įrangos tipo ir naudojimo. Reguliari priežiūra palaiko galią, mažina netikėtus gedimus ir padeda išsaugoti gamintojo garantiją. Tinkamą intervalą pasakome pagal jūsų įrangą."),
@@ -163,22 +164,23 @@ apie+=f'''<section><div class="wrap"><div class="prose">
   <p>Mums svarbu, kad jūsų namuose ar biure tiesiog būtų gera: tylu, šilta, šviežia. Visa inžinerija — mūsų rūpestis.</p>
   <div class="note"><strong>Kraulis — patikima inžinerija ir žmogiškas komfortas.</strong></div>
 </div></div></section>'''
+apie+=photo_strip(["matavimas","toshiba","trane","rekuperatorius"],sub="Nuo butų iki sudėtingų verslo sistemų — dirbame profesionalia įranga ir atsakome už rezultatą.")
 apie+=reviews_block(sub="Realūs klientų atsiliepimai apie mūsų atliktus darbus — remontą, montavimą ir balansavimą.")
 apie+=cta("Pasitarkime dėl jūsų sistemos","Renkatės naują įrangą ar reikia pagalbos su turima — parašykite arba paskambinkite.",
     [btn("Užsakyti konsultaciją","Užklausos forma.html"),btn(f"Skambinti {TEL}",TELH,"ghost cta-ghost")])
 page_cr("Apie mus.html","Apie mus — Kraulis | ŠVOK įranga ir servisas Vilniuje","Kraulis — ŠVOK komanda iš Vilniaus. 8 m. patirtis, visi reikiami atestatai. Parduodame įrangą, sumontuojame ir prižiūrime; liekame atsakingi po pardavimo.",apie,"apie",
-    anno("paaiškinti darbo principą + kelti pasitikėjimą (patirtis, atestatai, atsiliepimai)","visi","„Užsakyti konsultaciją“","komandos/objekto nuotrauka (Q23) — laukiu failo"),"Apie mus.html")
+    anno("paaiškinti darbo principą + kelti pasitikėjimą (patirtis, atestatai, atsiliepimai, nuotraukos)","visi","„Užsakyti konsultaciją“","nuotraukos įdėtos — laukia failų į /img (žr. IMG-INSTRUKCIJA)"),"Apie mus.html")
 
 # =========================================================== DASHBOARD (index.html)
 PAGES=[
- ("Pagrindinis","Pagrindinis.html","index.html","🟠","Aiškesnis hero + realūs atsiliepimai (5,0) + servisas po pardavimo"),
- ("Paslaugos","Paslaugos.html","Paslaugos.html","🟠","„Kodėl Kraulis“ blokas; garantijos 24 mėn./6 mėn."),
- ("Kondicionierių remontas","Paslauga - Kondicionierių remontas.html","Paslauga - Kondicionierių remontas.html","🟠","„Ką patikriname“ techninė kompetencija; 6 mėn. garantija"),
- ("Šilumos siurblių remontas","Paslauga - Šilumos siurblių remontas.html","Paslauga - Šilumos siurblių remontas.html","🟠","Techninė kompetencija; geoterminiai ĮTRAUKTI (Q7 ✓)"),
- ("Rekuperatorių remontas","Paslauga - Rekuperatorių remontas.html","Paslauga - Rekuperatorių remontas.html","🟠","„Ką patikriname“; nuoroda į balansavimą"),
- ("Rekuperatorių balansavimas","Paslauga - Rekuperatorių balansavimas.html","Paslauga - Rekuperatorių balansavimas.html","🔴","Signature — ataskaitos vertė + realus kliento atsiliepimas apie ataskaitą"),
+ ("Pagrindinis","Pagrindinis.html","index.html","🟠","Hero + realios darbų nuotraukos + atsiliepimai (5,0) + servisas po pardavimo"),
+ ("Paslaugos","Paslaugos.html","Paslaugos.html","🟠","„Kodėl Kraulis“ blokas; garantija nuo 3 iki 24 mėn. + gamintojo pratęsimas"),
+ ("Kondicionierių remontas","Paslauga - Kondicionierių remontas.html","Paslauga - Kondicionierių remontas.html","🟠","„Ką patikriname“; termovizijos nuotrauka"),
+ ("Šilumos siurblių remontas","Paslauga - Šilumos siurblių remontas.html","Paslauga - Šilumos siurblių remontas.html","🟠","Geoterminiai ĮTRAUKTI (Q7 ✓); Toshiba serviso nuotrauka"),
+ ("Rekuperatorių remontas","Paslauga - Rekuperatorių remontas.html","Paslauga - Rekuperatorių remontas.html","🟠","„Ką patikriname“; rekuperatoriaus nuotrauka; nuoroda į balansavimą"),
+ ("Rekuperatorių balansavimas","Paslauga - Rekuperatorių balansavimas.html","Paslauga - Rekuperatorių balansavimas.html","🔴","Signature — ataskaita + realus atsiliepimas + „testo“ matavimo nuotraukos"),
  ("Profilaktinė priežiūra","Paslauga - Profilaktinė priežiūra.html","Paslauga - Profilaktinė priežiūra.html","🟠","Aiškesnė nauda; „ką apima“ konkrečiau"),
- ("Įrangos montavimas","Paslauga - Įrangos montavimas.html","Paslauga - Įrangos montavimas.html","🟠","Atestuotas montavimas (F-dujos); 24 mėn. garantija"),
+ ("Įrangos montavimas","Paslauga - Įrangos montavimas.html","Paslauga - Įrangos montavimas.html","🟠","Kvalifikuotas montavimas; garantijos pratęsimas 3–5 m.; nuotraukos"),
  ("Kontaktai","Kontaktai.html","Kontaktai.html","🟠","„Kad padėtume greičiau“; teritorija Vilnius +100 km"),
  ("Užklausos forma","Užklausos forma.html","Užklausos forma.html","🟠","„Kas nutiks toliau“; laukų hint'ai"),
  ("Patarimai","Patarimai.html","Patarimai.html","⚪","Konkretesni kortelių kabliukai"),

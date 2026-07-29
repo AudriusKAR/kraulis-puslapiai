@@ -4,16 +4,18 @@ Klausiu tik to, ko nėra PRODUCT.md. Kiekvienam — kurių puslapių tekstą pav
 
 ## ✅ Atsakyta (Audrius, 2026-07) — įtraukta į content-review
 - **Q7 Geoterminiai** — TAIP, montuoja/remontuoja. Grąžinta į šilumos siurblių psl., DUK, gidą.
-- **Q9 Garantija** — SIŪLOMA: montavimo darbams **24 mėn.**, remonto darbams **6 mėn.** (Audrius dar tvirtina galutinius skaičius; keičiama vienoje vietoje — `G_MONT`/`G_REM`).
+- **Q9 Garantija** — PATVIRTINTA: darbams **nuo 3 iki 24 mėn.** (pagal darbų pobūdį). Keičiama vienoje vietoje — `G_GAR`.
+- **Q10 Garantijos pratęsimas** — perkama įranga: standartinė įstatymų garantija; sumontavus Kraulis kvalifikuotam specialistui — gamintojo garantija pailgėja iki 3, kai kur 5 metų (tikslūs terminai gamintojų lentelėje).
 - **Q15–16 Patirtis/atestatai** — **8 m. patirtis** (paslaugos.lt); **visi reikiami atestatai**, įskaitant F-dujų (freono) ir elektrosaugos; atestuotas ŠVOK montuotojas darbui su freonu. Minima trumpai.
 - **Q17 Reagavimas** — „per 1–2 darbo dienas" = oficialus teiginys.
 - **Q21 Akcentas** — servisas po pardavimo, „klientas neliks be serviso".
-- **Q23 Atsiliepimai** — 7 realūs atsiliepimai (5,0) iš paslaugos.lt panaudoti. **Nuotrauka** — laukiu failo iš Audriaus.
-- **Q11 Teritorija** — SIŪLOMA „Vilnius + ~100 km" (iš paslaugos.lt profilio); tikslus spindulys/rajonai dar tikslintini.
+- **Q23 Atsiliepimai + nuotraukos** — 7 realūs atsiliepimai (5,0) + 7 realių darbų nuotraukos gautos ir įdėtos į puslapius. Failai keliami į `content-review/img/` (žr. IMG-INSTRUKCIJA.md).
+- **Q24 Balansavimo ataskaita** — Audrius turi realių pavyzdžių; nori dar patobulinti prieš rodant. Kol kas rodomas tik atsiliepimas apie ataskaitą + matavimo įrangos nuotraukos.
+- **Q11 Teritorija** — „Vilnius + ~100 km" (iš paslaugos.lt profilio, patvirtinta); tikslus spindulys/rajonai dar gali būti tikslinami.
 - **Q19–20 DUK/problemos** — pasiūlyti klausimai iš konkurentų DUK + Kraulis faktų; laukia Audriaus peržiūros.
 
 ## Dar neatsakyta (žemiau) — laukia
-Q1–Q6, Q8, Q10, Q12–Q14, Q18, Q22, Q24–Q26.
+Q1–Q6, Q8, Q12–Q14, Q18, Q22, Q25–Q26.
 
 ## Auditorija
 1. **Kuri klientų grupė svarbiausia** (prioritetas): privatūs namai, butai ar verslas? → *Pagrindinis, Apie mus, visi hero.*
