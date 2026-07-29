@@ -11,7 +11,7 @@
 <!--
 DERINYS: 60% C (šviesus blueprint pasaulis, oro srautas, asimetrija) + 30% B (pardavimo logika, kategorijų panelė, CTA) + 10% A (techninių duomenų juostos, prieš/po, kainos, datasheet blokai).
 Šviesu (~80%+ balta/labai šviesu). Navy tik tekstui, linijoms, footer ir vienam kompaktiškam CTA. Jokio didelio tamsaus hero.
-CLAIMS: patvirtinti (PRODUCT.md) — kainos nuo 69/99/149 €, darbams garantija, Vilnius+apylinkės, pristatymas visoje LT, reagavimas 1–2 d.d. Pašalinta: "100% matuota, ne spėta". Nenaudota: "automatiniai priminimai", naujos garantijų formuluotės.
+CLAIMS: naudojami tik patvirtinti (PRODUCT.md) — kainos nuo 69/99/149 €, darbams garantija, Vilnius+apylinkės, pristatymas visoje LT. NENAUDOTA pagrindiniame puslapyje: reagavimas 1-2 d.d. (liks kontaktams/DUK), "100% matuota ne spėta" (pašalinta), "automatiniai priminimai", naujos garantijų formuluotės. El. paštas audrius@kraulis.lt — patvirtinti info@ vs audrius@.
 Assetai: custom SVG (individualūs Kraulis) — hero iliustracija, kategorijų ikonos, paslaugų ikonos, techniniai motyvai, skirtukai.
 -->
 <style>
@@ -165,6 +165,35 @@ Assetai: custom SVG (individualūs Kraulis) — hero iliustracija, kategorijų i
   .foot-b{border-top:1px solid rgba(255,255,255,.12);margin-top:26px;padding-top:16px;font-size:12.5px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
   @media(max-width:820px){.foot{grid-template-columns:1fr 1fr}.foot>div:first-child{grid-column:1/-1}}
 
+  /* --- polish: atviras darbo procesas (be kortelių) --- */
+  .process{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;position:relative}
+  .process::before{content:"";position:absolute;left:26px;right:26px;top:26px;height:1px;background:var(--line)}
+  .pstep{position:relative}
+  .pstep .pn{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:var(--paper);border:1px solid var(--line);font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;color:var(--sky-deep);position:relative;z-index:1;margin-bottom:16px}
+  .pstep h3{font-size:19px;margin-bottom:8px}
+  .pstep p{font-size:14.5px;color:var(--steel);max-width:300px}
+  @media(max-width:820px){.process{grid-template-columns:1fr;gap:20px}.process::before{display:none}.pstep{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:start}.pstep .pn{margin-bottom:0}}
+  /* --- polish: mikroklimato juosta (viena horizontali) --- */
+  .climate{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--white)}
+  .cl{display:flex;align-items:center;gap:13px;padding:22px 22px;border-right:1px solid var(--line)}
+  .cl:last-child{border-right:none}
+  .cl>svg.ic{width:30px;height:30px;color:var(--sky-deep);flex:none;stroke-width:1.5}
+  .cl b{display:block;font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:var(--navy)}
+  .cl span{font-size:12.5px;color:var(--steel)}
+  @media(max-width:820px){.climate{grid-template-columns:1fr 1fr}.cl:nth-child(2){border-right:none}.cl:nth-child(1),.cl:nth-child(2){border-bottom:1px solid var(--line)}}
+  @media(max-width:480px){.climate{grid-template-columns:1fr}.cl{border-right:none;border-bottom:1px solid var(--line)}.cl:last-child{border-bottom:none}}
+  /* --- polish: CTA du veiksmai --- */
+  .cta-acts{display:flex;gap:12px;flex-wrap:wrap;position:relative}
+  .cta .cta-ghost{color:#fff;border-color:rgba(255,255,255,.45)}
+  .cta .cta-ghost:hover{background:rgba(255,255,255,.10)}
+  /* --- polish: mobilus CTA meniuje (≤480 header nesispaudžia) --- */
+  .navcta{display:none}
+  @media(max-width:480px){
+    .hd-right>.btn-primary{display:none}
+    nav.main .navcta{display:block;margin-top:10px;background:var(--sky-deep);color:#fff;text-align:center;border-radius:10px;padding:14px;font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;border-bottom:none}
+    nav.main .navcta:hover{background:var(--sky-deeper)}
+  }
+
   @media(max-width:860px){
     nav.main{position:fixed;inset:66px 0 auto 0;flex-direction:column;align-items:stretch;gap:0;background:var(--white);border-bottom:1px solid var(--line);padding:8px 24px 16px;box-shadow:var(--shadow);transform:translateY(-130%);visibility:hidden;transition:transform .28s var(--ease),visibility .28s;max-height:calc(100dvh - 66px);overflow:auto}
     nav.main a{padding:14px 0;border-bottom:1px solid var(--line-soft);font-size:16px}
@@ -187,6 +216,7 @@ Assetai: custom SVG (individualūs Kraulis) — hero iliustracija, kategorijų i
   <symbol id="i-kond" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="6.5" rx="1.6"/><path d="M6 9h9"/><path d="M7 16c0 1.4-1 2-1 2.6M12 16c0 1.8-1.2 2.5-1.2 3.2M17 16c0 1.4-1 2-1 2.6"/></symbol>
   <symbol id="i-shiluma" viewBox="0 0 24 24"><rect x="3" y="5.5" width="12" height="13" rx="1.6"/><circle cx="9" cy="12" r="3.1"/><path d="M9 9.6v4.8M7.2 10.5l3.6 3M10.8 10.5l-3.6 3"/><path d="M18 8.5c1.4 1.2 1.4 3 0 4.2M20.5 7c1.9 1.8 1.9 4.6 0 6.4"/></symbol>
   <symbol id="i-servisas" viewBox="0 0 24 24"><path d="M14.5 6.5a3.2 3.2 0 0 1-4.2 4.2L6 15a2.4 2.4 0 0 0 3.4 3.4l4.3-4.3a3.2 3.2 0 0 1 4.2-4.2l-2.4 2.4-2-.5-.5-2z"/><circle cx="17.5" cy="17.5" r="2.6"/><path d="M17.5 16v1.5l1 .7"/></symbol>
+  <symbol id="i-priedai" viewBox="0 0 24 24"><path d="M12 3.2l8 4.1v9.4L12 20.8l-8-4.1V7.3z"/><path d="M4 7.3l8 4.1 8-4.1M12 11.4v9.4"/></symbol>
   <symbol id="i-remontas" viewBox="0 0 24 24"><path d="M15 7a4 4 0 0 1-5.2 5.2L5.5 16.5a2.5 2.5 0 0 0 3.5 3.5l4.3-4.3A4 4 0 0 1 18.5 10.5l-2.8 2.8-2.8-.7-.7-2.8z"/></symbol>
   <symbol id="i-balans" viewBox="0 0 24 24"><path d="M20 14a8 8 0 1 0-16 0"/><path d="M12 14l4-3.2"/><circle cx="12" cy="14" r="1.4" fill="currentColor" stroke="none"/><path d="M4 18h16"/></symbol>
   <symbol id="i-prieziura" viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6z"/><path d="M9 12l2 2 4-4"/></symbol>
@@ -205,6 +235,7 @@ Assetai: custom SVG (individualūs Kraulis) — hero iliustracija, kategorijų i
     <a href="#" aria-label="Kraulis"><svg class="logo" viewBox="14 19 322 343.7654345654346" role="img" aria-label="Kraulis"><path fill-rule="evenodd" fill="#24303E" d="M175,31 L26,180 L57,180 L57,302 L293,302 L293,180 L324,180 Z M175,72 L81,166 L81,275 L269,275 L269,166 Z"/><path fill="#24303E" d="M151,149 L133,177 L145,177 L145,243 L157,243 L157,177 L169,177 Z"/><path fill="#24303E" d="M199,243 L181,215 L193,215 L193,149 L205,149 L205,215 L217,215 Z"/><g transform="translate(53.416,350.152) scale(0.02358,-0.02358)"><path fill="#24303E" d="M152 1466H605V912L1080 1466H1682L1148 913L1706 0H1148L839 603L605 358V0H152ZM1862 0V1466H2617Q2827 1466 2938.0 1430.0Q3049 1394 3117.0 1296.5Q3185 1199 3185 1059Q3185 937 3133.0 848.5Q3081 760 2990 705Q2932 670 2831 647Q2912 620 2949 593Q2974 575 3021.5 516.0Q3069 457 3085 425L3304 0H2792L2550 448Q2504 535 2468 561Q2419 595 2357 595H2317V0ZM2317 872H2508Q2539 872 2628 892Q2673 901 2701.5 938.0Q2730 975 2730 1023Q2730 1094 2685.0 1132.0Q2640 1170 2516 1170H2317ZM4351 242H3835L3764 0H3301L3852 1466H4346L4897 0H4423ZM4256 559 4094 1086 3933 559ZM5996 1466H6448V592Q6448 462 6407.5 346.5Q6367 231 6280.5 144.5Q6194 58 6099 23Q5967 -26 5782 -26Q5675 -26 5548.5 -11.0Q5422 4 5337.0 48.5Q5252 93 5181.5 175.0Q5111 257 5085 344Q5043 484 5043 592V1466H5495V571Q5495 451 5561.5 383.5Q5628 316 5746 316Q5863 316 5929.5 382.5Q5996 449 5996 571ZM6748 1466H7201V361H7908V0H6748ZM8132 1466H8586V0H8132ZM8832 485 9263 512Q9277 407 9320 352Q9390 263 9520 263Q9617 263 9669.5 308.5Q9722 354 9722 414Q9722 471 9672 516Q9622 561 9440 601Q9142 668 9015 779Q8887 890 8887 1062Q8887 1175 8952.5 1275.5Q9018 1376 9149.5 1433.5Q9281 1491 9510 1491Q9791 1491 9938.5 1386.5Q10086 1282 10114 1054L9687 1029Q9670 1128 9615.5 1173.0Q9561 1218 9465 1218Q9386 1218 9346.0 1184.5Q9306 1151 9306 1103Q9306 1068 9339 1040Q9371 1011 9491 986Q9788 922 9916.5 856.5Q10045 791 10103.5 694.0Q10162 597 10162 477Q10162 336 10084.0 217.0Q10006 98 9866.0 36.5Q9726 -25 9513 -25Q9139 -25 8995.0 119.0Q8851 263 8832 485Z"/></g></svg></a>
     <nav class="main" id="mainnav" aria-label="Pagrindinė navigacija">
       <a href="#">E-parduotuvė</a><a href="#kategorijos">Įranga</a><a href="#paslaugos">Paslaugos</a><a href="#">Patarimai</a><a href="#">Kontaktai</a>
+      <a class="navcta" href="#uzsakyti">Užsakyti servisą</a>
     </nav>
     <div class="hd-right">
       <a class="hd-tel" href="tel:+37061024999">+370 610 24999</a>
@@ -262,8 +293,8 @@ Assetai: custom SVG (individualūs Kraulis) — hero iliustracija, kategorijų i
   <div class="catgrid">
     <a class="cat" href="#"><span class="cic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-rekup"/></svg></span><b>Rekuperatoriai</b><span>Šviežias oras be šilumos nuostolių</span><span class="go">Žiūrėti <svg class="ic" style="width:13px;height:13px"><use href="#i-arrow"/></svg></span></a>
     <a class="cat" href="#"><span class="cic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-kond"/></svg></span><b>Kondicionieriai</b><span>Vėsina vasarą, šildo žiemą</span><span class="go">Žiūrėti <svg class="ic" style="width:13px;height:13px"><use href="#i-arrow"/></svg></span></a>
-    <a class="cat" href="#"><span class="cic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-shiluma"/></svg></span><b>Šilumos siurbliai</b><span>Oras–oras, oras–vanduo, geoterminiai</span><span class="go">Žiūrėti <svg class="ic" style="width:13px;height:13px"><use href="#i-arrow"/></svg></span></a>
-    <a class="cat" href="#"><span class="cic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-servisas"/></svg></span><b>Servisas ir priedai</b><span>Remontas, priežiūra, balansavimas</span><span class="go">Žiūrėti <svg class="ic" style="width:13px;height:13px"><use href="#i-arrow"/></svg></span></a>
+    <a class="cat" href="#"><span class="cic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-shiluma"/></svg></span><b>Šilumos siurbliai</b><span>Oras–oras ir oras–vanduo sprendimai.</span><span class="go">Žiūrėti <svg class="ic" style="width:13px;height:13px"><use href="#i-arrow"/></svg></span></a>
+    <a class="cat" href="#"><span class="cic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-priedai"/></svg></span><b>Priedai ir montavimo medžiagos</b><span>Montavimo medžiagos, priedai ir dalys.</span><span class="go">Žiūrėti <svg class="ic" style="width:13px;height:13px"><use href="#i-arrow"/></svg></span></a>
   </div>
 </div>
 </section>
@@ -272,11 +303,11 @@ Assetai: custom SVG (individualūs Kraulis) — hero iliustracija, kategorijų i
 
 <!-- ===== KĄ DARO KRAULIS (3 ramsčiai) ===== -->
 <section><div class="wrap">
-  <div class="sh"><div><span class="kick">Vienose rankose</span><h2>Įranga, montavimas ir servisas — iš vienos komandos</h2></div><p>Vienas telefonas visiems klausimams. Ir padedame net tada, kai įrangą pirkote kitur.</p></div>
-  <div class="pillars">
-    <div class="pillar"><span class="num">01</span><span class="p-ic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-shop"/></svg></span><h3>Parduodame</h3><p>Rekuperatoriai, kondicionieriai, šilumos siurbliai ir priedai. Pristatome visoje Lietuvoje.</p></div>
-    <div class="pillar"><span class="num">02</span><span class="p-ic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-montavimas"/></svg></span><h3>Montuojame</h3><p>Nuo sistemos parinkimo iki paleidimo ir sureguliavimo. Vilniuje ir apylinkėse.</p></div>
-    <div class="pillar"><span class="num">03</span><span class="p-ic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-remontas"/></svg></span><h3>Prižiūrime ir remontuojame</h3><p>Profilaktika, diagnostika ir remontas. Namams ir verslui, įskaitant sudėtingus sprendimus.</p></div>
+  <div class="sh"><div><span class="kick">Kaip dirbame</span><h2>Vienose rankose — nuo parinkimo iki priežiūros</h2></div><p>Vienas telefonas visiems klausimams. Ir padedame net tada, kai įrangą pirkote kitur.</p></div>
+  <div class="process">
+    <div class="pstep"><span class="pn">01</span><h3>Parenkame sprendimą</h3><p>Įvertiname patalpas, poreikį ir biudžetą, pasiūlome tinkamą įrangą.</p></div>
+    <div class="pstep"><span class="pn">02</span><h3>Sumontuojame ir paleidžiame</h3><p>Profesionalus montavimas, paleidimas ir sureguliavimas Vilniuje ir apylinkėse.</p></div>
+    <div class="pstep"><span class="pn">03</span><h3>Prižiūrime ir remontuojame</h3><p>Profilaktika, diagnostika ir remontas — kad sistema tarnautų ilgai.</p></div>
   </div>
 </div></section>
 
@@ -311,19 +342,19 @@ Assetai: custom SVG (individualūs Kraulis) — hero iliustracija, kategorijų i
 
 <!-- ===== TECHNINIAI MOTYVAI ===== -->
 <section style="padding-top:0"><div class="wrap">
-  <div class="sh"><div><span class="kick">Ką sprendžiame</span><h2>Komfortas — tai keturi dydžiai</h2></div></div>
-  <div class="motifs">
-    <div class="motif"><span class="m-ic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-airflow"/></svg></span><h4>Oro srautas</h4><p>Šviežias, tolygiai paskirstytas oras.</p></div>
-    <div class="motif"><span class="m-ic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-temp"/></svg></span><h4>Temperatūra</h4><p>Šiluma tada, kai jos reikia.</p></div>
-    <div class="motif"><span class="m-ic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-cooling"/></svg></span><h4>Vėsinimas</h4><p>Vėsu per karščius, be triukšmo.</p></div>
-    <div class="motif"><span class="m-ic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-energy"/></svg></span><h4>Efektyvumas</h4><p>Sureguliuota sistema naudoja mažiau.</p></div>
+  <div class="sh"><div><span class="kick">Ką sprendžiame</span><h2>Keturi gero mikroklimato parametrai</h2></div></div>
+  <div class="climate">
+    <div class="cl"><svg class="ic" viewBox="0 0 24 24"><use href="#i-airflow"/></svg><div><b>Oro srautas</b><span>Šviežias, tolygiai paskirstytas</span></div></div>
+    <div class="cl"><svg class="ic" viewBox="0 0 24 24"><use href="#i-temp"/></svg><div><b>Temperatūra</b><span>Šiluma tada, kai reikia</span></div></div>
+    <div class="cl"><svg class="ic" viewBox="0 0 24 24"><use href="#i-cooling"/></svg><div><b>Vėsinimas</b><span>Vėsu per karščius, tyliai</span></div></div>
+    <div class="cl"><svg class="ic" viewBox="0 0 24 24"><use href="#i-energy"/></svg><div><b>Efektyvumas</b><span>Sureguliuota naudoja mažiau</span></div></div>
   </div>
 </div></section>
 
 <!-- ===== CTA (vienas kompaktiškas navy) ===== -->
 <section id="uzsakyti" style="padding-top:0"><div class="wrap"><div class="cta">
-  <div><h2>Turite įrangą, bet negaunate pagalbos?</h2><p>Namas, butas, įmonė ar sudėtinga sistema — padėsime ten, kur pagalbos negaunate kitur.</p></div>
-  <a class="btn btn-primary" href="tel:+37061024999">Užsakyti servisą <svg class="ic" style="width:16px;height:16px"><use href="#i-arrow"/></svg></a>
+  <div><h2>Renkate įrangą ar reikia serviso?</h2><p>Padėsime pasirinkti tinkamą sprendimą, sumontuoti įrangą arba sutvarkyti jau veikiančią sistemą.</p></div>
+  <div class="cta-acts"><a class="btn btn-primary" href="#kategorijos">Padėti išsirinkti įrangą</a><a class="btn btn-ghost cta-ghost" href="tel:+37061024999">Užsakyti servisą</a></div>
 </div></div></section>
 </main>
 
