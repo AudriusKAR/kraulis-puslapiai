@@ -28,12 +28,14 @@ FORM: techninis datasheet / field manual. Signature: kairysis matavimo rail per 
   a{color:var(--sky-deep)}
   .wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,40px)}
   /* Measurement rail (signature) */
-  .rail{--railw:56px;position:relative}
+  .rail{--railw:64px;position:relative}
+  .railmark{display:none}
   @media(min-width:900px){
     .rail{padding-left:var(--railw)}
     .rail::before{content:"";position:absolute;left:calc(var(--railw) - 1px);top:0;bottom:0;width:1px;background:var(--line)}
-    .tick{position:absolute;left:0;width:calc(var(--railw) - 14px);height:1px;background:var(--line)}
-    .railcode{position:absolute;left:0;top:0;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--sky-deep);writing-mode:vertical-rl;text-orientation:mixed}
+    .railmark{display:block;position:absolute;left:0;top:4px;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--sky-deep)}
+    .railmark::before{content:"§";color:var(--steel)}
+    .railmark::after{content:"";position:absolute;left:1px;top:23px;width:calc(var(--railw) - 22px);height:1px;background:var(--line)}
   }
   .kick{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--sky-deep)}
   .btn{display:inline-flex;align-items:center;gap:8px;font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;text-decoration:none;padding:13px 22px;border-radius:6px;border:1px solid var(--navy);background:var(--navy);color:#fff;transition:transform .12s cubic-bezier(0.23,1,0.32,1),background .18s}
@@ -134,7 +136,7 @@ FORM: techninis datasheet / field manual. Signature: kairysis matavimo rail per 
 </div></header>
 
 <div class="hero"><div class="wrap rail">
-  <span class="railcode">ŠVOK · SERVISAS</span>
+  <span class="railmark">00</span>
   <div class="grid">
     <div>
       <div class="doc-meta"><span>Dok. <b>KR-SVC</b></span><span>Vilnius + apyl.</span><span>Reag. <b>1–2 d.d.</b></span></div>
@@ -168,7 +170,7 @@ FORM: techninis datasheet / field manual. Signature: kairysis matavimo rail per 
 </div></div>
 
 <section><div class="wrap rail">
-  <span class="railcode">§01 · PASLAUGOS</span>
+  <span class="railmark">01</span>
   <div class="sec-h"><h2>Paslaugų specifikacija</h2><span class="idx">6 pozicijos · kainos „nuo“</span></div>
   <table class="sheet">
     <thead><tr><th>Kodas</th><th>Paslauga</th><th>Požymiai</th><th style="text-align:right">Kaina</th><th></th></tr></thead>
@@ -184,7 +186,7 @@ FORM: techninis datasheet / field manual. Signature: kairysis matavimo rail per 
 </div></section>
 
 <section><div class="wrap rail">
-  <span class="railcode">§02 · METODIKA</span>
+  <span class="railmark">02</span>
   <div class="sec-h"><h2>Balansavimas su matavimų ataskaita</h2><span class="idx">FIG. 02</span></div>
   <div class="split">
     <div class="fig">
@@ -207,7 +209,7 @@ FORM: techninis datasheet / field manual. Signature: kairysis matavimo rail per 
 </div></div></section>
 
 <section style="border-bottom:none"><div class="wrap rail">
-  <span class="railcode">§03 · KREIPTIS</span>
+  <span class="railmark">03</span>
   <div class="cta">
     <div><h2>Turite įrangą, bet negaunate pagalbos?</h2><p>Namas, butas, įmonė ar sudėtinga sistema — padėsime ten, kur pagalbos negaunate kitur.</p></div>
     <a class="btn" href="#">Užsakyti servisą →</a>
