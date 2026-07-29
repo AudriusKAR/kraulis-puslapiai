@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import io, os
-from build_cr import page_cr, anno, OUT_CR
+from build_cr import page_cr, anno, OUT_CR, reviews_block, review_lead, REVIEWS, G_MONT, G_REM, TERITORIJA
 from build_v2 import MAIL, TEL, TELH
 from build_v2_content import (ic, crumbs, titlebar, chips, cta, btn, faq, process, priespo,
     HERO_SVG, DIVIDER, datasheet, CATPANEL, CLIMATE)
@@ -32,10 +32,11 @@ home=f'''<section class="hero"><div class="wrap hgrid">
 {priespo(h2="Nesakome „viskas gerai“ žodžiais.",
          p="Po rekuperacijos balansavimo pateikiame matavimų ataskaitą su oro srautų reikšmėmis prieš ir po reguliavimo — kiekviename taške. Matote tiksliai, kaip veikia jūsų sistema.")}
 {CLIMATE}
-{cta("Renkate įrangą ar reikia serviso?","Padėsime pasirinkti tinkamą sprendimą, sumontuoti įrangą arba sutvarkyti jau veikiančią sistemą.",
+{reviews_block(sub="Realūs žmonės, kuriems jau padėjome — remontas, montavimas ir balansavimas. Įsigijote įrangą kitur? Vis tiek liekate su servisu.")}
+{cta("Renkate įrangą ar reikia serviso?","Padėsime pasirinkti tinkamą sprendimą, sumontuoti įrangą arba sutvarkyti jau veikiančią sistemą — ir liekame šalia, kai prireiks serviso.",
     [btn("Rinktis įrangą","index.html#kategorijos"),btn("Užsakyti servisą","Užklausos forma.html","ghost cta-ghost")])}'''
 page_cr("Pagrindinis.html","Kraulis — ŠVOK įranga ir servisas Vilniuje","Vėdinimo, šildymo ir vėsinimo įranga su montavimu ir servisu Vilniuje. Parduodame, sumontuojame, prižiūrime ir remontuojame — net jei pirkote kitur.",home,"",
-    anno("nukreipti į įrangą arba servisą; paaiškinti visą Kraulis vertę","visi (renkasi ar turi įrangą)","„Rinktis įrangą“ / „Užsakyti servisą“","kategorijų turinys (Q3–5); prioritetinė žinutė (Q21)"),"index.html")
+    anno("nukreipti į įrangą arba servisą; akcentuoti servisą po pardavimo","visi (renkasi ar turi įrangą)","„Rinktis įrangą“ / „Užsakyti servisą“","kategorijų turinys (Q3–5)"),"index.html")
 
 # ===================== PASLAUGOS
 pasl=titlebar("Servisas visų gamintojų ŠVOK įrangai","Diagnozuojame, remontuojame, prižiūrime ir balansuojame — namams ir verslui. Aiškios „nuo“ kainos, garantija darbams. Padedame ir tada, kai įrangą pirkote kitur.",
@@ -45,24 +46,25 @@ pasl+=f'''<section><div class="wrap">{datasheet()}
     <h2>Kodėl verta pas Kraulis</h2>
     <p>Dirbame su visu ciklu — nuo įrangos parinkimo iki nuolatinės priežiūros. Todėl matome sistemą kaip visumą, o ne pavienį gedimą. Prieš darbus suderiname apimtį ir kainą, o po jų paaiškiname, kaip naudoti, kad problema nesikartotų.</p>
     <h2>Garantijos</h2>
-    <p><strong>Įrangai — gamintojo garantija</strong> (trukmė priklauso nuo gamintojo ir modelio; daliai įrangos ji pailgėja, kai sumontuoja sertifikuoti montuotojai). <strong>Darbams — mūsų garantija:</strong> jei po mūsų darbų kas nors veikia ne taip — grįžtame ir sutvarkome.</p>
+    <p><strong>Įrangai — gamintojo garantija</strong> (trukmė priklauso nuo gamintojo ir modelio; daliai įrangos ji pailgėja, kai sumontuoja atestuoti specialistai). <strong>Darbams — mūsų garantija:</strong> montavimo darbams — {G_MONT}, remonto darbams — {G_REM}. Jei per šį laiką kas nors veikia ne taip dėl mūsų darbo — grįžtame ir sutvarkome.</p>
   </div></div></section>'''
 pasl+=priespo()
 pasl+=cta("Nežinote, kurios paslaugos reikia?","Aprašykite įrangą ir problemą — patarsime ir suderinsime tolesnį žingsnį.",
     [btn("Užpildyti užklausą","Užklausos forma.html"),btn(f"Skambinti {TEL}",TELH,"ghost cta-ghost")])
 page_cr("Paslaugos.html","Paslaugos — Kraulis | Remontas, priežiūra, montavimas, balansavimas","ŠVOK servisas Vilniuje: kondicionierių, šilumos siurblių ir rekuperatorių remontas (diagnostika nuo 69 €), priežiūra (nuo 99 €), balansavimas su ataskaita (nuo 149 €), montavimas.",pasl,"paslaugos",
-    anno("apžvalga + kelias į konkrečią paslaugą","turintys įrangą / gedimą","„Užpildyti užklausą“","garantijos trukmė (Q9); pilnas paslaugų sąrašas (Q6)"),"Paslaugos.html")
+    anno("apžvalga + kelias į konkrečią paslaugą","turintys įrangą / gedimą","„Užpildyti užklausą“","garantijos trukmės — SIŪLOMA 24 mėn. montavimui / 6 mėn. remontui; pilnas paslaugų sąrašas (Q6)"),"Paslaugos.html")
 
 # ===================== PASLAUGŲ PUSLAPIAI su technine kompetencija
 STEPS=[("Susisiekiate","Paskambinate arba parašote. Aiškų gedimą dažnai įkainojame ar patariame jau telefonu."),
        ("Diagnozuojame ir suderiname","Nustatome tikrąją priežastį ir suderiname darbų apimtį bei kainą prieš tęsdami."),
        ("Sutvarkome ir paaiškiname","Atliekame darbus, patikriname sistemą ir paaiškiname, kaip naudoti, kad gedimas nesikartotų.")]
-def svc(fn,h1,lead,price,kick,intro,tikrinam_title,tikrinam,faqs,mt,md,ann_wait,priespo_block=False):
+def svc(fn,h1,lead,price,kick,intro,tikrinam_title,tikrinam,faqs,mt,md,ann_wait,priespo_block=False,rev=None):
     tk="".join(f"<li>{s}</li>" for s in tikrinam)
     b=titlebar(h1,lead,kick=kick,crumb=crumbs(H,("Paslaugos","Paslaugos.html"),(h1,None)),meta=price,
         chips=chips([("Skambinti",TELH,ic("i-phone")),("Rašyti",f"mailto:{MAIL}",ic("i-mail")),("Užpildyti užklausą","Užklausos forma.html",ic("i-arrow"))]))
     b+=f'<section><div class="wrap"><div class="prose">{intro}<h2>{tikrinam_title}</h2><ul>{tk}</ul></div></div></section>'
     if priespo_block: b+=priespo()
+    if rev: b+=f'<section style="padding-top:0">{review_lead(*rev)}</section>'
     b+=process(STEPS,kick="Kaip dirbame",title="Trys paprasti žingsniai")
     b+=faq(faqs,title="Dažni klausimai",kick="DUK")
     b+=cta("Užsakykite šią paslaugą","Aprašykite įrangą (gamintoją/modelį, jei žinote) ir problemą — grįšime su aiškiu žingsniu ir kaina.",
@@ -71,31 +73,31 @@ def svc(fn,h1,lead,price,kick,intro,tikrinam_title,tikrinam,faqs,mt,md,ann_wait,
 
 svc("Paslauga - Kondicionierių remontas.html","Kondicionierių remontas",
   "Nešaldo, nešildo, teka, triukšmauja ar rodo klaidą? Randame priežastį ir sutvarkome. Sieninius (split), multi-split ir kanalinius — visų pagrindinių gamintojų, net jei pirkote kitur.",
-  "Diagnostika nuo 69 € · Darbams — garantija","Paslauga · Priežiūra ir remontas",
+  f"Diagnostika nuo 69 € · Remonto darbams — {G_REM} garantija","Paslauga · Priežiūra ir remontas",
   '<p>Kondicionieriaus problema retai būna atsitiktinė — dažniausiai tai šaltnešio trūkumas, užsiteršęs radiatorius ar filtrai, kondensato nutekėjimo ar automatikos gedimas. Randame tikrąją priežastį, o ne tik pašaliname simptomą.</p>',
   "Ką patikriname ir sutvarkome",
   ["Šaltnešio kiekį ir sistemos sandarumą","Vidinio bloko ir filtrų būklę, kondensato nutekėjimą","Ventiliatorių, kompresorių ir automatikos veikimą","Šaldymo/šildymo galią po remonto"],
   [("Ar remontuojate ne pas jus pirktą kondicionierių?","Taip. Diagnozuojame ir remontuojame visų pagrindinių gamintojų įrangą, nepriklausomai nuo to, kur ją pirkote."),
    ("Kiek kainuoja diagnostika?","Diagnostika — nuo 69 €. Aiškų gedimą dažnai įkainojame dar prieš atvykdami; kitu atveju kainą suderiname prieš darbus."),
-   ("Ar suteikiate garantiją darbams?","Taip, atliktiems remonto darbams suteikiame garantiją.")],
+   ("Ar suteikiate garantiją darbams?",f"Taip. Atliktiems remonto darbams suteikiame {G_REM} garantiją.")],
   "Kondicionierių remontas Vilniuje — Kraulis | Diagnostika nuo 69 €","Kondicionierių remontas Vilniuje: nešaldo, teka, triukšmauja ar klaidos. Randame priežastį ir sutvarkome. Diagnostika nuo 69 €, darbams garantija.",
-  "garantijos trukmė (Q9); dažnos problemos (Q20)")
+  "garantija — SIŪLOMA 6 mėn.; dažnos problemos (Q20)")
 
 svc("Paslauga - Šilumos siurblių remontas.html","Šilumos siurblių remontas",
-  "Šildo silpnai, augo sąnaudos, apledija lauko blokas ar rodo klaidą? Remontuojame oras–oras ir oras–vanduo šilumos siurblius — kad šiluma nedingtų tada, kai jos labiausiai reikia.",
-  "Diagnostika nuo 69 € · Darbams — garantija","Paslauga · Priežiūra ir remontas",
+  "Šildo silpnai, augo sąnaudos, apledija lauko blokas ar rodo klaidą? Remontuojame oras–oras, oras–vanduo ir geoterminius šilumos siurblius — kad šiluma nedingtų tada, kai jos labiausiai reikia.",
+  f"Diagnostika nuo 69 € · Remonto darbams — {G_REM} garantija","Paslauga · Priežiūra ir remontas",
   '<p>Šilumos siurblio efektyvumas krenta pamažu, todėl problema dažnai pastebima tik pagal sąskaitą. Patikriname visą grandinę — nuo šaltnešio ir atitirpinimo iki automatikos — ir grąžiname sistemą į projektinį efektyvumą.</p>',
   "Ką patikriname ir sutvarkome",
   ["Šaltnešio kiekį ir sandarumą","Lauko bloko atitirpinimo (defrost) veikimą","Kompresoriaus, ventiliatorių ir siurblio darbą","Automatiką, jutiklius ir šildymo galią po remonto"],
-  [("Kokius šilumos siurblius remontuojate?","Oras–oras ir oras–vanduo, visų pagrindinių gamintojų."),
+  [("Kokius šilumos siurblius remontuojate?","Oras–oras, oras–vanduo ir geoterminius (žemė–vanduo), visų pagrindinių gamintojų."),
    ("Padėsite su sudėtinga ar sena sistema?","Taip. Į sudėtingas situacijas žiūrime kaip į galimybę rasti praktišką sprendimą — net jei pagalbos negaunate kitur."),
    ("Kiek kainuoja iškvietimas ir diagnostika?","Diagnostika — nuo 69 €. Kainą už darbus suderiname iš anksto.")],
-  "Šilumos siurblių remontas Vilniuje — Kraulis | Nuo 69 €","Šilumos siurblių remontas: oras–oras ir oras–vanduo. Randame priežastį, grąžiname efektyvumą. Diagnostika nuo 69 €, darbams garantija.",
-  "geoterminiai? (Q7); garantijos trukmė (Q9)")
+  "Šilumos siurblių remontas Vilniuje — Kraulis | Nuo 69 €","Šilumos siurblių remontas: oras–oras, oras–vanduo ir geoterminiai. Randame priežastį, grąžiname efektyvumą. Diagnostika nuo 69 €, darbams garantija.",
+  "garantija — SIŪLOMA 6 mėn.; dažnos problemos (Q20)")
 
 svc("Paslauga - Rekuperatorių remontas.html","Rekuperatorių remontas",
   "Silpna trauka, drėgmė, triukšmas ar klaidos? Diagnozuojame ir remontuojame rekuperatorius bei vėdinimo sistemas, kad namuose vėl būtų šviežias oras be nereikalingos drėgmės.",
-  "Diagnostika nuo 69 € · Darbams — garantija","Paslauga · Priežiūra ir remontas",
+  f"Diagnostika nuo 69 € · Remonto darbams — {G_REM} garantija","Paslauga · Priežiūra ir remontas",
   '<p>Dažniausiai kaltininkas — užsiteršę filtrai, ventiliatoriaus ar automatikos gedimas arba netinkamai sureguliuoti srautai. Randame priežastį, o jei sutrikęs oro pasiskirstymas — pasiūlome <a href="Paslauga - Rekuperatorių balansavimas.html">balansavimą su matavimų ataskaita</a>.</p>',
   "Ką patikriname ir sutvarkome",
   ["Filtrų būklę ir šilumokaičio švarą","Ventiliatorių ir automatikos veikimą","Oro srautus ir traukos tolygumą","Drėgmės ir kondensato problemas"],
@@ -103,7 +105,7 @@ svc("Paslauga - Rekuperatorių remontas.html","Rekuperatorių remontas",
    ("Ar remontuojate ne jūsų sumontuotą sistemą?","Taip, visų pagrindinių gamintojų rekuperatorius."),
    ("Kaip dažnai reikia keisti filtrus?","Priklauso nuo modelio ir aplinkos; tikslų intervalą pasakome apžiūros metu.")],
   "Rekuperatorių remontas Vilniuje — Kraulis | Nuo 69 €","Rekuperatorių ir vėdinimo sistemų remontas: silpna trauka, drėgmė, triukšmas, klaidos. Diagnostika nuo 69 €, darbams garantija.",
-  "garantijos trukmė (Q9); dažnos problemos (Q20)")
+  "garantija — SIŪLOMA 6 mėn.; dažnos problemos (Q20)")
 
 svc("Paslauga - Rekuperatorių balansavimas.html","Rekuperatorių balansavimas",
   "Vienur skersvėjis, kitur tvanku? Išmatuojame ir subalansuojame oro srautus kiekviename taške, o rezultatą pateikiame matavimų ataskaita „prieš ir po“. Nustojate spėlioti.",
@@ -115,7 +117,7 @@ svc("Paslauga - Rekuperatorių balansavimas.html","Rekuperatorių balansavimas",
    ("Ką gausiu po darbų?","Matavimų ataskaitą su reikšmėmis „prieš ir po“ reguliavimo kiekviename taške."),
    ("Kiek kainuoja balansavimas?","Nuo 149 €. Tiksli kaina priklauso nuo taškų skaičiaus; ją suderiname iš anksto.")],
   "Rekuperatorių balansavimas su ataskaita — Kraulis | Nuo 149 €","Rekuperacijos oro srautų balansavimas Vilniuje: matavimai kiekviename taške ir ataskaita „prieš ir po“. Nuo 149 €, darbams garantija.",
-  "realaus ataskaitos pavyzdžio galimybė (Q24)",priespo_block=True)
+  "realaus ataskaitos pavyzdžio nuotrauka (Q24)",priespo_block=True,rev=REVIEWS[0])
 
 svc("Paslauga - Profilaktinė priežiūra.html","Profilaktinė priežiūra",
   "Gedimo nėra — ir tegul taip lieka. Reguliari priežiūra palaiko galią, mažina netikėtus gedimus ir padeda išsaugoti gamintojo garantiją.",
@@ -131,14 +133,14 @@ svc("Paslauga - Profilaktinė priežiūra.html","Profilaktinė priežiūra",
 
 svc("Paslauga - Įrangos montavimas.html","Įrangos montavimas",
   "Sumontuojame ir paleidžiame šilumos siurblius, kondicionierius ir rekuperatorius — nuo sistemos parinkimo iki sureguliavimo. Vienos rankos nuo pradžios iki galo.",
-  "Kaina — pagal sprendimą, suderinama iš anksto · Darbams — garantija","Paslauga",
-  '<p>Tinkamas montavimas svarbus ne tik veikimui — daliai įrangos <strong>gamintojo garantija pailgėja</strong>, kai ją sumontuoja sertifikuoti montuotojai. Todėl darbą planuojame nuo teisingo sprendimo parinkimo, o ne nuo skylės sienoje.</p>',
+  f"Kaina — pagal sprendimą, suderinama iš anksto · Montavimo darbams — {G_MONT} garantija","Paslauga",
+  '<p>Tinkamas montavimas svarbus ne tik veikimui — daliai įrangos <strong>gamintojo garantija pailgėja</strong>, kai ją sumontuoja atestuoti specialistai. Turime F-dujų (freono) tvarkymo atestatą — būtiną teisėtam darbui su šaltnešiu. Todėl darbą planuojame nuo teisingo sprendimo parinkimo, o ne nuo skylės sienoje.</p>',
   "Ką apima montavimas",
   ["Sistemos parinkimą pagal patalpas ir biudžetą","Profesionalų montavimą ir prijungimą","Paleidimą ir sureguliavimą","Naudojimo ir priežiūros paaiškinimą"],
   [("Ar galiu pirkti įrangą su montavimu?","Taip. Galime pasiūlyti ir parduoti įrangą kartu su montavimu Vilniaus regione."),
-   ("Ar montavimas turi įtakos garantijai?","Daliai įrangos gamintojo garantija pailgėja, kai ją sumontuoja sertifikuoti montuotojai."),
+   ("Ar montavimas turi įtakos garantijai?","Daliai įrangos gamintojo garantija pailgėja, kai ją sumontuoja atestuoti specialistai. Kraulis turi reikiamus atestatus, įskaitant F-dujų (freono) tvarkymo."),
    ("Kiek kainuoja montavimas?","Priklauso nuo sistemos ir objekto; kainą suderiname po konsultacijos.")],
-  "Įrangos montavimas Vilniuje — Kraulis","Šilumos siurblių, kondicionierių ir rekuperatorių montavimas Vilniuje: parinkimas, montavimas, paleidimas ir sureguliavimas. Darbams garantija.",
-  "sertifikuoti montuotojai? (Q16); gamintojų sąrašas (Q4)")
+  "Įrangos montavimas Vilniuje — Kraulis","Šilumos siurblių, kondicionierių ir rekuperatorių montavimas Vilniuje: parinkimas, montavimas, paleidimas ir sureguliavimas. Montavimo darbams garantija.",
+  "montavimo garantija — SIŪLOMA 24 mėn.; gamintojų sąrašas (Q4)")
 
 print("cr service + home + paslaugos done")

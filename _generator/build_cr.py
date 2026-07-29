@@ -14,7 +14,47 @@ ANNO_STYLE = '''<style>
 .cr-anno .wait{color:#8a5a00}
 .cr-bar{background:#1A6E96;color:#fff;font-size:12.5px;text-align:center;padding:7px 12px;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em}
 .cr-bar a{color:#CFE0EC}
+.cr-revs{padding:56px 0}
+.cr-revwrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;margin-top:26px}
+.rev{background:#fff;border:1px solid #E4EBF1;border-radius:14px;padding:22px 22px 18px;display:flex;flex-direction:column;gap:12px}
+.rev .stars{color:#F2A93B;letter-spacing:2px;font-size:15px}
+.rev blockquote{margin:0;font-size:15px;line-height:1.6;color:var(--navy)}
+.rev figcaption{font-size:13px;color:var(--steel);font-weight:600}
+.rev figcaption span{display:block;font-weight:400;font-family:'IBM Plex Mono',monospace;font-size:11.5px;margin-top:2px;letter-spacing:.02em}
+.cr-revsrc{font-size:12.5px;color:var(--steel);margin-top:18px}
+.rev-lead{background:#fff;border:1px solid #E4EBF1;border-left:3px solid #2E9BD6;border-radius:12px;padding:22px 24px;margin-top:22px}
+.rev-lead blockquote{margin:0;font-size:16.5px;line-height:1.6;color:var(--navy);font-weight:500}
+.rev-lead .stars{color:#F2A93B;letter-spacing:2px;font-size:15px;margin-bottom:8px}
+.rev-lead cite{display:block;margin-top:12px;font-style:normal;font-size:13px;color:var(--steel);font-weight:600}
 </style>'''
+
+# --- Realūs klientų atsiliepimai iš paslaugos.lt profilio (Audrius Karnišauskas | Kraulis).
+#     Įvertinimas 5,0 (7 atsiliepimai). Rašyba lengvai sutvarkyta, prasmė nekeista.
+# Siūlomos garantijos trukmės (Audriaus pasirinkimas — keičiama vienoje vietoje):
+G_MONT = "24 mėn."   # montavimo (įrengimo) darbams
+G_REM  = "6 mėn."    # remonto darbams
+# Aptarnaujama teritorija (iš paslaugos.lt profilio: „Vilnius, +100 km aplink“):
+TERITORIJA = "Vilniuje ir apie 100 km aplink"
+
+PASLAUGOS_URL = "https://paslaugos.lt/audrius-karnisauskas--kraulis-av4380"
+REVIEWS = [
+ ("Tadas Kaminskas","Rekuperatoriaus remontas · 2026-06","Pro meistras — po remonto dar gavau matavimų ataskaitą; nesu matęs, kad kas taip dirbtų Lietuvoje. Rekomenduoju, ačiū Audriau!"),
+ ("Danielius Šeštokas","Vėdinimo sistemos remontas · 2026-06","Darbas atliktas greitai, profesionaliai ir preciziškai. Audrius tiksliai sureguliavo oro srautus ir pakonsultavo apie priežiūrą. Name iškart juntamas geresnis oro balansas."),
+ ("Diana","Kondicionieriaus remontas · 2026-05","Meistras jau pirmo vizito metu sutvarkė problemą, kurios nepavyko išspręsti jau kurį laiką. Išsami konsultacija ir naudingi patarimai ateičiai. Geriausios rekomendacijos!"),
+ ("Juozas","Rekuperatoriaus remontas · 2026-07","Operatyviai sutvarkė rekuperatoriaus problemą. Rekomenduoju."),
+ ("Charles M.","Vėdinimo sistemos montavimas · 2026-06","Very professional and human person. He takes time for you and takes care of everything — rare these days. All at a very reasonable price."),
+ ("Jolanta","Kondicionieriaus montavimas · 2026-05","Dėkoju už greitą ir kokybišką paslaugą. Viskas puiku, sėkmės darbuose!"),
+]
+
+def reviews_block(items=None, title="Ką sako klientai", kick="Atsiliepimai", sub=None, src=True):
+    items = items if items is not None else REVIEWS
+    cards="".join(f'<figure class="rev"><div class="stars">★★★★★</div><blockquote>{q}</blockquote><figcaption>{who}<span>{meta}</span></figcaption></figure>' for who,meta,q in items)
+    srch=(f'<p class="cr-revsrc">Tikri klientų atsiliepimai iš <a href="{PASLAUGOS_URL}" target="_blank" rel="noopener">Paslaugos.lt profilio</a> — įvertinimas 5,0 (7 atsiliepimai).</p>') if src else ''
+    s=f'<p>{sub}</p>' if sub else ''
+    return f'<section class="cr-revs"><div class="wrap"><div class="sh"><div><span class="kick">{kick}</span><h2>{title}</h2></div>{s}</div><div class="cr-revwrap">{cards}</div>{srch}</div></section>'
+
+def review_lead(who, meta, quote):
+    return f'<div class="wrap"><div class="rev-lead"><div class="stars">★★★★★</div><blockquote>„{quote}"</blockquote><cite>— {who}, {meta} · <a href="{PASLAUGOS_URL}" target="_blank" rel="noopener">Paslaugos.lt</a></cite></div></div>'
 
 def anno(tikslas, auditorija, cta, laukia):
     w = ('<span class="wait"><b>Laukia patvirtinimo:</b> '+laukia+'</span>') if laukia else '<span style="color:#2e7d32"><b>✓</b> nauji teiginiai nelaukia</span>'

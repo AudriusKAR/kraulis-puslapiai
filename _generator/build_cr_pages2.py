@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import io, os
 from urllib.parse import quote
-from build_cr import page_cr, anno, OUT_CR
+from build_cr import page_cr, anno, OUT_CR, reviews_block, review_lead, REVIEWS, G_MONT, G_REM, TERITORIJA
 from build_v2 import MAIL, TEL, TELH, CSS
 from build_v2_content import ic, crumbs, titlebar, chips, cta, btn, faq
 H=("Pradžia","Pagrindinis.html")
@@ -12,13 +12,13 @@ kont=titlebar("Susisiekime","Renkatės įrangą, reikia serviso ar tik norite pa
 kont+=f'''<section><div class="wrap"><div class="cards">
   <a class="card" href="{TELH}"><span class="cardic">{ic("i-phone")}</span><h3>Telefonas</h3><p class="price" style="font-size:16px">{TEL}</p><p>Greičiausias kelias — aiškų gedimą dažnai įkainojame telefonu.</p></a>
   <a class="card" href="mailto:{MAIL}"><span class="cardic">{ic("i-mail")}</span><h3>El. paštas</h3><p class="price" style="font-size:15px">{MAIL}</p><p>Bendras svetainės kontaktas.</p></a>
-  <div class="card" style="cursor:default"><span class="cardic">{ic("i-prieziura")}</span><h3>Darbo laikas</h3><p class="mono" style="color:var(--navy)">I–V 8.00–17.00</p><p>Servisas — Vilnius ir apylinkės.</p></div>
+  <div class="card" style="cursor:default"><span class="cardic">{ic("i-prieziura")}</span><h3>Darbo laikas</h3><p class="mono" style="color:var(--navy)">I–V 8.00–17.00</p><p>Servisas — Vilnius ir apie 100 km aplink.</p></div>
 </div></div></section>
 <section style="padding-top:0"><div class="wrap"><div class="layout aside">
   <div class="prose"><h2>Kad padėtume greičiau</h2>
     <p>Kreipdamiesi trumpai nurodykite: <strong>įrangos tipą ir gamintoją/modelį</strong> (jei žinote), <strong>ką pastebite</strong> (nešaldo, triukšmauja, klaida…) ir <strong>adresą</strong>. Tada dažnai galime patarti ar įkainoti dar prieš atvykdami.</p>
     <h2>Kur dirbame</h2>
-    <p>Montavimo, priežiūros ir remonto paslaugas teikiame <strong>Vilniuje ir apylinkėse</strong>. E-parduotuvės prekes pristatome <strong>visoje Lietuvoje</strong>.</p>
+    <p>Montavimo, priežiūros ir remonto paslaugas teikiame <strong>Vilniuje ir apie 100 km aplink</strong>. E-parduotuvės prekes pristatome <strong>visoje Lietuvoje</strong>.</p>
     <div class="note">Į užklausas paprastai atsakome per 1–2 darbo dienas. Skubūs darbai derinami individualiai.</div>
     {chips([("Skambinti",TELH,ic("i-phone")),("Rašyti el. paštu",f"mailto:{MAIL}",ic("i-mail")),("Užpildyti užklausą","Užklausos forma.html",ic("i-arrow"))])}
   </div>
@@ -29,7 +29,7 @@ kont+=f'''<section><div class="wrap"><div class="cards">
 kont+=cta("Užsakykite servisą arba konsultaciją","Aprašykite įrangą ir situaciją — grįšime su aiškiu tolesniu žingsniu.",
     [btn("Užpildyti užklausą","Užklausos forma.html"),btn(f"Skambinti {TEL}",TELH,"ghost cta-ghost")])
 page_cr("Kontaktai.html","Kontaktai — Kraulis | +370 610 24999","Susisiekite su Kraulis: +370 610 24999, info@kraulis.lt. Servisas Vilniuje ir apylinkėse, prekės — visoje Lietuvoje. Ką nurodyti, kad padėtume greičiau.",kont,"kontaktai",
-    anno("sumažinti dvejones; duoti kelis kontakto būdus","turintys klausimą / poreikį","„Skambinti“ / „Užpildyti užklausą“","„1–2 d.d.“ formuluotė (Q17); apylinkės (Q11)"),"Kontaktai.html")
+    anno("sumažinti dvejones; duoti kelis kontakto būdus","turintys klausimą / poreikį","„Skambinti“ / „Užpildyti užklausą“","teritorija — SIŪLOMA „Vilnius +100 km“ (iš paslaugos.lt); tikslus spindulys (Q11)"),"Kontaktai.html")
 
 # ---- UŽKLAUSOS FORMA (revised: kas nutiks toliau)
 FORMJS='''<script>
@@ -104,7 +104,7 @@ g2=titlebar("Kaip išsirinkti kondicionierių ar šilumos siurblį","Oras–oras
     kick="Patarimai · Gidas",crumb=crumbs(H,("Patarimai","Patarimai.html"),("Kaip išsirinkti kondicionierių ar šilumos siurblį",None)))
 g2+='''<section><div class="wrap"><div class="prose">
   <h2>1. Galios parinkimas</h2><p>Per maža galia nešildys/nevėsins per ekstremumus, per didelė — brangesnė ir dažniau įsijungs/išsijungs. Galia priklauso nuo ploto, aukščio, langų, izoliacijos ir orientacijos.</p>
-  <h2>2. Kuris tipas jums</h2><ul><li><strong>Oras–oras</strong> — šildo ir vėsina orą patalpoje; paprasčiausias, dažniausias sprendimas.</li><li><strong>Oras–vanduo</strong> šilumos siurblys — šildo pastato vandens sistemą (grindinį šildymą, radiatorius), gali ruošti karštą vandenį.</li><li><strong>Multi-split</strong> — vienas lauko blokas kelioms patalpoms.</li></ul>
+  <h2>2. Kuris tipas jums</h2><ul><li><strong>Oras–oras</strong> — šildo ir vėsina orą patalpoje; paprasčiausias, dažniausias sprendimas.</li><li><strong>Oras–vanduo</strong> šilumos siurblys — šildo pastato vandens sistemą (grindinį šildymą, radiatorius), gali ruošti karštą vandenį.</li><li><strong>Geoterminis (žemė–vanduo)</strong> — šilumą ima iš grunto; stabilus efektyvumas ir žiemą, bet reikia gręžinių ar kolektoriaus, todėl planuojamas iš anksto.</li><li><strong>Multi-split</strong> — vienas lauko blokas kelioms patalpoms.</li></ul>
   <h2>3. Ką reiškia SEER ir SCOP jūsų sąskaitai</h2><p>Tai sezoninio efektyvumo rodikliai: <strong>SCOP</strong> — šildymo, <strong>SEER</strong> — vėsinimo. Kuo didesni, tuo mažesnės metinės elektros sąnaudos. Verta žiūrėti ir į energijos klasę.</p>
   <h2>4. Veikimas šaltyje ir triukšmas</h2><p>Jei siurblys bus pagrindinis šildymas, svarbu, iki kokios lauko temperatūros jis efektyviai šildo. Vidinio ir lauko blokų garsas svarbus miegamiesiems ir kaimynystei.</p>
   <div class="note"><strong>Prieš perkant pasitikslinkite:</strong> kiek patalpų ir koks plotas, ar tai pagrindinis, ar papildomas šildymas, kur tiktų lauko blokas. Tada parinksime galią ir tipą.</div>
@@ -112,25 +112,28 @@ g2+='''<section><div class="wrap"><div class="prose">
 g2+=cta("Nežinote, kokios galios reikia?","Parinksime kondicionierių ar šilumos siurblį pagal jūsų patalpas ir biudžetą.",
     [btn("Užsakyti konsultaciją","Užklausos forma.html"),btn(f"Skambinti {TEL}",TELH,"ghost cta-ghost")])
 page_cr("Patarimas - Kaip išsirinkti kondicionierių ar šilumos siurblį.html","Kaip išsirinkti kondicionierių ar šilumos siurblį — Kraulis gidas","Kaip išsirinkti kondicionierių ar šilumos siurblį: galia, oras–oras ir oras–vanduo, SEER/SCOP, veikimas šaltyje. Praktiškas gidas.",g2,"patarimai",
-    anno("padėti priimti sprendimą","renkasi pirmą kartą","„Užsakyti konsultaciją“","geoterminiai? (Q7)"),"Patarimas - Kaip išsirinkti kondicionierių ar šilumos siurblį.html")
+    anno("padėti priimti sprendimą","renkasi pirmą kartą","„Užsakyti konsultaciją“",None),"Patarimas - Kaip išsirinkti kondicionierių ar šilumos siurblį.html")
 
 # ---- DUK
 duk=titlebar("Dažni klausimai","Trumpi atsakymai apie Kraulis paslaugas, kainas, aptarnaujamą teritoriją ir garantijas.",
     kick="DUK",crumb=crumbs(H,("DUK",None)))
 duk+=faq([
-  ("Ar aptarnaujate ne pas jus pirktą įrangą?","Taip. Diagnozuojame, remontuojame ir prižiūrime visų pagrindinių gamintojų kondicionierius, šilumos siurblius ir rekuperatorius — nesvarbu, kur juos pirkote."),
+  ("Ar aptarnaujate ne pas jus pirktą įrangą?","Taip. Diagnozuojame, remontuojame ir prižiūrime visų pagrindinių gamintojų kondicionierius, šilumos siurblius ir rekuperatorius — nesvarbu, kur juos pirkote. Su servisu neliksite vieni."),
   ("Kiek kainuoja diagnostika ir paslaugos?",["Gedimo diagnostika — nuo 69 €. Profilaktinė priežiūra — nuo 99 €. Rekuperacijos balansavimas — nuo 149 €.","Kainos „nuo“; tikslią suderiname prieš darbus."]),
-  ("Kur teikiate paslaugas?","Montavimą, priežiūrą ir remontą — Vilniuje ir apylinkėse. E-parduotuvės prekes pristatome visoje Lietuvoje."),
-  ("Per kiek laiko atsakote į užklausą?","Į užklausas paprastai atsakome per 1–2 darbo dienas. Skubūs darbai derinami individualiai."),
-  ("Kokia garantija?",["Įrangai — gamintojo garantija (trukmė pagal gamintoją ir modelį; daliai pailgėja sumontavus sertifikuotiems montuotojams).","Mūsų atliktiems darbams suteikiame garantiją."]),
+  ("Kur teikiate paslaugas?",f"Montavimą, priežiūrą ir remontą — {TERITORIJA}. E-parduotuvės prekes pristatome visoje Lietuvoje."),
+  ("Per kiek laiko atsakote į užklausą?","Į užklausas atsakome per 1–2 darbo dienas. Skubūs darbai derinami individualiai."),
+  ("Kokia darbų garantija?",[f"Montavimo darbams — {G_MONT}, remonto darbams — {G_REM}. Jei per šį laiką kas nors veikia ne taip dėl mūsų darbo — grįžtame ir sutvarkome.","Įrangai galioja gamintojo garantija (trukmė pagal gamintoją ir modelį; daliai pailgėja, kai sumontuoja atestuoti specialistai)."]),
+  ("Ar turite reikiamus atestatus darbams?","Taip. Kraulis turi visus veiklai reikalingus atestatus, įskaitant F-dujų (freono) tvarkymo ir elektrosaugos. Tai būtina teisėtam ir saugiam darbui su ŠVOK įranga."),
+  ("Ar remontuojate geoterminius šilumos siurblius?","Taip. Dirbame su oras–oras, oras–vanduo ir geoterminiais (žemė–vanduo) šilumos siurbliais."),
+  ("Kaip dažnai reikia prižiūrėti įrangą?","Priklauso nuo įrangos tipo ir naudojimo. Reguliari priežiūra palaiko galią, mažina netikėtus gedimus ir padeda išsaugoti gamintojo garantiją. Tinkamą intervalą pasakome pagal jūsų įrangą."),
+  ("Ar galima kondicionieriumi šildyti žiemą?","Taip — oras–oras įranga šildo ir vėsina. Kiek efektyviai ji šildo esant šalčiui, priklauso nuo modelio; parenkant atsižvelgiame į Lietuvos klimatą."),
   ("Ar dirbate su verslu ir sudėtingomis sistemomis?","Taip — ir namams, ir verslui, įskaitant sudėtingus sprendimus."),
-  ("Kaip užsakyti servisą?","Paskambinkite +370 610 24999, parašykite info@kraulis.lt arba užpildykite užklausos formą."),
-  ("Su kokiais gamintojais dirbate?","Mitsubishi Electric, Samsung, Midea, Zehnder, Recom, Airwell, Cooper&Hunter ir kt."),
+  ("Kaip užsakyti servisą?","Paskambinkite +370 610 24999, parašykite info@kraulis.lt arba užpildykite užklausos formą — patogiausiu jums būdu."),
 ],title="Klausimai ir atsakymai",kick="DUK")
 duk+=cta("Neradote atsakymo?","Paskambinkite arba parašykite — atsakysime ir patarsime.",
     [btn("Užpildyti užklausą","Užklausos forma.html"),btn(f"Skambinti {TEL}",TELH,"ghost cta-ghost")])
-page_cr("DUK.html","Dažni klausimai (DUK) — Kraulis | Kainos, teritorija, garantijos","Dažni klausimai apie Kraulis ŠVOK paslaugas: kainos (diagnostika nuo 69 €), teritorija, garantijos, kaip užsakyti servisą.",duk,"patarimai",
-    anno("pašalinti abejones, atliepti paiešką","turintys klausimų","„Užpildyti užklausą“","realūs klientų klausimai (Q19–20); „1–2 d.d.“ (Q17)"),"DUK.html")
+page_cr("DUK.html","Dažni klausimai (DUK) — Kraulis | Kainos, teritorija, garantijos","Dažni klausimai apie Kraulis ŠVOK paslaugas: kainos (diagnostika nuo 69 €), aptarnaujama teritorija, garantijos, atestatai, kaip užsakyti servisą.",duk,"patarimai",
+    anno("pašalinti abejones, atliepti paiešką","turintys klausimų","„Užpildyti užklausą“","klausimai parinkti iš konkurentų DUK + Kraulis faktų — laukia Audriaus peržiūros (Q19)"),"DUK.html")
 
 # ---- APIE MUS (revised: konkretus darbo principas, be išgalvotos istorijos)
 apie=titlebar("Įranga, kuri veikia. Ir žmonės, kurie už ją atsako.","Kraulis — šildymo, vėdinimo ir vėsinimo (ŠVOK) komanda iš Vilniaus. Parduodame įrangą, ją sumontuojame ir liekame šalia tada, kai pardavimas jau įvykęs.",
@@ -141,38 +144,48 @@ apie+=f'''<section><div class="wrap"><div class="prose">
   <h2>Ką darome</h2></div>
   <div class="cards" style="margin-top:20px">
     <a class="card" href="#" data-todo="eshop-visa"><span class="cardic">{ic("i-shop")}</span><h3>Parduodame įrangą</h3><p>Rekuperatoriai, kondicionieriai, šilumos siurbliai ir priedai. Pristatome visoje Lietuvoje.</p></a>
-    <a class="card" href="Paslauga - Įrangos montavimas.html"><span class="cardic">{ic("i-montavimas")}</span><h3>Montuojame</h3><p>Nuo sistemos parinkimo iki paleidimo ir sureguliavimo. Vilniuje ir apylinkėse.</p></a>
+    <a class="card" href="Paslauga - Įrangos montavimas.html"><span class="cardic">{ic("i-montavimas")}</span><h3>Montuojame</h3><p>Nuo sistemos parinkimo iki paleidimo ir sureguliavimo. {TERITORIJA[0].upper()+TERITORIJA[1:]}.</p></a>
     <a class="card" href="Paslaugos.html"><span class="cardic">{ic("i-remontas")}</span><h3>Prižiūrime ir remontuojame</h3><p>Profilaktika, diagnostika ir remontas. Namams ir verslui, įskaitant sudėtingus sprendimus.</p></a>
     <a class="card" href="Paslauga - Rekuperatorių balansavimas.html"><span class="cardic">{ic("i-balans")}</span><h3>Balansuojame</h3><p>Sureguliuojame oro srautus ir pateikiame matavimų ataskaitą „prieš/po“.</p></a>
   </div>
 </div></section>
 <section style="padding-top:0"><div class="wrap"><div class="prose">
+  <h2>Kodėl galite pasitikėti</h2>
+  <p><strong>8 metų patirtis</strong> ŠVOK srityje ir <strong>5,0 įvertinimas</strong> pagal klientų atsiliepimus. Dirbame ne dėl vienkartinio darbo, o dėl to, kad grįžtumėte ir rekomenduotumėte.</p>
+  <ul>
+    <li><strong>Visi veiklai reikiami atestatai</strong> — įskaitant F-dujų (freono) tvarkymo ir elektrosaugos. Tai būtina teisėtam ir saugiam darbui su šaltnešiu.</li>
+    <li><strong>Atsakomybė po pardavimo</strong> — priežiūra ir remontas, net jei įrangą pirkote kitur. Su servisu neliekate vieni.</li>
+    <li><strong>Skaidrumas</strong> — kainą ir apimtį suderiname prieš darbus, o po jų paaiškiname, kaip naudoti, kad problema nesikartotų.</li>
+  </ul>
+</div></div></section>
+<section style="padding-top:0"><div class="wrap"><div class="prose">
   <h2>Dirbame su visais</h2><p>Turite namą, butą, įmonę ar sudėtingą sistemą — kreipkitės. Į sudėtingas situacijas žiūrime ne kaip į priežastį jų vengti, o kaip į galimybę rasti geriausią sprendimą.</p>
   <p>Mums svarbu, kad jūsų namuose ar biure tiesiog būtų gera: tylu, šilta, šviežia. Visa inžinerija — mūsų rūpestis.</p>
   <div class="note"><strong>Kraulis — patikima inžinerija ir žmogiškas komfortas.</strong></div>
 </div></div></section>'''
+apie+=reviews_block(sub="Realūs klientų atsiliepimai apie mūsų atliktus darbus — remontą, montavimą ir balansavimą.")
 apie+=cta("Pasitarkime dėl jūsų sistemos","Renkatės naują įrangą ar reikia pagalbos su turima — parašykite arba paskambinkite.",
     [btn("Užsakyti konsultaciją","Užklausos forma.html"),btn(f"Skambinti {TEL}",TELH,"ghost cta-ghost")])
-page_cr("Apie mus.html","Apie mus — Kraulis | ŠVOK įranga ir servisas Vilniuje","Kraulis — ŠVOK komanda iš Vilniaus. Parduodame įrangą, sumontuojame ir prižiūrime; liekame atsakingi po pardavimo. Servisas namams ir verslui.",apie,"apie",
-    anno("paaiškinti darbo principą + naudą, kelti pasitikėjimą","visi","„Užsakyti konsultaciją“","patirtis/kvalifikacija/sertifikatai (Q15–16) — dabar neteigiama"),"Apie mus.html")
+page_cr("Apie mus.html","Apie mus — Kraulis | ŠVOK įranga ir servisas Vilniuje","Kraulis — ŠVOK komanda iš Vilniaus. 8 m. patirtis, visi reikiami atestatai. Parduodame įrangą, sumontuojame ir prižiūrime; liekame atsakingi po pardavimo.",apie,"apie",
+    anno("paaiškinti darbo principą + kelti pasitikėjimą (patirtis, atestatai, atsiliepimai)","visi","„Užsakyti konsultaciją“","komandos/objekto nuotrauka (Q23) — laukiu failo"),"Apie mus.html")
 
 # =========================================================== DASHBOARD (index.html)
 PAGES=[
- ("Pagrindinis","Pagrindinis.html","index.html","🟠","Aiškesnis hero (įranga+montavimas+servisas), varijuotas turinys"),
- ("Paslaugos","Paslaugos.html","Paslaugos.html","🟠","H1 su verte, „kodėl Kraulis“ blokas"),
- ("Kondicionierių remontas","Paslauga - Kondicionierių remontas.html","Paslauga - Kondicionierių remontas.html","🟠","„Ką patikriname“ techninė kompetencija"),
- ("Šilumos siurblių remontas","Paslauga - Šilumos siurblių remontas.html","Paslauga - Šilumos siurblių remontas.html","🟠","Techninė kompetencija; be „geoterminių“ (Q7)"),
+ ("Pagrindinis","Pagrindinis.html","index.html","🟠","Aiškesnis hero + realūs atsiliepimai (5,0) + servisas po pardavimo"),
+ ("Paslaugos","Paslaugos.html","Paslaugos.html","🟠","„Kodėl Kraulis“ blokas; garantijos 24 mėn./6 mėn."),
+ ("Kondicionierių remontas","Paslauga - Kondicionierių remontas.html","Paslauga - Kondicionierių remontas.html","🟠","„Ką patikriname“ techninė kompetencija; 6 mėn. garantija"),
+ ("Šilumos siurblių remontas","Paslauga - Šilumos siurblių remontas.html","Paslauga - Šilumos siurblių remontas.html","🟠","Techninė kompetencija; geoterminiai ĮTRAUKTI (Q7 ✓)"),
  ("Rekuperatorių remontas","Paslauga - Rekuperatorių remontas.html","Paslauga - Rekuperatorių remontas.html","🟠","„Ką patikriname“; nuoroda į balansavimą"),
- ("Rekuperatorių balansavimas","Paslauga - Rekuperatorių balansavimas.html","Paslauga - Rekuperatorių balansavimas.html","🔴","Signature — sustiprinta ataskaitos vertė ir prieš/po vizualas"),
+ ("Rekuperatorių balansavimas","Paslauga - Rekuperatorių balansavimas.html","Paslauga - Rekuperatorių balansavimas.html","🔴","Signature — ataskaitos vertė + realus kliento atsiliepimas apie ataskaitą"),
  ("Profilaktinė priežiūra","Paslauga - Profilaktinė priežiūra.html","Paslauga - Profilaktinė priežiūra.html","🟠","Aiškesnė nauda; „ką apima“ konkrečiau"),
- ("Įrangos montavimas","Paslauga - Įrangos montavimas.html","Paslauga - Įrangos montavimas.html","🟠","Sertifikuoto montavimo nauda (Q16)"),
- ("Kontaktai","Kontaktai.html","Kontaktai.html","🟠","„Kad padėtume greičiau“ — kokios info reikia"),
+ ("Įrangos montavimas","Paslauga - Įrangos montavimas.html","Paslauga - Įrangos montavimas.html","🟠","Atestuotas montavimas (F-dujos); 24 mėn. garantija"),
+ ("Kontaktai","Kontaktai.html","Kontaktai.html","🟠","„Kad padėtume greičiau“; teritorija Vilnius +100 km"),
  ("Užklausos forma","Užklausos forma.html","Užklausos forma.html","🟠","„Kas nutiks toliau“; laukų hint'ai"),
  ("Patarimai","Patarimai.html","Patarimai.html","⚪","Konkretesni kortelių kabliukai"),
  ("Gidas: rekuperatorius","Patarimas - Kaip išsirinkti rekuperatorių.html","Patarimas - Kaip išsirinkti rekuperatorių.html","⚪","Praktiškas „prieš perkant“ checklist"),
- ("Gidas: kondicionierius / šil. siurblys","Patarimas - Kaip išsirinkti kondicionierių ar šilumos siurblį.html","Patarimas - Kaip išsirinkti kondicionierių ar šilumos siurblį.html","⚪","SEER/SCOP → nauda; checklist"),
- ("DUK","DUK.html","DUK.html","🟠","Tie patys faktai; laukia realių klausimų (Q19)"),
- ("Apie mus","Apie mus.html","Apie mus.html","🟠","Konkretus darbo principas; be išgalvotos istorijos"),
+ ("Gidas: kondicionierius / šil. siurblys","Patarimas - Kaip išsirinkti kondicionierių ar šilumos siurblį.html","Patarimas - Kaip išsirinkti kondicionierių ar šilumos siurblį.html","⚪","SEER/SCOP → nauda; geoterminiai įtraukti"),
+ ("DUK","DUK.html","DUK.html","🟠","Realūs klausimai (konkurentų DUK+faktai); garantija, atestatai, geoterminiai"),
+ ("Apie mus","Apie mus.html","Apie mus.html","🟠","8 m. patirtis, atestatai, realūs atsiliepimai; darbo principas"),
 ]
 rows=""
 for name,cr,sv,st,chg in PAGES:

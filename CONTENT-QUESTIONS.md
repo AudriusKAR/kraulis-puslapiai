@@ -2,6 +2,19 @@
 
 Klausiu tik to, ko nėra PRODUCT.md. Kiekvienam — kurių puslapių tekstą paveiks. Neatsakinėju pats.
 
+## ✅ Atsakyta (Audrius, 2026-07) — įtraukta į content-review
+- **Q7 Geoterminiai** — TAIP, montuoja/remontuoja. Grąžinta į šilumos siurblių psl., DUK, gidą.
+- **Q9 Garantija** — SIŪLOMA: montavimo darbams **24 mėn.**, remonto darbams **6 mėn.** (Audrius dar tvirtina galutinius skaičius; keičiama vienoje vietoje — `G_MONT`/`G_REM`).
+- **Q15–16 Patirtis/atestatai** — **8 m. patirtis** (paslaugos.lt); **visi reikiami atestatai**, įskaitant F-dujų (freono) ir elektrosaugos; atestuotas ŠVOK montuotojas darbui su freonu. Minima trumpai.
+- **Q17 Reagavimas** — „per 1–2 darbo dienas" = oficialus teiginys.
+- **Q21 Akcentas** — servisas po pardavimo, „klientas neliks be serviso".
+- **Q23 Atsiliepimai** — 7 realūs atsiliepimai (5,0) iš paslaugos.lt panaudoti. **Nuotrauka** — laukiu failo iš Audriaus.
+- **Q11 Teritorija** — SIŪLOMA „Vilnius + ~100 km" (iš paslaugos.lt profilio); tikslus spindulys/rajonai dar tikslintini.
+- **Q19–20 DUK/problemos** — pasiūlyti klausimai iš konkurentų DUK + Kraulis faktų; laukia Audriaus peržiūros.
+
+## Dar neatsakyta (žemiau) — laukia
+Q1–Q6, Q8, Q10, Q12–Q14, Q18, Q22, Q24–Q26.
+
 ## Auditorija
 1. **Kuri klientų grupė svarbiausia** (prioritetas): privatūs namai, butai ar verslas? → *Pagrindinis, Apie mus, visi hero.*
 2. Ar akcentuoti pagalbą **ne saviems klientams** (pirko kitur) kaip stiprų kabliuką? → *Pagrindinis, Paslaugos, remontas, Apie mus.*
