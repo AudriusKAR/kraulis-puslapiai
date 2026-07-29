@@ -28,15 +28,9 @@ FORM: techninis datasheet / field manual. Signature: kairysis matavimo rail per 
   a{color:var(--sky-deep)}
   .wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,40px)}
   /* Measurement rail (signature) */
-  .rail{--railw:64px;position:relative}
+  /* Kairysis rail pašalintas — turinys lygiuojasi su antrašte */
+  .rail{position:relative}
   .railmark{display:none}
-  @media(min-width:900px){
-    .rail{padding-left:var(--railw)}
-    .rail::before{content:"";position:absolute;left:calc(var(--railw) - 1px);top:0;bottom:0;width:1px;background:var(--line)}
-    .railmark{display:block;position:absolute;left:0;top:4px;font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:.04em;color:var(--sky-deep)}
-    .railmark::before{content:"§";color:var(--steel)}
-    .railmark::after{content:"";position:absolute;left:1px;top:23px;width:calc(var(--railw) - 22px);height:1px;background:var(--line)}
-  }
   .kick{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--sky-deep)}
   .btn{display:inline-flex;align-items:center;gap:8px;font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;text-decoration:none;padding:13px 22px;border-radius:6px;border:1px solid var(--navy);background:var(--navy);color:#fff;transition:transform .12s cubic-bezier(0.23,1,0.32,1),background .18s}
   .btn:hover{background:var(--sky-deeper);border-color:var(--sky-deeper)}
