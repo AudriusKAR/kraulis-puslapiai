@@ -1,0 +1,268 @@
+<!DOCTYPE html><html lang="lt"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kraulis — turinio peržiūra (content-review)</title><meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--white:#FFFFFF;--paper:#F5F8FB;--panel:#FBFCFD;--navy:#24303E;--ink:#16242C;--steel:#5D6B74;
+    --line:#DCE4EB;--line-soft:#E9EFF4;--grid:#E7EEF4;--sky:#2E9BD6;--sky-deep:#1A6E96;--sky-deeper:#17607E;
+    --mist:#EAF0F4;--cloud:#CFE0EC;--ease:cubic-bezier(0.23,1,0.32,1);--shadow:0 12px 34px rgba(36,48,62,.09)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:'Archivo',sans-serif;color:var(--navy);letter-spacing:-0.02em;line-height:1.04}
+  a{color:var(--sky-deep)}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,4vw,44px)}
+  .mono{font-family:'IBM Plex Mono',monospace}
+  .kick{display:inline-flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sky-deep)}
+  .kick::before{content:"";width:24px;height:1px;background:var(--sky)}
+  .ic{width:1em;height:1em;display:inline-block;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--navy);color:#fff;padding:10px 16px;border-radius:8px;z-index:100}
+  .skip:focus{left:12px;top:10px}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;text-decoration:none;padding:14px 26px;border-radius:10px;border:none;cursor:pointer;transition:transform .13s var(--ease),background .2s,box-shadow .2s}
+  .btn-primary{background:var(--sky-deep);color:#fff}
+  .btn-primary:hover{background:var(--sky-deeper)}.btn-primary:active{transform:scale(.97)}
+  .btn-ghost{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
+  .btn-ghost:hover{background:var(--white)}.btn-ghost:active{transform:scale(.97)}
+  a:focus-visible,.btn:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--sky);outline-offset:3px;border-radius:8px}
+
+  header{position:sticky;top:0;z-index:40;background:rgba(245,248,251,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .hd{display:flex;align-items:center;justify-content:space-between;gap:18px;height:66px}
+  .hd .logo{height:38px;width:auto;display:block}
+  nav.main{display:flex;gap:22px;align-items:center}
+  nav.main a{font-size:14.5px;color:var(--navy);text-decoration:none;font-weight:500}
+  nav.main a:hover{color:var(--sky-deep)}
+  nav.main a[aria-current="page"]{color:var(--sky-deep);font-weight:600}
+  .hd-right{display:flex;align-items:center;gap:16px}
+  .hd-tel{font-family:'IBM Plex Mono',monospace;font-size:13.5px;color:var(--navy);text-decoration:none;white-space:nowrap}
+  .burger{display:none;background:none;border:1.5px solid var(--line);border-radius:9px;padding:8px 10px;cursor:pointer;color:var(--navy)}
+  .burger:hover{background:var(--white)}
+  .navcta{display:none}
+
+  /* HOME hero (C) */
+  .hero{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--white),var(--paper))}
+  .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:36px 36px;-webkit-mask-image:radial-gradient(130% 100% at 82% 26%,#000 26%,transparent 70%);mask-image:radial-gradient(130% 100% at 82% 26%,#000 26%,transparent 70%);pointer-events:none}
+  .hero .hgrid{position:relative;display:grid;grid-template-columns:1.02fr .98fr;gap:36px;align-items:center;padding:clamp(46px,6.5vw,80px) 0 clamp(30px,4vw,44px)}
+  .hero h1{font-size:clamp(40px,6.4vw,72px);font-weight:900;letter-spacing:-0.04em;margin:18px 0}
+  .hero h1 em{font-style:normal;color:var(--sky-deep)}
+  .hero .lead{font-size:17.5px;color:var(--ink);max-width:480px;margin-bottom:22px}
+  .doing{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+  .doing span{display:inline-flex;align-items:center;gap:7px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.04em;color:var(--navy);background:var(--white);border:1px solid var(--line);border-radius:999px;padding:7px 13px}
+  .doing span .ic{width:15px;height:15px;color:var(--sky-deep)}
+  .acts{display:flex;gap:13px;flex-wrap:wrap}
+  .instr{position:relative}
+  .flow{stroke-dasharray:5 9;animation:flow 3.2s linear infinite}
+  @keyframes flow{to{stroke-dashoffset:-140}}
+  .draw{stroke-dasharray:var(--l);stroke-dashoffset:var(--l);animation:draw 1.5s var(--ease) forwards}
+  .draw.d2{animation-delay:.28s}.draw.d3{animation-delay:.52s}
+  @keyframes draw{to{stroke-dashoffset:0}}
+
+  /* Subpage titlebar (light hero-lite) */
+  .titlebar{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--white),var(--paper));border-bottom:1px solid var(--line)}
+  .titlebar::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:34px 34px;-webkit-mask-image:radial-gradient(120% 120% at 92% 10%,#000 0%,transparent 60%);mask-image:radial-gradient(120% 120% at 92% 10%,#000 0%,transparent 60%);opacity:.8;pointer-events:none}
+  .titlebar .inner{position:relative;padding:clamp(38px,5.5vw,64px) 0 clamp(30px,4vw,44px);max-width:760px}
+  .titlebar h1{font-size:clamp(30px,4.6vw,50px);font-weight:900;letter-spacing:-0.03em;margin:14px 0 0}
+  .titlebar h1 em{font-style:normal;color:var(--sky-deep)}
+  .titlebar .lead{font-size:17px;color:var(--ink);margin-top:16px;max-width:640px}
+  .titlebar .meta{margin-top:16px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--sky-deep)}
+  .crumbs{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.04em;color:var(--steel);margin-bottom:8px}
+  .crumbs a{color:var(--steel);text-decoration:none}.crumbs a:hover{color:var(--sky-deep)}
+  .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+  .chip{display:inline-flex;align-items:center;gap:7px;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:700;font-size:13px;color:var(--navy);border:1.5px solid var(--line);background:var(--white);border-radius:999px;padding:8px 15px;transition:border-color .18s,color .18s}
+  .chip:hover{border-color:var(--sky);color:var(--sky-deep)}
+  .chip .ic{width:15px;height:15px;color:var(--sky-deep)}
+
+  section{padding:clamp(48px,7vw,80px) 0;position:relative}
+  .sh{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:32px;flex-wrap:wrap}
+  .sh h2{font-size:clamp(24px,3.4vw,38px);font-weight:800;max-width:600px;margin-top:12px}
+  .sh p{color:var(--steel);max-width:320px;font-size:15px}
+
+  /* category panel */
+  .cats{position:relative;padding-bottom:clamp(30px,5vw,52px)}
+  .cats .hd2{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin:0 0 16px;flex-wrap:wrap}
+  .cats .hd2 .t{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--steel)}
+  .cats .hd2 a{font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;text-decoration:none;color:var(--navy)}
+  .catgrid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--white)}
+  .cat{display:flex;flex-direction:column;gap:12px;padding:22px 20px;text-decoration:none;color:inherit;border-right:1px solid var(--line);transition:background .18s}
+  .cat:last-child{border-right:none}.cat:hover{background:var(--paper)}
+  .cat .cic .ic{width:40px;height:40px;stroke-width:1.5;color:var(--navy)}
+  .cat b{font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:var(--navy)}
+  .cat span{font-size:13px;color:var(--steel);min-height:34px}
+  .cat .go{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--sky-deep);display:flex;align-items:center;gap:6px}.cat:hover .go{gap:9px}
+  @media(max-width:820px){.catgrid{grid-template-columns:1fr 1fr}.cat:nth-child(2){border-right:none}.cat:nth-child(1),.cat:nth-child(2){border-bottom:1px solid var(--line)}}
+  @media(max-width:480px){.catgrid{grid-template-columns:1fr}.cat{border-right:none;border-bottom:1px solid var(--line)}.cat:last-child{border-bottom:none}}
+
+  /* airflow divider */
+  .divide{position:relative;height:1px;background:var(--line);max-width:1200px;margin:0 auto}
+  .divide svg{position:absolute;left:50%;top:-19px;transform:translateX(-50%);width:180px;height:38px;overflow:visible}
+
+  /* process (open) */
+  .process{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;position:relative}
+  .process::before{content:"";position:absolute;left:26px;right:26px;top:26px;height:1px;background:var(--line)}
+  .pstep{position:relative}
+  .pstep .pn{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:var(--paper);border:1px solid var(--line);font-family:'Archivo',sans-serif;font-weight:800;font-size:17px;color:var(--sky-deep);position:relative;z-index:1;margin-bottom:16px}
+  .pstep h3{font-size:19px;margin-bottom:8px}
+  .pstep p{font-size:14.5px;color:var(--steel);max-width:300px}
+  @media(max-width:820px){.process{grid-template-columns:1fr;gap:20px}.process::before{display:none}.pstep{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:start}.pstep .pn{margin-bottom:0}}
+
+  /* microclimate strip */
+  .climate{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--white)}
+  .cl{display:flex;align-items:center;gap:13px;padding:22px;border-right:1px solid var(--line)}
+  .cl:last-child{border-right:none}
+  .cl>svg.ic{width:30px;height:30px;color:var(--sky-deep);flex:none;stroke-width:1.5}
+  .cl b{display:block;font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;color:var(--navy)}
+  .cl span{font-size:12.5px;color:var(--steel)}
+  @media(max-width:820px){.climate{grid-template-columns:1fr 1fr}.cl:nth-child(2){border-right:none}.cl:nth-child(1),.cl:nth-child(2){border-bottom:1px solid var(--line)}}
+  @media(max-width:480px){.climate{grid-template-columns:1fr}.cl{border-right:none;border-bottom:1px solid var(--line)}.cl:last-child{border-bottom:none}}
+
+  /* services datasheet */
+  .svc-wrap{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--white)}
+  .srow{display:grid;grid-template-columns:46px 1.1fr 2fr auto;gap:22px;align-items:center;padding:20px 24px;border-top:1px solid var(--line-soft);text-decoration:none;color:inherit;transition:background .16s}
+  .srow:first-child{border-top:none}.srow:hover{background:var(--paper)}
+  .srow .sic .ic{width:34px;height:34px;color:var(--sky-deep);stroke-width:1.5}
+  .srow h3{font-family:'Archivo',sans-serif;font-weight:700;font-size:17px;color:var(--navy)}
+  .srow p{font-size:14px;color:var(--steel)}
+  .srow .rt{display:flex;align-items:center;gap:16px;justify-self:end}
+  .srow .price{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--navy);white-space:nowrap}
+  .srow .ar{color:var(--sky-deep);transition:transform .18s}.srow:hover .ar{transform:translateX(3px)}
+  @media(max-width:760px){.srow{grid-template-columns:34px 1fr auto;gap:14px}.srow p{display:none}}
+
+  /* prieš/po */
+  .sig{display:grid;grid-template-columns:1fr 1.05fr;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--white)}
+  .sig .txt{padding:clamp(28px,4vw,44px)}
+  .sig h2{font-size:clamp(23px,3vw,32px);margin:12px 0 14px}
+  .sig p{color:var(--steel);font-size:15.5px;margin-bottom:22px}
+  .sig .fig{background:var(--paper);border-left:1px solid var(--line);padding:clamp(24px,3vw,38px);position:relative}
+  .sig .fig::before{content:"";position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:22px 22px;opacity:.6;pointer-events:none}
+  .fh{position:relative;display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);margin-bottom:18px}
+  .brow{position:relative;display:grid;grid-template-columns:66px 1fr;gap:12px;align-items:center;margin-bottom:12px}
+  .brow .rl{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--navy)}
+  .bar{height:22px;background:var(--mist);border-radius:5px;position:relative;overflow:hidden}
+  .bar i{position:absolute;left:0;top:0;bottom:0;border-radius:5px}
+  .bar i.b{background:#C7D2DB}.bar i.a{background:var(--sky-deep)}
+  .bar b{position:absolute;right:7px;top:50%;transform:translateY(-50%);font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--navy);font-weight:400}.bar i.a b{color:#fff}
+  .leg{position:relative;display:flex;gap:16px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--steel);margin-top:6px}.leg em{font-style:normal;color:var(--sky-deep)}
+  @media(max-width:820px){.sig{grid-template-columns:1fr}.sig .fig{border-left:none;border-top:1px solid var(--line)}}
+
+  /* prose article */
+  .layout{display:grid;grid-template-columns:1fr;gap:40px}
+  @media(min-width:920px){.layout.aside{grid-template-columns:minmax(0,1fr) 300px}}
+  aside.side{align-self:start;position:sticky;top:88px;display:flex;flex-direction:column;gap:16px}
+  .prose{max-width:720px}
+  .prose h2{font-size:clamp(21px,2.6vw,27px);font-weight:800;margin:34px 0 12px}.prose h2:first-child{margin-top:0}
+  .prose h3{font-size:18px;font-weight:700;margin:24px 0 8px}
+  .prose p{margin:0 0 14px;font-size:16px}.prose ul,.prose ol{margin:0 0 16px;padding-left:22px}
+  .prose li{margin:0 0 7px;font-size:16px}.prose li::marker{color:var(--sky-deep)}
+  .prose strong{color:var(--navy);font-weight:600}
+  .prose a{color:var(--sky-deep);text-underline-offset:2px}
+  .note{background:var(--white);border:1px solid var(--line);border-left:4px solid var(--sky);border-radius:12px;padding:16px 18px;font-size:15px;margin:18px 0}.note strong{color:var(--navy)}
+
+  /* FAQ native details */
+  .faq{max-width:760px}
+  .faq details{border:1px solid var(--line);border-radius:12px;margin-bottom:12px;background:var(--white);overflow:hidden}
+  .faq details[open]{box-shadow:var(--shadow)}
+  .faq summary{list-style:none;cursor:pointer;padding:18px 48px 18px 20px;font-family:'Archivo',sans-serif;font-weight:700;font-size:16.5px;color:var(--navy);position:relative}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"";position:absolute;right:20px;top:22px;width:10px;height:10px;border-right:2px solid var(--sky-deep);border-bottom:2px solid var(--sky-deep);transform:rotate(45deg);transition:transform .2s}
+  .faq details[open] summary::after{transform:rotate(-135deg);top:25px}
+  .faq .a{padding:0 20px 18px;font-size:15.5px;color:var(--ink)}.faq .a p{margin:0 0 10px}.faq .a p:last-child{margin:0}
+
+  /* cards grid (services index / guides) */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+  a.card{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:24px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:10px;transition:transform .15s var(--ease),box-shadow .2s}
+  a.card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+  .card .cardic .ic{width:30px;height:30px;color:var(--sky-deep)}
+  .card h3{font-size:18px;font-weight:700}.card p{font-size:14px;color:var(--steel);flex:1}
+  .card .price{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--sky-deep)}
+  .card .more{font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;color:var(--navy)}a.card:hover .more{color:var(--sky-deep)}
+
+  /* form */
+  .form{max-width:640px}
+  .field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+  .field label{font-size:14.5px;color:var(--navy);font-weight:600}.field .req{color:var(--sky-deep)}
+  .field input,.field textarea,.field select{font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:16px;color:var(--ink);background:var(--white);border:1px solid var(--steel);border-radius:8px;padding:12px 14px;transition:border-color .2s,box-shadow .2s;width:100%}
+  .field input::placeholder,.field textarea::placeholder{color:#93a0a8}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 3px rgba(46,155,214,.18)}
+  .field textarea{min-height:130px;resize:vertical}.field .hint{font-size:13px;color:var(--steel)}
+  .grid2{display:grid;grid-template-columns:1fr;gap:0 16px}@media(min-width:620px){.grid2{grid-template-columns:1fr 1fr}}
+  .consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--steel)}
+  .consent input{width:18px;height:18px;margin-top:2px;flex:none;accent-color:var(--sky-deep)}
+  .form-status{font-size:14.5px;margin-top:12px}
+
+  /* compact navy CTA */
+  .cta{background:var(--navy);border-radius:18px;padding:clamp(30px,4vw,48px);display:flex;justify-content:space-between;align-items:center;gap:26px;flex-wrap:wrap;position:relative;overflow:hidden}
+  .cta::after{content:"";position:absolute;right:-90px;top:-90px;width:300px;height:300px;border-radius:50%;border:1px solid rgba(46,155,214,.22)}
+  .cta h2{color:#fff;font-size:clamp(22px,3vw,32px);max-width:560px;position:relative}
+  .cta p{color:var(--cloud);margin-top:8px;position:relative;font-size:15px}
+  .cta-acts{display:flex;gap:12px;flex-wrap:wrap;position:relative}
+  .cta .btn-primary{background:#fff;color:var(--navy)}.cta .btn-primary:hover{background:var(--sky);color:#fff}
+  .cta .cta-ghost{color:#fff;border-color:rgba(255,255,255,.45)}.cta .cta-ghost:hover{background:rgba(255,255,255,.10)}
+
+  footer{background:var(--navy);color:var(--cloud);padding:44px 0 26px;margin-top:20px}
+  .foot{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.1fr;gap:30px}
+  .foot .logo{height:54px;margin-bottom:12px}
+  .foot p{font-size:14px;color:var(--cloud);margin:2px 0}
+  .foot h4{color:#fff;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;color:var(--cloud)}
+  .foot a{color:var(--cloud);text-decoration:none;display:block;padding:3px 0;font-size:14px}.foot a:hover{color:#fff}
+  .foot .mono{font-family:'IBM Plex Mono',monospace}
+  .foot-b{border-top:1px solid rgba(255,255,255,.12);margin-top:26px;padding-top:16px;font-size:12.5px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  @media(max-width:820px){.foot{grid-template-columns:1fr 1fr}.foot>div:first-child{grid-column:1/-1}}
+
+  @media(max-width:860px){
+    nav.main{position:fixed;inset:66px 0 auto 0;flex-direction:column;align-items:stretch;gap:0;background:var(--white);border-bottom:1px solid var(--line);padding:8px 24px 16px;box-shadow:var(--shadow);transform:translateY(-130%);visibility:hidden;transition:transform .28s var(--ease),visibility .28s;max-height:calc(100dvh - 66px);overflow:auto}
+    nav.main a{padding:14px 0;border-bottom:1px solid var(--line-soft);font-size:16px}
+    nav.main.open{transform:translateY(0);visibility:visible}
+    .burger{display:inline-flex}.hd-tel{display:none}
+    .hero .hgrid{grid-template-columns:1fr;gap:22px}.instr{order:-1;max-width:440px}
+    nav.main .navcta{display:none}
+  }
+  @media(max-width:480px){
+    .hd-right>.btn-primary{display:none}
+    nav.main .navcta{display:block;margin-top:10px;background:var(--sky-deep);color:#fff;text-align:center;border-radius:10px;padding:14px;font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;border-bottom:none}
+    nav.main .navcta:hover{background:var(--sky-deeper)}
+  }
+  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.001ms!important;animation-duration:.001ms!important}.flow,.draw{animation:none;stroke-dashoffset:0}}
+
+.dash{max-width:1100px}
+table.rev{width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:14px;margin-top:10px}
+table.rev th,table.rev td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--line-soft);vertical-align:top}
+table.rev th{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);background:var(--paper)}
+table.rev tr:last-child td{border-bottom:none}
+table.rev a{font-family:'Archivo',sans-serif;font-weight:700;text-decoration:none;white-space:nowrap}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--steel);margin-top:14px}
+.docs a{display:inline-block;margin:4px 10px 4px 0;font-family:'Archivo',sans-serif;font-weight:700;text-decoration:none;color:var(--navy);border:1px solid var(--line);border-radius:8px;padding:8px 14px}
+.docs a:hover{border-color:var(--sky);color:var(--sky-deep)}
+</style></head><body>
+<header><div class="wrap hd"><a href="index.html" aria-label="Kraulis"><svg class="logo" viewBox="14 19 322 343.7654345654346" role="img" aria-label="Kraulis"><path fill-rule="evenodd" fill="#24303E" d="M175,31 L26,180 L57,180 L57,302 L293,302 L293,180 L324,180 Z M175,72 L81,166 L81,275 L269,275 L269,166 Z"/><path fill="#24303E" d="M151,149 L133,177 L145,177 L145,243 L157,243 L157,177 L169,177 Z"/><path fill="#24303E" d="M199,243 L181,215 L193,215 L193,149 L205,149 L205,215 L217,215 Z"/><g transform="translate(53.416,350.152) scale(0.02358,-0.02358)"><path fill="#24303E" d="M152 1466H605V912L1080 1466H1682L1148 913L1706 0H1148L839 603L605 358V0H152ZM1862 0V1466H2617Q2827 1466 2938.0 1430.0Q3049 1394 3117.0 1296.5Q3185 1199 3185 1059Q3185 937 3133.0 848.5Q3081 760 2990 705Q2932 670 2831 647Q2912 620 2949 593Q2974 575 3021.5 516.0Q3069 457 3085 425L3304 0H2792L2550 448Q2504 535 2468 561Q2419 595 2357 595H2317V0ZM2317 872H2508Q2539 872 2628 892Q2673 901 2701.5 938.0Q2730 975 2730 1023Q2730 1094 2685.0 1132.0Q2640 1170 2516 1170H2317ZM4351 242H3835L3764 0H3301L3852 1466H4346L4897 0H4423ZM4256 559 4094 1086 3933 559ZM5996 1466H6448V592Q6448 462 6407.5 346.5Q6367 231 6280.5 144.5Q6194 58 6099 23Q5967 -26 5782 -26Q5675 -26 5548.5 -11.0Q5422 4 5337.0 48.5Q5252 93 5181.5 175.0Q5111 257 5085 344Q5043 484 5043 592V1466H5495V571Q5495 451 5561.5 383.5Q5628 316 5746 316Q5863 316 5929.5 382.5Q5996 449 5996 571ZM6748 1466H7201V361H7908V0H6748ZM8132 1466H8586V0H8132ZM8832 485 9263 512Q9277 407 9320 352Q9390 263 9520 263Q9617 263 9669.5 308.5Q9722 354 9722 414Q9722 471 9672 516Q9622 561 9440 601Q9142 668 9015 779Q8887 890 8887 1062Q8887 1175 8952.5 1275.5Q9018 1376 9149.5 1433.5Q9281 1491 9510 1491Q9791 1491 9938.5 1386.5Q10086 1282 10114 1054L9687 1029Q9670 1128 9615.5 1173.0Q9561 1218 9465 1218Q9386 1218 9346.0 1184.5Q9306 1151 9306 1103Q9306 1068 9339 1040Q9371 1011 9491 986Q9788 922 9916.5 856.5Q10045 791 10103.5 694.0Q10162 597 10162 477Q10162 336 10084.0 217.0Q10006 98 9866.0 36.5Q9726 -25 9513 -25Q9139 -25 8995.0 119.0Q8851 263 8832 485Z"/></g></svg></a><span class="mono" style="font-size:12px;color:var(--steel)">Turinio peržiūra · content-review</span></div></header>
+<section class="titlebar"><div class="wrap"><div class="inner dash">
+  <span class="kick">Content review · tik peržiūrai</span>
+  <h1>Kraulis turinio peržiūra</h1>
+  <p class="lead">Siūlomas 15 puslapių turinys <strong>tuo pačiu final-cba dizainu</strong>. Palyginkite su dabartine site-v2 versija. Kiekvienam siūlomam puslapiui viršuje — anotacijų juosta (tikslas, auditorija, CTA, laukiantys patvirtinimo teiginiai). <strong>Dizainas nekeičiamas; site-v2 neliestas.</strong></p>
+</div></div></section>
+<section><div class="wrap dash">
+  <div class="sh"><div><span class="kick">Audito santrauka</span><h2>Ką keičiu ir kodėl</h2></div></div>
+  <div class="prose" style="max-width:820px">
+    <ul>
+      <li><strong>0 fiktyvių faktų</strong> — kainos, garantijos, teritorija, gamintojai nekeisti.</li>
+      <li><strong>Hero ir CTA varijuoti</strong> — nebe ta pati formulė visur; CTA pagal puslapio tikslą (pirkimas / servisas / konsultacija).</li>
+      <li><strong>Paslaugų puslapiuose — techninė kompetencija</strong>: pridėta „ką patikriname / sutvarkome".</li>
+      <li><strong>Gidai realiai padeda apsispręsti</strong> — pridėti „prieš perkant" patikslinimai, CTA = konsultacija.</li>
+      <li><strong>Kontaktai / forma</strong> — paaiškinta, kokios info reikia ir kas nutiks toliau.</li>
+      <li><strong>Nenaudota:</strong> „geoterminiai", „1–2 d.d." kaip pažadas pagrindiniuose, jokių atsiliepimų/skaičių.</li>
+    </ul>
+    <p class="mono" style="font-size:13px;color:var(--steel)">Pilna analizė ir klausimai — dokumentuose:</p>
+    <div class="docs">
+      <a href="../CONTENT-AUDIT.md">CONTENT-AUDIT.md</a><a href="../CONTENT-QUESTIONS.md">CONTENT-QUESTIONS.md</a><a href="../CONTENT-VOICE.md">CONTENT-VOICE.md</a><a href="../../.agents/product-marketing.md">product-marketing.md</a>
+    </div>
+  </div>
+  <div class="sh" style="margin-top:36px"><div><span class="kick">Visi puslapiai</span><h2>Siūloma vs dabartinė</h2></div></div>
+  <table class="rev"><thead><tr><th>Prior.</th><th>Puslapis</th><th>Svarbiausias pakeitimas</th><th>Siūloma</th><th>Dabartinė</th></tr></thead><tbody><tr><td>🟠</td><td><b>Pagrindinis</b></td><td>Aiškesnis hero (įranga+montavimas+servisas), varijuotas turinys</td><td><a href="Pagrindinis.html" target="_blank">Siūloma ↗</a></td><td><a href="../site-v2/index.html" target="_blank">Dabartinė ↗</a></td></tr><tr><td>🟠</td><td><b>Paslaugos</b></td><td>H1 su verte, „kodėl Kraulis“ blokas</td><td><a href="Paslaugos.html" target="_blank">Siūloma ↗</a></td><td><a href="../site-v2/Paslaugos.html" target="_blank">Dabartinė ↗</a></td></tr><tr><td>🟠</td><td><b>Kondicionierių remontas</b></td><td>„Ką patikriname“ techninė kompetencija</td><td><a href="Paslauga%20-%20Kondicionieri%C5%B3%20remontas.html" target="_blank">Siūloma ↗</a></td><td><a href="../site-v2/Paslauga%20-%20Kondicionieri%C5%B3%20remontas.html" target="_blank">Dabartinė ↗</a></td></tr><tr><td>🟠</td><td><b>Šilumos siurblių remontas</b></td><td>Techninė kompetencija; be „geoterminių“ (Q7)</td><td><a href="Paslauga%20-%20%C5%A0ilumos%20siurbli%C5%B3%20remontas.html" target="_blank">Siūloma ↗</a></td><td><a href="../site-v2/Paslauga%20-%20%C5%A0ilumos%20siurbli%C5%B3%20remontas.html" target="_blank">Dabartinė ↗</a></td></tr><tr><td>🟠</td><td><b>Rekuperatorių remontas</b></td><td>„Ką patikriname“; nuoroda į balansavimą</td><td><a href="Paslauga%20-%20Rekuperatori%C5%B3%20remontas.html" target="_blank">Siūloma ↗</a></td><td><a href="../site-v2/Paslauga%20-%20Rekuperatori%C5%B3%20remontas.html" target="_blank">Dabartinė ↗</a></td></tr><tr><td>🔴</td><td><b>Rekuperatorių balansavimas</b></td><td>Signature — sustiprinta ataskaitos vertė ir prieš/po vizualas</td><td><a href="Paslauga%20-%20Rekuperatori%C5%B3%20balansavimas.html" target="_blank">Siūloma ↗</a></td><td><a href="../site-v2/Paslauga%20-%20Rekuperatori%C5%B3%20balansavimas.html" target="_blank">Dabartinė ↗</a></td></tr><tr><td>🟠</td><td><b>Profilaktinė priežiūra</b></td><td>Aiškesnė nauda; „ką apima“ konkrečiau</td><td><a href="Paslauga%20-%20Profilaktin%C4%97%20prie%C5%BEi%C5%ABra.html" target="_blank">Siūloma ↗</a></td><td><a href="../site-v2/Paslauga%20-%20Profilaktin%C4%97%20prie%C5%BEi%C5%ABra.html" target="_blank">Dabartinė ↗</a></td></tr><tr><td>🟠</td><td><b>Įrangos montavimas</b></td><td>Sertifikuoto montavimo nauda (Q16)</td><td><a href="Paslauga%20-%20%C4%AErangos%20montavimas.html" target="_blank">Siūloma ↗</a></td><td><a href="../site-v2/Paslauga%20-%20%C4%AErangos%20montavimas.html" target="_blank">Dabartinė ↗</a></td></tr><tr><td>🟠</td><td><b>Kontaktai</b></td><td>„Kad padėtume greičiau“ — kokios info reikia</td><td><a href="Kontaktai.html" target="_blank">Siūloma ↗</a></td><td><a href="../site-v2/Kontaktai.html" target="_blank">Dabartinė ↗</a></td></tr><tr><td>🟠</td><td><b>Užklausos forma</b></td><td>„Kas nutiks toliau“; laukų hint'ai</td><td><a href="U%C5%BEklausos%20forma.html" target="_blank">Siūloma ↗</a></td><td><a href="../site-v2/U%C5%BEklausos%20forma.html" target="_blank">Dabartinė ↗</a></td></tr><tr><td>⚪</td><td><b>Patarimai</b></td><td>Konkretesni kortelių kabliukai</td><td><a href="Patarimai.html" target="_blank">Siūloma ↗</a></td><td><a href="../site-v2/Patarimai.html" target="_blank">Dabartinė ↗</a></td></tr><tr><td>⚪</td><td><b>Gidas: rekuperatorius</b></td><td>Praktiškas „prieš perkant“ checklist</td><td><a href="Patarimas%20-%20Kaip%20i%C5%A1sirinkti%20rekuperatori%C5%B3.html" target="_blank">Siūloma ↗</a></td><td><a href="../site-v2/Patarimas%20-%20Kaip%20i%C5%A1sirinkti%20rekuperatori%C5%B3.html" target="_blank">Dabartinė ↗</a></td></tr><tr><td>⚪</td><td><b>Gidas: kondicionierius / šil. siurblys</b></td><td>SEER/SCOP → nauda; checklist</td><td><a href="Patarimas%20-%20Kaip%20i%C5%A1sirinkti%20kondicionieri%C5%B3%20ar%20%C5%A1ilumos%20siurbl%C4%AF.html" target="_blank">Siūloma ↗</a></td><td><a href="../site-v2/Patarimas%20-%20Kaip%20i%C5%A1sirinkti%20kondicionieri%C5%B3%20ar%20%C5%A1ilumos%20siurbl%C4%AF.html" target="_blank">Dabartinė ↗</a></td></tr><tr><td>🟠</td><td><b>DUK</b></td><td>Tie patys faktai; laukia realių klausimų (Q19)</td><td><a href="DUK.html" target="_blank">Siūloma ↗</a></td><td><a href="../site-v2/DUK.html" target="_blank">Dabartinė ↗</a></td></tr><tr><td>🟠</td><td><b>Apie mus</b></td><td>Konkretus darbo principas; be išgalvotos istorijos</td><td><a href="Apie%20mus.html" target="_blank">Siūloma ↗</a></td><td><a href="../site-v2/Apie%20mus.html" target="_blank">Dabartinė ↗</a></td></tr></tbody></table>
+  <div class="legend"><span>🔴 kritinis</span><span>🟠 svarbus</span><span>⚪ kosmetinis</span></div>
+  <div class="prose" style="max-width:820px;margin-top:30px">
+    <h2>Atviri klausimai (svarbiausi)</h2>
+    <p>Prieš galutinius tekstus reikia jūsų atsakymų — visų 26 klausimų sąrašas <a href="../CONTENT-QUESTIONS.md">CONTENT-QUESTIONS.md</a>. Svarbiausi: <strong>Q7</strong> (ar geoterminiai?), <strong>Q9</strong> (garantijos trukmė), <strong>Q15–16</strong> (patirtis / sertifikuoti montuotojai), <strong>Q17</strong> („1–2 d.d." formuluotė), <strong>Q19</strong> (realūs klientų klausimai), <strong>Q21</strong> (ką labiausiai akcentuoti), <strong>Q23</strong> (ar bus nuotraukų/atsiliepimų).</p>
+    <h2>Pirma tikrinti</h2>
+    <p><strong>Pagrindinis</strong>, <strong>Paslaugos + Balansavimas</strong>, <strong>Apie mus</strong> — didžiausias poveikis pasitikėjimui ir konversijai.</p>
+  </div>
+</div></section>
+<footer style="margin-top:0"><div class="wrap"><div class="foot-b" style="border:none"><span>Kraulis, MB · turinio peržiūra (nebus gamyboje)</span><span><a href="../site-v2/index.html" style="color:var(--cloud)">Dabartinė site-v2 →</a></span></div></div></footer>
+</body></html>
