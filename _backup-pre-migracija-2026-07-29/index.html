@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kraulis — puslapių peržiūra (testas)</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--navy:#24303E;--white:#FBFCFD;--ink:#16242C;--mist:#EAF0F4;--cloud:#CFE0EC;--sky:#2E9BD6;--sky-deep:#1A6E96;--steel:#5D6B74}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--ink);background:var(--white);line-height:1.6}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+  header{background:var(--navy);color:#fff;padding:48px 0 40px}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);margin-bottom:12px}
+  h1{font-family:'Archivo',sans-serif;font-size:clamp(26px,4vw,36px);font-weight:800;letter-spacing:-0.01em;line-height:1.1;max-width:760px}
+  header p{color:var(--cloud);font-size:16px;max-width:640px;margin-top:12px}
+  .note{background:rgba(46,155,214,.12);border-left:4px solid var(--sky);border-radius:10px;padding:14px 18px;margin-top:20px;font-size:14.5px;color:var(--cloud)}
+  section{padding:40px 0}
+  h2{font-family:'Archivo',sans-serif;font-size:20px;font-weight:800;color:var(--navy);margin-bottom:16px;letter-spacing:-0.01em}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+  a.tile{display:block;text-decoration:none;color:var(--ink);background:var(--white);border:1px solid var(--mist);border-radius:12px;padding:16px 18px;transition:box-shadow .2s,transform .2s,border-color .2s}
+  a.tile:hover{box-shadow:0 10px 30px rgba(36,48,62,.12);transform:translateY(-2px);border-color:var(--sky)}
+  a.tile:focus-visible{outline:2px solid var(--sky);outline-offset:3px}
+  a.tile b{font-family:'Archivo',sans-serif;font-weight:700;color:var(--navy);display:block;font-size:15.5px}
+  a.tile span{font-size:13px;color:var(--steel)}
+  footer{border-top:1px solid var(--mist);padding:26px 0;color:var(--steel);font-size:13px}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="eyebrow">Vidinė peržiūra</div>
+  <h1>Kraulis — informacinių ir paslaugų puslapių testas</h1>
+  <p>Laikinas puslapių navigatorius testavimui. Tai ne svetainės pagrindinis puslapis — jį kuria Verskis.lt.</p>
+  <div class="note">Interaktyvą (mobilus meniu, DUK „harmonika“, forma) matysite realioje naršyklėje. Nuorodos tarp puslapių veikia.</div>
+</div></header>
+
+<section><div class="wrap">
+  <h2>Paslaugos</h2>
+  <div class="grid">
+    <a class="tile" href="Paslaugos.html"><b>Paslaugos</b><span>Visų paslaugų apžvalga</span></a>
+    <a class="tile" href="Paslauga - Kondicionierių remontas.html"><b>Kondicionierių remontas</b><span>Diagnostika nuo 69 €</span></a>
+    <a class="tile" href="Paslauga - Šilumos siurblių remontas.html"><b>Šilumos siurblių remontas</b><span>Nuo 69 €</span></a>
+    <a class="tile" href="Paslauga - Rekuperatorių remontas.html"><b>Rekuperatorių remontas</b><span>Nuo 69 €</span></a>
+    <a class="tile" href="Paslauga - Rekuperatorių balansavimas.html"><b>Rekuperatorių balansavimas</b><span>Su ataskaita · nuo 149 €</span></a>
+    <a class="tile" href="Paslauga - Profilaktinė priežiūra.html"><b>Profilaktinė priežiūra</b><span>Nuo 99 €</span></a>
+    <a class="tile" href="Paslauga - Įrangos montavimas.html"><b>Įrangos montavimas</b><span>Parinkimas → paleidimas</span></a>
+  </div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+  <h2>Informacija</h2>
+  <div class="grid">
+    <a class="tile" href="Apie mus.html"><b>Apie mus</b><span>Kas yra Kraulis</span></a>
+    <a class="tile" href="Kontaktai.html"><b>Kontaktai</b><span>Telefonas, rekvizitai</span></a>
+    <a class="tile" href="Patarimai.html"><b>Patarimai</b><span>Gidai + DUK</span></a>
+    <a class="tile" href="Patarimas - Kaip išsirinkti rekuperatorių.html"><b>Gidas: rekuperatorius</b><span>Kaip išsirinkti</span></a>
+    <a class="tile" href="Patarimas - Kaip išsirinkti kondicionierių ar šilumos siurblį.html"><b>Gidas: kondicionierius / šilumos siurblys</b><span>Kaip išsirinkti</span></a>
+    <a class="tile" href="DUK.html"><b>DUK</b><span>Dažni klausimai</span></a>
+    <a class="tile" href="Užklausos forma.html"><b>Užklausos forma</b><span>Servisas / konsultacija</span></a>
+  </div>
+</div></section>
+
+<footer><div class="wrap">Kraulis, MB · Vidinė testų peržiūra · <span style="font-family:'IBM Plex Mono',monospace">noindex</span></div></footer>
+</body>
+</html>

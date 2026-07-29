@@ -4,14 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kraulis — galutinis derinys (C·B·A)</title>
-<meta name="description" content="Vėdinimo, šildymo ir vėsinimo įranga su servisu, kuris neišnyksta po pardavimo. Parduodame, montuojame, prižiūrime ir remontuojame.">
+<meta name="description" content="Vėdinimo, šildymo ir vėsinimo įranga su servisu, kuris lieka ir po pardavimo. Parduodame, montuojame, prižiūrime ir remontuojame.">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <!--
 DERINYS: 60% C (šviesus blueprint pasaulis, oro srautas, asimetrija) + 30% B (pardavimo logika, kategorijų panelė, CTA) + 10% A (techninių duomenų juostos, prieš/po, kainos, datasheet blokai).
 Šviesu (~80%+ balta/labai šviesu). Navy tik tekstui, linijoms, footer ir vienam kompaktiškam CTA. Jokio didelio tamsaus hero.
-CLAIMS: naudojami tik patvirtinti (PRODUCT.md) — kainos nuo 69/99/149 €, darbams garantija, Vilnius+apylinkės, pristatymas visoje LT. NENAUDOTA pagrindiniame puslapyje: reagavimas 1-2 d.d. (liks kontaktams/DUK), "100% matuota ne spėta" (pašalinta), "automatiniai priminimai", naujos garantijų formuluotės. El. paštas audrius@kraulis.lt — patvirtinti info@ vs audrius@.
+CLAIMS: naudojami tik patvirtinti (PRODUCT.md) — kainos nuo 69/99/149 €, darbams garantija, Vilnius+apylinkės, pristatymas visoje LT. NENAUDOTA pagrindiniame puslapyje: reagavimas 1-2 d.d. (liks kontaktams/DUK), "100% matuota ne spėta" (pašalinta), "automatiniai priminimai", naujos garantijų formuluotės. El. paštas info@kraulis.lt — patvirtinti info@ vs audrius@.
 Assetai: custom SVG (individualūs Kraulis) — hero iliustracija, kategorijų ikonos, paslaugų ikonos, techniniai motyvai, skirtukai.
 -->
 <style>
@@ -99,15 +99,6 @@ Assetai: custom SVG (individualūs Kraulis) — hero iliustracija, kategorijų i
   .divide{position:relative;height:1px;background:var(--line);max-width:1200px;margin:0 auto}
   .divide svg{position:absolute;left:50%;top:-19px;transform:translateX(-50%);width:180px;height:38px;overflow:visible}
 
-  /* 3 pillars (what we do) */
-  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-  .pillar{padding:26px 24px;border:1px solid var(--line);border-radius:14px;background:var(--white);position:relative}
-  .pillar .p-ic{width:46px;height:46px;color:var(--sky-deep);margin-bottom:14px}
-  .pillar .p-ic .ic{width:46px;height:46px}
-  .pillar h3{font-size:19px;margin-bottom:8px}
-  .pillar p{font-size:14.5px;color:var(--steel)}
-  .pillar .num{position:absolute;top:20px;right:22px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--line)}
-  @media(max-width:820px){.pillars{grid-template-columns:1fr}}
 
   /* Services datasheet (A) */
   .svc-wrap{border:1px solid var(--line);border-radius:16px;overflow:hidden;background:var(--white)}
@@ -140,13 +131,6 @@ Assetai: custom SVG (individualūs Kraulis) — hero iliustracija, kategorijų i
   .leg{position:relative;display:flex;gap:16px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--steel);margin-top:6px}.leg em{font-style:normal;color:var(--sky-deep)}
   @media(max-width:820px){.sig{grid-template-columns:1fr}.sig .fig{border-left:none;border-top:1px solid var(--line)}}
 
-  /* technical motifs row */
-  .motifs{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-  .motif{text-align:left;padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--white)}
-  .motif .m-ic{width:40px;height:40px;color:var(--sky-deep);margin-bottom:12px}.motif .m-ic .ic{width:40px;height:40px}
-  .motif h4{font-family:'Archivo',sans-serif;font-size:15px;color:var(--navy);margin-bottom:5px}
-  .motif p{font-size:13px;color:var(--steel)}
-  @media(max-width:820px){.motifs{grid-template-columns:1fr 1fr}}
 
   /* compact navy CTA (allowed, rare) */
   .cta{background:var(--navy);border-radius:18px;padding:clamp(30px,4vw,48px);display:flex;justify-content:space-between;align-items:center;gap:26px;flex-wrap:wrap;position:relative;overflow:hidden}
@@ -251,7 +235,7 @@ Assetai: custom SVG (individualūs Kraulis) — hero iliustracija, kategorijų i
   <div>
     <span class="kick">ŠVOK inžinerija · Vilnius</span>
     <h1>Tylu. Šilta.<br><em>Šviežia.</em></h1>
-    <p class="lead">Vėdinimo, šildymo ir vėsinimo įranga su servisu, kuris neišnyksta po pardavimo. Išsirinkite — sumontuosime, subalansuosime ir prižiūrėsime.</p>
+    <p class="lead">Vėdinimo, šildymo ir vėsinimo įranga su servisu, kuris lieka ir po pardavimo. Išsirinkite — sumontuosime, subalansuosime ir prižiūrėsime.</p>
     <div class="doing">
       <span><svg class="ic"><use href="#i-shop"/></svg>Parduodame</span>
       <span><svg class="ic"><use href="#i-montavimas"/></svg>Montuojame</span>
@@ -305,9 +289,9 @@ Assetai: custom SVG (individualūs Kraulis) — hero iliustracija, kategorijų i
 <section><div class="wrap">
   <div class="sh"><div><span class="kick">Kaip dirbame</span><h2>Vienose rankose — nuo parinkimo iki priežiūros</h2></div><p>Vienas telefonas visiems klausimams. Ir padedame net tada, kai įrangą pirkote kitur.</p></div>
   <div class="process">
-    <div class="pstep"><span class="pn">01</span><h3>Parenkame sprendimą</h3><p>Įvertiname patalpas, poreikį ir biudžetą, pasiūlome tinkamą įrangą.</p></div>
-    <div class="pstep"><span class="pn">02</span><h3>Sumontuojame ir paleidžiame</h3><p>Profesionalus montavimas, paleidimas ir sureguliavimas Vilniuje ir apylinkėse.</p></div>
-    <div class="pstep"><span class="pn">03</span><h3>Prižiūrime ir remontuojame</h3><p>Profilaktika, diagnostika ir remontas — kad sistema tarnautų ilgai.</p></div>
+    <div class="pstep"><span class="pn">01</span><div class="pstep-content"><h3>Parenkame sprendimą</h3><p>Įvertiname patalpas, poreikį ir biudžetą, pasiūlome tinkamą įrangą.</p></div></div>
+    <div class="pstep"><span class="pn">02</span><div class="pstep-content"><h3>Sumontuojame ir paleidžiame</h3><p>Profesionalus montavimas, paleidimas ir sureguliavimas Vilniuje ir apylinkėse.</p></div></div>
+    <div class="pstep"><span class="pn">03</span><div class="pstep-content"><h3>Prižiūrime ir remontuojame</h3><p>Profilaktika, diagnostika ir remontas — kad sistema tarnautų ilgai.</p></div></div>
   </div>
 </div></section>
 
@@ -354,7 +338,7 @@ Assetai: custom SVG (individualūs Kraulis) — hero iliustracija, kategorijų i
 <!-- ===== CTA (vienas kompaktiškas navy) ===== -->
 <section id="uzsakyti" style="padding-top:0"><div class="wrap"><div class="cta">
   <div><h2>Renkate įrangą ar reikia serviso?</h2><p>Padėsime pasirinkti tinkamą sprendimą, sumontuoti įrangą arba sutvarkyti jau veikiančią sistemą.</p></div>
-  <div class="cta-acts"><a class="btn btn-primary" href="#kategorijos">Padėti išsirinkti įrangą</a><a class="btn btn-ghost cta-ghost" href="tel:+37061024999">Užsakyti servisą</a></div>
+  <div class="cta-acts"><a class="btn btn-primary" href="#kategorijos">Rinktis įrangą</a><a class="btn btn-ghost cta-ghost" href="tel:+37061024999">Užsakyti servisą</a></div>
 </div></div></section>
 </main>
 
@@ -362,10 +346,10 @@ Assetai: custom SVG (individualūs Kraulis) — hero iliustracija, kategorijų i
   <div class="foot">
     <div>
       <svg class="logo" viewBox="14 19 322 343.7654345654346" role="img" aria-label="Kraulis"><path fill-rule="evenodd" fill="#FBFCFD" d="M175,31 L26,180 L57,180 L57,302 L293,302 L293,180 L324,180 Z M175,72 L81,166 L81,275 L269,275 L269,166 Z"/><path fill="#FBFCFD" d="M151,149 L133,177 L145,177 L145,243 L157,243 L157,177 L169,177 Z"/><path fill="#FBFCFD" d="M199,243 L181,215 L193,215 L193,149 L205,149 L205,215 L217,215 Z"/><g transform="translate(53.416,350.152) scale(0.02358,-0.02358)"><path fill="#FBFCFD" d="M152 1466H605V912L1080 1466H1682L1148 913L1706 0H1148L839 603L605 358V0H152ZM1862 0V1466H2617Q2827 1466 2938.0 1430.0Q3049 1394 3117.0 1296.5Q3185 1199 3185 1059Q3185 937 3133.0 848.5Q3081 760 2990 705Q2932 670 2831 647Q2912 620 2949 593Q2974 575 3021.5 516.0Q3069 457 3085 425L3304 0H2792L2550 448Q2504 535 2468 561Q2419 595 2357 595H2317V0ZM2317 872H2508Q2539 872 2628 892Q2673 901 2701.5 938.0Q2730 975 2730 1023Q2730 1094 2685.0 1132.0Q2640 1170 2516 1170H2317ZM4351 242H3835L3764 0H3301L3852 1466H4346L4897 0H4423ZM4256 559 4094 1086 3933 559ZM5996 1466H6448V592Q6448 462 6407.5 346.5Q6367 231 6280.5 144.5Q6194 58 6099 23Q5967 -26 5782 -26Q5675 -26 5548.5 -11.0Q5422 4 5337.0 48.5Q5252 93 5181.5 175.0Q5111 257 5085 344Q5043 484 5043 592V1466H5495V571Q5495 451 5561.5 383.5Q5628 316 5746 316Q5863 316 5929.5 382.5Q5996 449 5996 571ZM6748 1466H7201V361H7908V0H6748ZM8132 1466H8586V0H8132ZM8832 485 9263 512Q9277 407 9320 352Q9390 263 9520 263Q9617 263 9669.5 308.5Q9722 354 9722 414Q9722 471 9672 516Q9622 561 9440 601Q9142 668 9015 779Q8887 890 8887 1062Q8887 1175 8952.5 1275.5Q9018 1376 9149.5 1433.5Q9281 1491 9510 1491Q9791 1491 9938.5 1386.5Q10086 1282 10114 1054L9687 1029Q9670 1128 9615.5 1173.0Q9561 1218 9465 1218Q9386 1218 9346.0 1184.5Q9306 1151 9306 1103Q9306 1068 9339 1040Q9371 1011 9491 986Q9788 922 9916.5 856.5Q10045 791 10103.5 694.0Q10162 597 10162 477Q10162 336 10084.0 217.0Q10006 98 9866.0 36.5Q9726 -25 9513 -25Q9139 -25 8995.0 119.0Q8851 263 8832 485Z"/></g></svg>
-      <p>Šildymo, vėdinimo ir vėsinimo įranga su servisu, kuris neišnyksta po pardavimo.</p>
+      <p>Šildymo, vėdinimo ir vėsinimo įranga su servisu, kuris lieka ir po pardavimo.</p>
     </div>
     <div><h4>Paslaugos</h4><a href="#">Remontas</a><a href="#">Balansavimas</a><a href="#">Priežiūra</a><a href="#">Montavimas</a></div>
-    <div><h4>Kontaktai</h4><p class="mono"><a href="tel:+37061024999">+370 610 24999</a></p><p class="mono"><a href="mailto:audrius@kraulis.lt">audrius@kraulis.lt</a></p><p>I–V 8.00–17.00</p><p>Servisas: Vilnius ir apylinkės</p><p>Prekės: visa Lietuva</p></div>
+    <div><h4>Kontaktai</h4><p class="mono"><a href="tel:+37061024999">+370 610 24999</a></p><p class="mono"><a href="mailto:info@kraulis.lt">info@kraulis.lt</a></p><p>I–V 8.00–17.00</p><p>Servisas: Vilnius ir apylinkės</p><p>Prekės: visa Lietuva</p></div>
   </div>
   <div class="foot-b"><span>Kraulis, MB · Įmonės kodas 307605802 · Vilnius</span><span>© 2026 Kraulis, MB</span></div>
 </div></footer>
@@ -375,10 +359,19 @@ Assetai: custom SVG (individualūs Kraulis) — hero iliustracija, kategorijų i
 (function(){
   var b=document.querySelector('.burger'), n=document.getElementById('mainnav');
   if(!b||!n) return;
-  function set(open){ n.classList.toggle('open',open); b.setAttribute('aria-expanded',open?'true':'false'); b.setAttribute('aria-label',open?'Užverti meniu':'Atverti meniu'); }
-  b.addEventListener('click',function(){ set(!n.classList.contains('open')); });
+  var mq=window.matchMedia('(max-width:860px)');
+  function isOpen(){ return n.classList.contains('open'); }
+  function set(open){
+    n.classList.toggle('open',open);
+    b.setAttribute('aria-expanded',open?'true':'false');
+    b.setAttribute('aria-label',open?'Užverti meniu':'Atverti meniu');
+    if(open){ var first=n.querySelector('a'); if(first) first.focus(); }
+  }
+  b.addEventListener('click',function(){ set(!isOpen()); });
   n.addEventListener('click',function(e){ if(e.target.closest('a')) set(false); });
-  document.addEventListener('keydown',function(e){ if(e.key==='Escape') set(false); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && isOpen()){ set(false); b.focus(); } });
+  document.addEventListener('click',function(e){ if(isOpen() && !n.contains(e.target) && !b.contains(e.target)) set(false); });
+  if(mq.addEventListener) mq.addEventListener('change',function(){ if(!mq.matches) set(false); });
 })();
 </script>
 </body>
