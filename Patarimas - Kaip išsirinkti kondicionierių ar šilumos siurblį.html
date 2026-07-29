@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaip išsirinkti kondicionierių ar šilumos siurblį — Kraulis gidas</title>
+<meta name="description" content="Kaip išsirinkti kondicionierių ar šilumos siurblį: galia, oras–oras ir oras–vanduo, SEER/SCOP, veikimas šaltyje, triukšmas ir montavimas. Kraulis patarimai.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#24303E; --white:#FBFCFD; --ink:#16242C; --mist:#EAF0F4; --cloud:#CFE0EC;
+    --sky:#2E9BD6; --sky-deep:#1A6E96; --sky-deeper:#17607E; --steel:#5D6B74;
+    --shadow-hover:0 10px 30px rgba(36,48,62,.12);
+    --wrap:1080px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--ink);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:'Archivo',sans-serif;color:var(--navy);letter-spacing:-0.01em}
+  a{color:var(--sky-deep)}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+  .eyebrow{font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:13.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--sky-deep);margin-bottom:12px}
+  .skip{position:absolute;left:-9999px;top:0;background:var(--navy);color:#fff;padding:10px 16px;border-radius:8px;z-index:100}
+  .skip:focus{left:12px;top:12px}
+
+  /* Header */
+  header{background:var(--white);border-bottom:1px solid var(--mist);position:sticky;top:0;z-index:20}
+  .hdr{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 0}
+  .hdr .logo{height:50px;width:auto;display:block}
+  nav.main{display:flex;align-items:center;gap:22px}
+  nav.main a{font-family:'IBM Plex Sans',sans-serif;font-size:15px;font-weight:500;color:var(--ink);text-decoration:none;padding:6px 0;position:relative}
+  nav.main a:hover{color:var(--sky-deep)}
+  nav.main a[aria-current="page"]{color:var(--navy);font-weight:600}
+  nav.main a[aria-current="page"]::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--sky)}
+  .hdr-right{display:flex;align-items:center;gap:16px}
+  .hdr-tel{font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--navy);text-decoration:none;font-weight:500;white-space:nowrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--sky-deep);color:var(--white);text-decoration:none;font-family:'Archivo',sans-serif;font-weight:700;font-size:15px;padding:12px 24px;border-radius:8px;border:none;cursor:pointer;transition:background .2s}
+  .btn:hover{background:var(--sky-deeper)}
+  .btn:active{transform:translateY(1px)}
+  .btn-ghost{background:transparent;color:var(--navy);border:2px solid var(--navy);padding:10px 22px}
+  .btn-ghost:hover{background:var(--mist)}
+  a:focus-visible,.btn:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--sky);outline-offset:3px;border-radius:6px}
+
+  /* Mobile nav */
+  .burger{display:none;background:none;border:1.5px solid var(--mist);border-radius:8px;padding:8px 10px;cursor:pointer;color:var(--navy)}
+  .burger:hover{background:var(--mist)}
+
+  /* Hero / titlebar */
+  .titlebar{background:var(--mist);padding:44px 0 40px}
+  .titlebar h1{font-size:clamp(28px,4vw,40px);font-weight:800;line-height:1.05;max-width:820px}
+  .titlebar .lead{font-size:clamp(16px,2vw,18px);color:var(--ink);max-width:680px;margin-top:14px}
+  .crumbs{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.04em;color:var(--steel);margin-bottom:14px}
+  .crumbs a{color:var(--steel);text-decoration:none}
+  .crumbs a:hover{color:var(--sky-deep)}
+  .crumbs span{color:var(--steel)}
+
+  /* Trust strip */
+  .trust{background:var(--navy);color:var(--white)}
+  .trust-inner{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px;padding:18px 0}
+  .trust-item{display:flex;align-items:center;gap:10px;font-size:14.5px;padding:6px 10px}
+  .trust-item svg{flex:none;stroke:var(--sky)}
+
+  section{padding:56px 0}
+  .sec-head{max-width:700px;margin-bottom:32px}
+  .sec-head h2{font-size:clamp(24px,3.4vw,30px);font-weight:800;margin-bottom:10px}
+  .sec-head p{color:var(--steel);font-size:16px}
+
+  /* Prose / article */
+  .prose{max-width:720px}
+  .prose h2{font-size:clamp(22px,3vw,27px);font-weight:800;margin:38px 0 12px}
+  .prose h2:first-child{margin-top:0}
+  .prose h3{font-size:19px;font-weight:700;margin:26px 0 8px}
+  .prose p{margin:0 0 14px;font-size:16px}
+  .prose ul,.prose ol{margin:0 0 16px;padding-left:22px}
+  .prose li{margin:0 0 7px;font-size:16px}
+  .prose li::marker{color:var(--sky-deep)}
+  .prose strong{color:var(--navy);font-weight:600}
+  .prose a{color:var(--sky-deep);text-decoration:underline;text-underline-offset:2px}
+  .prose a:hover{color:var(--sky-deeper)}
+
+  .layout{display:grid;grid-template-columns:1fr;gap:40px}
+  @media(min-width:900px){.layout.with-aside{grid-template-columns:minmax(0,1fr) 300px}}
+  .aside{align-self:start;position:sticky;top:90px;display:flex;flex-direction:column;gap:18px}
+
+  /* Cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+  .card{background:var(--white);border:1px solid var(--mist);border-radius:14px;padding:24px 22px;display:flex;flex-direction:column;gap:10px;transition:box-shadow .2s,transform .2s}
+  a.card{text-decoration:none;color:inherit}
+  a.card:hover,.card:focus-within{box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+  .card .icon{width:48px;height:48px;border-radius:12px;background:var(--mist);display:flex;align-items:center;justify-content:center;color:var(--navy)}
+  .card .icon svg{stroke:var(--navy)}
+  .card h3{font-size:17.5px;font-weight:700}
+  .card p{font-size:14px;color:var(--ink);flex:1}
+  .card .price{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--sky-deep);font-weight:500}
+  .card .more{font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;color:var(--navy);text-decoration:none;margin-top:2px}
+  a.card:hover .more{color:var(--sky-deep)}
+
+  /* Note / callout */
+  .note{background:var(--mist);border-left:4px solid var(--sky);border-radius:12px;padding:18px 20px;font-size:15px;color:var(--ink);margin:18px 0}
+  .note strong{color:var(--navy)}
+
+  /* Steps */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;counter-reset:s}
+  .step{background:var(--white);border:1px solid var(--mist);border-radius:14px;padding:24px 22px}
+  .step .num{font-family:'Archivo',sans-serif;font-weight:900;font-size:38px;color:var(--mist);line-height:1;margin-bottom:8px}
+  .step h3{font-size:17px;margin-bottom:6px}
+  .step p{font-size:14.5px;color:var(--ink)}
+
+  /* FAQ (native details) */
+  .faq{max-width:760px}
+  .faq details{border:1px solid var(--mist);border-radius:12px;padding:0;margin-bottom:12px;background:var(--white);overflow:hidden}
+  .faq details[open]{box-shadow:var(--shadow-hover)}
+  .faq summary{list-style:none;cursor:pointer;padding:18px 48px 18px 20px;font-family:'Archivo',sans-serif;font-weight:700;font-size:16.5px;color:var(--navy);position:relative}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"";position:absolute;right:20px;top:22px;width:11px;height:11px;border-right:2px solid var(--sky-deep);border-bottom:2px solid var(--sky-deep);transform:rotate(45deg);transition:transform .2s}
+  .faq details[open] summary::after{transform:rotate(-135deg);top:26px}
+  .faq .a{padding:0 20px 18px;font-size:15.5px;color:var(--ink)}
+  .faq .a p{margin:0 0 10px}
+  .faq .a p:last-child{margin:0}
+
+  /* CTA band */
+  .band{background:var(--navy);color:var(--white);border-radius:16px;margin:56px 0}
+  .band-inner{display:flex;align-items:center;gap:32px;padding:40px 36px;flex-wrap:wrap}
+  .band-txt{flex:1;min-width:280px}
+  .band h2{color:var(--white);font-size:clamp(22px,3vw,27px);margin-bottom:10px}
+  .band p{color:var(--cloud);font-size:15.5px;max-width:560px}
+  .band .actions{display:flex;gap:12px;flex-wrap:wrap}
+  .band .btn-ghost{color:#fff;border-color:rgba(255,255,255,.5)}
+  .band .btn-ghost:hover{background:rgba(255,255,255,.1)}
+
+  /* Chips */
+  .chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  .chip{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-family:'Archivo',sans-serif;font-weight:700;font-size:13px;color:var(--navy);border:1.5px solid var(--navy);border-radius:999px;padding:6px 14px;transition:background .2s}
+  .chip:hover{background:var(--mist)}
+
+  /* Forms */
+  .form{max-width:640px}
+  .field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+  .field label{font-size:14.5px;color:var(--navy);font-weight:600}
+  .field .req{color:var(--sky-deep)}
+  .field input,.field textarea,.field select{font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:16px;color:var(--ink);background:var(--white);border:1px solid var(--steel);border-radius:8px;padding:12px 14px;transition:border-color .2s,box-shadow .2s;width:100%}
+  .field input::placeholder,.field textarea::placeholder{color:#93a0a8}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 3px rgba(46,155,214,.18)}
+  .field textarea{min-height:130px;resize:vertical}
+  .field .hint{font-size:13px;color:var(--steel)}
+  .grid2{display:grid;grid-template-columns:1fr;gap:0 16px}
+  @media(min-width:620px){.grid2{grid-template-columns:1fr 1fr}}
+  .consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--steel)}
+  .consent input{width:18px;height:18px;margin-top:2px;flex:none;accent-color:var(--sky-deep)}
+  .form-status{font-size:14.5px;margin-top:12px}
+
+  /* Footer */
+  footer{background:var(--navy);color:var(--white)}
+  .foot{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;padding:56px 0 30px}
+  .foot .logo{height:64px;width:auto;margin-bottom:14px}
+  .foot h4{color:#fff;font-size:14px;font-family:'IBM Plex Mono',monospace;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px;color:var(--cloud)}
+  .foot a{color:var(--cloud);text-decoration:none;font-size:14.5px;display:block;padding:4px 0}
+  .foot a:hover{color:#fff}
+  .foot p{color:var(--cloud);font-size:14px;margin:2px 0}
+  .foot .mono{font-family:'IBM Plex Mono',monospace}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.12);padding:18px 0;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--cloud)}
+  .foot-bottom a{color:var(--cloud);text-decoration:none}
+  .foot-bottom a:hover{color:#fff}
+
+  @media(max-width:860px){
+    .burger{display:inline-flex}
+    nav.main{position:fixed;inset:64px 0 auto 0;background:var(--white);border-bottom:1px solid var(--mist);flex-direction:column;align-items:stretch;gap:0;padding:8px 24px 16px;box-shadow:0 12px 24px rgba(36,48,62,.12);transform:translateY(-120%);visibility:hidden;transition:transform .25s ease,visibility .25s;max-height:calc(100dvh - 64px);overflow:auto}
+    nav.main a{padding:13px 0;border-bottom:1px solid var(--mist);font-size:16px}
+    nav.main a[aria-current="page"]::after{display:none}
+    nav.main.open{transform:translateY(0);visibility:visible}
+    .hdr-tel{display:none}
+  }
+  @media(max-width:560px){
+    section{padding:40px 0}
+    .titlebar{padding:32px 0 28px}
+    .band-inner{padding:30px 24px}
+    .hdr .btn{padding:10px 16px;font-size:14px}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{transition-duration:.001ms !important;animation-duration:.001ms !important}
+    a.card:hover,.btn:active{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Pereiti prie turinio</a>
+<header>
+  <div class="wrap hdr">
+    <a href="Apie mus.html" aria-label="Kraulis pradžia"><svg class="logo" viewBox="14 19 322 343.7654345654346" role="img" aria-label="Kraulis"><path fill-rule="evenodd" fill="#24303E" d="M175,31 L26,180 L57,180 L57,302 L293,302 L293,180 L324,180 Z M175,72 L81,166 L81,275 L269,275 L269,166 Z"/><path fill="#24303E" d="M151,149 L133,177 L145,177 L145,243 L157,243 L157,177 L169,177 Z"/><path fill="#24303E" d="M199,243 L181,215 L193,215 L193,149 L205,149 L205,215 L217,215 Z"/><g transform="translate(53.416,350.152) scale(0.02358,-0.02358)"><path fill="#24303E" d="M152 1466H605V912L1080 1466H1682L1148 913L1706 0H1148L839 603L605 358V0H152ZM1862 0V1466H2617Q2827 1466 2938.0 1430.0Q3049 1394 3117.0 1296.5Q3185 1199 3185 1059Q3185 937 3133.0 848.5Q3081 760 2990 705Q2932 670 2831 647Q2912 620 2949 593Q2974 575 3021.5 516.0Q3069 457 3085 425L3304 0H2792L2550 448Q2504 535 2468 561Q2419 595 2357 595H2317V0ZM2317 872H2508Q2539 872 2628 892Q2673 901 2701.5 938.0Q2730 975 2730 1023Q2730 1094 2685.0 1132.0Q2640 1170 2516 1170H2317ZM4351 242H3835L3764 0H3301L3852 1466H4346L4897 0H4423ZM4256 559 4094 1086 3933 559ZM5996 1466H6448V592Q6448 462 6407.5 346.5Q6367 231 6280.5 144.5Q6194 58 6099 23Q5967 -26 5782 -26Q5675 -26 5548.5 -11.0Q5422 4 5337.0 48.5Q5252 93 5181.5 175.0Q5111 257 5085 344Q5043 484 5043 592V1466H5495V571Q5495 451 5561.5 383.5Q5628 316 5746 316Q5863 316 5929.5 382.5Q5996 449 5996 571ZM6748 1466H7201V361H7908V0H6748ZM8132 1466H8586V0H8132ZM8832 485 9263 512Q9277 407 9320 352Q9390 263 9520 263Q9617 263 9669.5 308.5Q9722 354 9722 414Q9722 471 9672 516Q9622 561 9440 601Q9142 668 9015 779Q8887 890 8887 1062Q8887 1175 8952.5 1275.5Q9018 1376 9149.5 1433.5Q9281 1491 9510 1491Q9791 1491 9938.5 1386.5Q10086 1282 10114 1054L9687 1029Q9670 1128 9615.5 1173.0Q9561 1218 9465 1218Q9386 1218 9346.0 1184.5Q9306 1151 9306 1103Q9306 1068 9339 1040Q9371 1011 9491 986Q9788 922 9916.5 856.5Q10045 791 10103.5 694.0Q10162 597 10162 477Q10162 336 10084.0 217.0Q10006 98 9866.0 36.5Q9726 -25 9513 -25Q9139 -25 8995.0 119.0Q8851 263 8832 485Z"/></g></svg></a>
+    <nav class="main" id="mainnav" aria-label="Pagrindinė navigacija"><a href="#">E-parduotuvė</a><a href="Paslaugos.html">Paslaugos</a><a href="Patarimai.html" aria-current="page">Patarimai</a><a href="#">Naujienos</a><a href="Apie mus.html">Apie mus</a><a href="Kontaktai.html">Kontaktai</a></nav>
+    <div class="hdr-right">
+      <a class="hdr-tel" href="tel:+37061024999">+370 610 24999</a>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="mainnav" aria-label="Atverti meniu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+      <a class="btn" href="Užklausos forma.html">Užsakyti servisą</a>
+    </div>
+  </div>
+</header>
+<main id="main">
+<div class="titlebar"><div class="wrap"><div class="crumbs"><a href="Apie mus.html">Pradžia</a> / <a href="Patarimai.html">Patarimai</a> / <span>Kaip išsirinkti kondicionierių ar šilumos siurblį</span></div><div class="eyebrow">Patarimai · Gidas</div><h1>Kaip išsirinkti kondicionierių ar šilumos siurblį</h1><p class="lead">Oras–oras kondicionierius ir šilumos siurblys vėsina vasarą ir šildo žiemą. Svarbiausia — teisingai parinkti galią ir tipą pagal patalpas ir Lietuvos klimatą.</p></div></div>
+<section><div class="wrap"><div class="prose">
+  <h2>1. Galios parinkimas</h2>
+  <p>Per maža galia neužtikrins komforto per karščius ar šalčius, per didelė — brangesnė ir dažniau įsijungs/išsijungs. Reikiama galia priklauso nuo patalpos ploto ir aukščio, langų, izoliacijos bei orientacijos. Tikslų poreikį geriausia įvertinti individualiai.</p>
+  <h2>2. Sistemos tipas</h2>
+  <ul>
+    <li><strong>Oras–oras</strong> (kondicionierius / šilumos siurblys) — šildo ir vėsina orą patalpoje. Paprasčiausias ir dažniausias sprendimas vienai ar kelioms patalpoms.</li>
+    <li><strong>Oras–vanduo</strong> šilumos siurblys — šildo pastato vandens sistemą (grindinį šildymą, radiatorius) ir gali ruošti karštą vandenį.</li>
+    <li><strong>Geoterminis</strong> — šilumą ima iš grunto; efektyvus, bet reikalauja daugiau įrengimo darbų.</li>
+    <li><strong>Multi-split</strong> — vienas lauko blokas aptarnauja kelis vidinius blokus skirtingose patalpose.</li>
+  </ul>
+  <h2>3. Efektyvumas: SEER ir SCOP</h2>
+  <p><strong>SEER</strong> rodo sezoninį vėsinimo, o <strong>SCOP</strong> — sezoninį šildymo efektyvumą. Kuo šie rodikliai didesni, tuo mažesnės elektros sąnaudos per metus. Verta žiūrėti ir į energijos klasę.</p>
+  <h2>4. Veikimas šaltyje</h2>
+  <p>Lietuvos klimatui svarbu, iki kokios lauko temperatūros įrenginys efektyviai šildo. Jei šilumos siurblys bus pagrindinis šildymo šaltinis, atkreipkite dėmesį į našumą esant žemai temperatūrai.</p>
+  <h2>5. Triukšmas, valdymas ir montavimas</h2>
+  <p>Vidinio ir lauko blokų garso lygis svarbus miegamiesiems ir kaimynystei. Daugelis modelių valdomi programėle (Wi-Fi). Montavimo vieta lemia ir veikimą, ir garsą — tinkamą vietą padėsime parinkti.</p>
+  <div class="note"><strong>Sertifikuotas montavimas:</strong> daliai įrangos gamintojo garantija pailgėja, kai ją sumontuoja sertifikuoti montuotojai. Sumontavus mums — gaunate maksimalią gamintojo garantiją.</div>
+</div></div></section>
+<div class="wrap"><div class="band"><div class="band-inner"><div class="band-txt"><h2>Nežinote, kokios galios reikia?</h2><p>Parinksime kondicionierių ar šilumos siurblį pagal jūsų patalpas ir biudžetą.</p></div><div class="actions"><a class="btn" href="Užklausos forma.html">Užsakyti konsultaciją</a><a class="btn btn-ghost" href="tel:+37061024999">Skambinti +370 610 24999</a></div></div></div></div>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <svg class="logo" viewBox="14 19 322 343.7654345654346" role="img" aria-label="Kraulis"><path fill-rule="evenodd" fill="#FBFCFD" d="M175,31 L26,180 L57,180 L57,302 L293,302 L293,180 L324,180 Z M175,72 L81,166 L81,275 L269,275 L269,166 Z"/><path fill="#FBFCFD" d="M151,149 L133,177 L145,177 L145,243 L157,243 L157,177 L169,177 Z"/><path fill="#FBFCFD" d="M199,243 L181,215 L193,215 L193,149 L205,149 L205,215 L217,215 Z"/><g transform="translate(53.416,350.152) scale(0.02358,-0.02358)"><path fill="#FBFCFD" d="M152 1466H605V912L1080 1466H1682L1148 913L1706 0H1148L839 603L605 358V0H152ZM1862 0V1466H2617Q2827 1466 2938.0 1430.0Q3049 1394 3117.0 1296.5Q3185 1199 3185 1059Q3185 937 3133.0 848.5Q3081 760 2990 705Q2932 670 2831 647Q2912 620 2949 593Q2974 575 3021.5 516.0Q3069 457 3085 425L3304 0H2792L2550 448Q2504 535 2468 561Q2419 595 2357 595H2317V0ZM2317 872H2508Q2539 872 2628 892Q2673 901 2701.5 938.0Q2730 975 2730 1023Q2730 1094 2685.0 1132.0Q2640 1170 2516 1170H2317ZM4351 242H3835L3764 0H3301L3852 1466H4346L4897 0H4423ZM4256 559 4094 1086 3933 559ZM5996 1466H6448V592Q6448 462 6407.5 346.5Q6367 231 6280.5 144.5Q6194 58 6099 23Q5967 -26 5782 -26Q5675 -26 5548.5 -11.0Q5422 4 5337.0 48.5Q5252 93 5181.5 175.0Q5111 257 5085 344Q5043 484 5043 592V1466H5495V571Q5495 451 5561.5 383.5Q5628 316 5746 316Q5863 316 5929.5 382.5Q5996 449 5996 571ZM6748 1466H7201V361H7908V0H6748ZM8132 1466H8586V0H8132ZM8832 485 9263 512Q9277 407 9320 352Q9390 263 9520 263Q9617 263 9669.5 308.5Q9722 354 9722 414Q9722 471 9672 516Q9622 561 9440 601Q9142 668 9015 779Q8887 890 8887 1062Q8887 1175 8952.5 1275.5Q9018 1376 9149.5 1433.5Q9281 1491 9510 1491Q9791 1491 9938.5 1386.5Q10086 1282 10114 1054L9687 1029Q9670 1128 9615.5 1173.0Q9561 1218 9465 1218Q9386 1218 9346.0 1184.5Q9306 1151 9306 1103Q9306 1068 9339 1040Q9371 1011 9491 986Q9788 922 9916.5 856.5Q10045 791 10103.5 694.0Q10162 597 10162 477Q10162 336 10084.0 217.0Q10006 98 9866.0 36.5Q9726 -25 9513 -25Q9139 -25 8995.0 119.0Q8851 263 8832 485Z"/></g></svg>
+      <p>Šildymo, vėdinimo ir vėsinimo įranga su servisu, kuris neišnyksta po pardavimo.</p>
+    </div>
+    <div>
+      <h4>Paslaugos</h4>
+      <a href="Paslaugos.html">Visos paslaugos</a>
+      <a href="Paslauga - Rekuperatorių balansavimas.html">Rekuperatorių balansavimas</a>
+      <a href="Paslauga - Profilaktinė priežiūra.html">Profilaktinė priežiūra</a>
+      <a href="Paslauga - Įrangos montavimas.html">Įrangos montavimas</a>
+    </div>
+    <div>
+      <h4>Informacija</h4>
+      <a href="Patarimai.html">Patarimai</a>
+      <a href="DUK.html">Dažni klausimai</a>
+      <a href="Apie mus.html">Apie mus</a>
+      <a href="Kontaktai.html">Kontaktai</a>
+    </div>
+    <div>
+      <h4>Kontaktai</h4>
+      <p class="mono"><a href="tel:+37061024999">+370 610 24999</a></p>
+      <p class="mono"><a href="mailto:audrius@kraulis.lt">audrius@kraulis.lt</a></p>
+      <p>I–V 8.00–17.00</p>
+      <p>Servisas: Vilnius ir apylinkės</p>
+      <p>Prekės: visa Lietuva</p>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>Kraulis, MB · Įmonės kodas 307605802 · Naugarduko g. 68-3, Vilnius</span>
+    <span>© 2026 Kraulis, MB</span>
+  </div>
+</footer>
+<script>
+/* Mobilaus meniu perjungimas (vienintelė bendra puslapio funkcija). */
+(function(){
+  var b=document.querySelector('.burger'), n=document.getElementById('mainnav');
+  if(!b||!n) return;
+  function set(open){ n.classList.toggle('open',open); b.setAttribute('aria-expanded',open?'true':'false'); b.setAttribute('aria-label',open?'Užverti meniu':'Atverti meniu'); }
+  b.addEventListener('click',function(){ set(!n.classList.contains('open')); });
+  n.addEventListener('click',function(e){ if(e.target.closest('a')) set(false); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') set(false); });
+})();
+</script>
+</body>
+</html>
