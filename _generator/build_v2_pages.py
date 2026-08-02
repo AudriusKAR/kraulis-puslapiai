@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from build_v2 import page, TEL, TELH, MAIL
 from build_v2_content import (ic, crumbs, titlebar, chips, cta, btn, faq, process, priespo,
-    HERO_SVG, DIVIDER, datasheet, CATPANEL, CLIMATE, FINAL_CTA)
+    HERO_SVG, DIVIDER, datasheet, CATPANEL, CLIMATE, FINAL_CTA, why, gallery, reviews, photo)
 import os
 
 HOME_CRUMB=("Pradžia","index.html")
@@ -9,9 +9,9 @@ HOME_CRUMB=("Pradžia","index.html")
 # ============================ PAGRINDINIS
 home_body=f'''<section class="hero"><div class="wrap hgrid">
   <div>
-    <span class="kick">ŠVOK įranga ir paslaugos</span>
-    <h1>Tylu. Šilta.<br><em>Šviežia.</em></h1>
-    <p class="lead">Informacija apie vėdinimo, šildymo ir vėsinimo įrangą, montavimą, priežiūrą ir remontą — vienoje aiškioje vietoje.</p>
+    <span class="kick">ŠVOK įranga · montavimas · servisas</span>
+    <h1>Šildymo, vėdinimo ir vėsinimo įranga — <em>su servisu, kuris nedingsta po pardavimo</em></h1>
+    <p class="lead">Padedame išsirinkti ir sumontuoti kondicionierių, šilumos siurblį ar rekuperatorių (šviežio oro sistemą su šilumos atgavimu), o vėliau jį prižiūrime ir remontuojame. Dirbame ir su įranga, kurią pirkote ne pas mus.</p>
     <div class="doing"><span>{ic("i-shop","ic")}E-parduotuvė</span><span>{ic("i-montavimas","ic")}Montavimas</span><span>{ic("i-remontas","ic")}Remontas ir priežiūra</span></div>
     <div class="acts"><span class="btn btn-primary" aria-disabled="true">E-parduotuvė netrukus</span>{btn("Užsakyti servisą","Užklausos forma.html","ghost")}</div>
   </div>
@@ -19,20 +19,23 @@ home_body=f'''<section class="hero"><div class="wrap hgrid">
 </div>
 {CATPANEL}
 </section>
+<div class="wrap trustband"><span>Ilgametė patirtis</span><span>Atestuoti darbui su freonu (F-dujos) ir elektra</span><span>Servisas Vilniuje + ~100 km</span><span>Atsakome per 1–2 d. d.</span></div>
 {DIVIDER}
-{process([("Aptariame poreikį","Surinkus pagrindinę informaciją aiškėja tinkamiausias kitas žingsnis."),
-          ("Suderiname darbų eigą","Prieš darbus aptariama apimtis ir reikalinga informacija."),
-          ("Patikriname rezultatą","Baigus darbus įvertinamas sistemos veikimas ir tolesnė priežiūra.")],
-         kick="Paslaugų eiga",title="Aiški kelionė nuo klausimo iki sprendimo",
-         sub="Vienas kontaktas įrangos, montavimo, priežiūros ir remonto klausimams.")}
 <section id="paslaugos" style="padding-top:0"><div class="wrap">
   <div class="sh"><div><span class="kick">Paslaugos</span><h2>Priežiūra, remontas ir balansavimas</h2></div><p>Pasirinkite aktualią paslaugos kryptį arba pateikite bendrą užklausą.</p></div>
   {datasheet()}
 </div></section>
+{why()}
+{process([("Susisiekiate","Telefonu arba užklausa — trumpai aprašote poreikį ar gedimą."),
+          ("Įvertiname","Parenkame sprendimą arba diagnozuojame; pateikiame pasiūlymą."),
+          ("Padarome ir liekame","Sumontuojame ar sutvarkome, paaiškiname naudojimą, prireikus prižiūrime toliau.")],
+         kick="Kaip vyksta darbas",title="Aiški kelionė nuo klausimo iki sprendimo",
+         sub="Vienas kontaktas įrangos, montavimo, priežiūros ir remonto klausimams.")}
+{gallery(['01','02','05','06'],captions={'01':'Termovizinė kondicionieriaus patikra','02':'Sumontuotas kondicionieriaus lauko blokas','05':'Šilumos siurblio servisas','06':'Oro srauto matavimas balansuojant vėdinimą'})}
+{reviews()}
 {priespo()}
-{CLIMATE}
 {FINAL_CTA}'''
-page("index.html","Kraulis — ŠVOK įranga, montavimas ir servisas","Vėdinimo, šildymo ir vėsinimo įrangos, montavimo, priežiūros ir remonto informacija bei užklausos.",home_body,"")  # homepage: jokio false aria-current (logo = pradžia)
+page("index.html","Kraulis — ŠVOK įranga, montavimas ir servisas Vilniuje ir apylinkėse","Parduodame, montuojame ir prižiūrime kondicionierius, šilumos siurblius ir rekuperatorius. Servisas net jei įrangą pirkote kitur. Vilnius + ~100 km. Atsakome per 1–2 d. d.",home_body,"")  # homepage: jokio false aria-current (logo = pradžia)
 
 # ============================ PASLAUGOS (indeksas)
 pasl_body=titlebar("Priežiūra, remontas ir balansavimas","Pasirinkite paslaugos kryptį pagal įrangą ir pastebėtą problemą. Jei abejojate, pradėkite nuo bendros užklausos.",
@@ -57,6 +60,7 @@ def service_page(fn,h1,lead,price,kick,signs_title,signs,body_html,faqs,mt,md):
     b=titlebar(h1,lead,kick=kick,crumb=crumbs(HOME_CRUMB,("Paslaugos","Paslaugos.html"),(h1,None)),meta=price,
         chips=chips([("Skambinti",TELH,ic("i-phone")),("Rašyti",f"mailto:{MAIL}",ic("i-mail")),("Užpildyti užklausą","Užklausos forma.html",ic("i-arrow"))]))
     b+=f'<section><div class="wrap"><div class="prose"><h2>{signs_title}</h2><ul>{sl}</ul>{body_html}</div></div></section>'
+    b+=f'''<section style="padding-top:0"><div class="wrap"><div class="note"><strong>Paslaugų ribos:</strong> dirbame Vilniuje ir maždaug 100 km spinduliu, į užklausas atsakome per 1–2 darbo dienas. Savo darbams suteikiame 3–24 mėn. garantiją, priklausomai nuo darbų pobūdžio.</div></div></section>'''
     b+=process(STEPS,kick="Kaip dirbame",title="Trys paprasti žingsniai")
     b+=faq(faqs,title="Dažni klausimai",kick="DUK")
     b+=cta("Pateikite paslaugos užklausą","Nurodykite kontaktą ir pasirinkite poreikio kategoriją. Papildomą informaciją galėsite pateikti iškart arba vėliau.",
@@ -79,7 +83,7 @@ service_page("Paslauga - Šilumos siurblių remontas.html","Šilumos siurblių r
   "Remontuojame šilumos siurblius: oras–oras ir oras–vanduo. Kad šiluma nedingtų tada, kai jos labiausiai reikia.",
   "Pirmas žingsnis — situacijos įvertinimas","Paslauga · Priežiūra ir remontas","Kada verta kreiptis",
   ["Sistema nebešildo arba šildo silpnai","Smarkiai išaugo elektros sąnaudos","Lauko blokas apledija ir neatsileidžia","Rodomi klaidų kodai arba sistema stabdosi"],
-  '''<h2>Ką apima remontas</h2><p>Nustatome priežastį, suderiname darbų apimtį bei kainą, pašaliname gedimą ir patikriname sistemą po remonto. Dirbame su <strong>oras–oras ir oras–vanduo</strong> šilumos siurbliais.</p>
+  '''<h2>Ką apima remontas</h2><p>Nustatome priežastį, suderiname darbų apimtį, pašaliname gedimą ir patikriname sistemą po remonto. Dirbame su <strong>oras–oras ir oras–vanduo</strong> šilumos siurbliais.</p>
   <div class="note"><strong>Naudinga informacija:</strong> užklausoje nurodykite, ar sistema yra oras–oras, ar oras–vanduo, ir pateikite rodomą klaidos kodą.</div><!-- REIKIA_PATVIRTINIMO: gamintojai ir garantijų politika -->''',
   [("Kokią informaciją pateikti?","Nurodykite sistemos tipą, modelį, klaidos kodą ir pastebėtus simptomus."),
    ("Ar galite padėti su sudėtinga sistema?","Taip. Į sudėtingas situacijas žiūrime kaip į galimybę rasti praktišką sprendimą."),
@@ -100,10 +104,12 @@ service_page("Paslauga - Rekuperatorių remontas.html","Rekuperatorių remontas"
 service_page("Paslauga - Rekuperatorių balansavimas.html","Rekuperatorių balansavimas",
   "Oro srautų matavimo ir reguliavimo paslaugos apžvalga: kada ji aktuali, kokios informacijos reikia ir kaip gali atrodyti darbų eiga.",
   "Pirmas žingsnis — situacijos įvertinimas","Paslauga · Priežiūra ir remontas","Kada verta vertinti srautus",
-  ["Vienose patalpose per stipri trauka, kitose — beveik nėra","Naujai sumontuota sistema dar nebuvo subalansuota","Jaučiamas triukšmas dėl per didelių srautų","Norite dokumentuoto įrodymo, kad sistema veikia kaip suprojektuota"],
-  '''<h2>Kaip vertinami oro srautai</h2><p>Balansavimo metu oro srautai matuojami difuzoriuose ir grotelėse, lyginami su turimomis projektinėmis reikšmėmis ir pagal jas reguliuojami.</p>
+  ["Vienose patalpose per stipri trauka, kitose — beveik nėra","Naujai sumontuota sistema dar nebuvo subalansuota","Jaučiamas triukšmas dėl per didelių srautų","Norite patikrinti, ar oro srautai atitinka turimas projektines reikšmes"],
+  f'''<h2>Kaip vertinami oro srautai</h2><p>Balansavimo metu oro srautai matuojami difuzoriuose ir grotelėse, lyginami su turimomis projektinėmis reikšmėmis ir pagal jas reguliuojami.</p>
   <div class="note"><strong>Prieš užklausą:</strong> jei turite vėdinimo projektą ar ankstesnių matavimų duomenis, nurodykite tai papildomoje informacijoje.</div><!-- REIKIA_PATVIRTINIMO: ataskaitos sudėtis ir įteikimas klientui -->
-  <h2>Ką duoda subalansuota sistema</h2><ul><li>Tolygus, komfortiškas oras visose patalpose</li><li>Mažesnis triukšmas ir skersvėjų pojūtis</li><li>Efektyvesnis veikimas ir mažesnės sąnaudos</li><li>Dokumentuotas sistemos veikimo įrodymas</li></ul>''',
+  <h2>Ką duoda subalansuota sistema</h2><ul><li>Tolygus, komfortiškas oras visose patalpose</li><li>Mažesnis triukšmas ir skersvėjų pojūtis</li><li>Efektyvesnis veikimas</li><li>Išmatuoti ir sureguliuoti oro srautai</li></ul>
+  {photo('04','Oro srautų balansavimui naudojama matavimo įranga','inline')}
+  {photo('06','Oro srauto matavimas prie difuzoriaus','inline')}''',
   [("Kas yra oro srautų balansavimas?","Sistemos oro srautų matavimas ir reguliavimas pagal turimus projektinius poreikius."),
    ("Ką verta turėti prieš užklausą?","Vėdinimo projektą, įrangos modelį ir pastebėtų problemų aprašymą, jei šią informaciją turite."),
    ("Nuo ko pradedama?","Nuo sistemos ir turimos dokumentacijos įvertinimo.")],
@@ -121,12 +127,13 @@ service_page("Paslauga - Profilaktinė priežiūra.html","Profilaktinė prieži�
   "Profilaktinė ŠVOK priežiūra — Kraulis","Kondicionierių, šilumos siurblių ir rekuperatorių profilaktinės priežiūros informacija: patikra, valymas ir būklės įvertinimas.")
 
 service_page("Paslauga - Įrangos montavimas.html","Įrangos montavimas",
-  "Sumontuojame ir paleidžiame šilumos siurblius, kondicionierius ir rekuperatorius — nuo sistemos parinkimo iki sureguliavimo. Vienos rankos nuo pradžios iki galo.",
-  "Pirmas žingsnis — poreikio įvertinimas","Paslauga","Ką apima montavimo procesas",
-  ["Poreikio ir patalpų informacijos surinkimas","Montavimo ir prijungimo darbų kryptis","Paleidimo ir sureguliavimo etapas","Naudojimo informacijos perdavimas"],
-  '''<h2>Kokią įrangą montuojame</h2><ul><li>Šilumos siurbliai — oras–oras ir oras–vanduo</li><li>Kondicionieriai — sieniniai (split), multi-split, kanaliniai</li><li>Rekuperatoriai ir vėdinimo sistemos</li></ul>
-  <p>Konkreti įranga, montavimo galimybės ir darbų apimtis vertinamos pagal patalpas, esamą sistemą ir pasirinktą sprendimą.</p>
-  <div class="note"><strong>Prieš užklausą:</strong> jei turite patalpų planą, įrangos modelį ar projekto informaciją, nurodykite tai papildomame lauke.</div><!-- REIKIA_PATVIRTINIMO: gamintojai, sertifikatai ir garantijų politika -->''',
+  "Sumontuota įranga tarnauja tada, kai teisingai parinkta ir suderinta. Parenkame galią pagal patalpas, sumontuojame ir paleidžiame, o rekuperaciją subalansuojame pagal reikalingus oro srautus.",
+  "Pirmas žingsnis — poreikio įvertinimas","Paslauga · Montavimas","Kada verta kreiptis",
+  ["Įrengiate kondicionierių, šilumos siurblį ar rekuperatorių","Statotės ar renovuojate ir planuojate vėdinimą arba vėsinimą","Turite įrangą, bet reikia profesionalaus montavimo ir paleidimo","Norite, kad darbus atliktų atestuotas specialistas"],
+  f'''<h2>Ką apima montavimas</h2><ul><li><strong>Parenkame galią pagal patalpas</strong> — plotą, aukštį, langus, orientaciją ir naudojimą.</li><li><strong>Sumontuojame tvarkingai</strong> — įrenginius, trasas ir kondensato nuvedimą, palikdami galimybę įrangą aptarnauti.</li><li><strong>Paleidžiame ir patikriname</strong> — veikimą, sandarumą ir darbo režimus.</li><li><strong>Rekuperacijai subalansuojame oro srautus</strong> pagal projektinius poreikius.</li><li><strong>Geotermines sistemas</strong> taip pat montuojame ir remontuojame.</li></ul>
+  <h2>Patirtis, kvalifikacija ir garantija</h2><p>Turime ilgametę patirtį ir darbams reikalingus F-dujų bei elektrosaugos atestatus. Savo darbams suteikiame 3–24 mėn. garantiją, priklausomai nuo darbų pobūdžio. Kvalifikuotas montavimas gali pailginti gamintojo garantiją, tačiau tikslus terminas priklauso nuo konkretaus gamintojo ir modelio.</p>
+  {photo('02','Sumontuotas kondicionieriaus lauko blokas','inline')}
+  <div class="note"><strong>Prieš užklausą:</strong> jei turite patalpų planą, įrangos modelį ar projekto informaciją, nurodykite tai papildomame lauke.</div>''',
   [("Kokią informaciją pateikti?","Patalpų tipą, turimą projektą ar planą ir dominančios įrangos tipą, jei jau žinote."),
    ("Kas aptariama prieš montavimą?","Sistemos tipas, montavimo vieta, darbų apimtis ir reikalingas pasirengimas."),
    ("Nuo ko pradedama?","Nuo poreikio ir turimos techninės informacijos įvertinimo.")],

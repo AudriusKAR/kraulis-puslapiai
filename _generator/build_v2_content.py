@@ -34,7 +34,7 @@ def process(steps,kick="Kaip dirbame",title="Trys žingsniai",sub=None):
     sp=f'<p>{sub}</p>' if sub else ''
     return f'<section><div class="wrap"><div class="sh"><div><span class="kick">{kick}</span><h2>{title}</h2></div>{sp}</div><div class="process">{s}</div></div></section>'
 def priespo(kick="Balansavimo pavyzdys",h2="Oro srautų matavimo ir reguliavimo kryptis",
-            p="Pavyzdinė diagrama parodo, kaip galima vizualizuoti oro srautų reikšmes prieš ir po reguliavimo. Konkreti darbų ir ataskaitos apimtis derinama individualiai.",
+            p="Pavyzdinė diagrama paaiškina, kaip lyginami oro srautai prieš ir po reguliavimo. Tai iliustracija, o ne konkretaus objekto matavimo duomenys.",
             link=("Apie balansavimą","Paslauga - Rekuperatorių balansavimas.html")):
     return f'''<section><div class="wrap"><div class="sig">
   <div class="txt"><span class="kick">{kick}</span><h2>{h2}</h2><p>{p}</p>{btn(link[0],link[1],"primary",True)}</div>
@@ -91,5 +91,67 @@ CLIMATE=f'''<section style="padding-top:0"><div class="wrap"><div class="sh"><di
 
 FINAL_CTA=cta("Renkate įrangą ar reikia serviso?","Padėsime pasirinkti tinkamą sprendimą, sumontuoti įrangą arba sutvarkyti jau veikiančią sistemą.",
     [btn("Rinktis įrangą","index.html#kategorijos"),btn("Užsakyti servisą","Užklausos forma.html","ghost cta-ghost")])
+
+# ---- Realios darbų nuotraukos (content-review/img -> site-v2/img). Alt tekstai patvirtinti
+# (strategas + IMG-INSTRUKCIJA), be išgalvotų vietų/klientų/tech parametrų. Matmenys tikri.
+IMG={
+ '01':('01-termovizija-kondicionierius.jpg','Termovizinė kondicionieriaus patikra — matomas šaldymo pasiskirstymas',501,512),
+ '02':('02-olimpia-lauko-blokas.jpg','Sumontuotas Olimpia Splendid kondicionieriaus lauko blokas',1600,901),
+ '03':('03-rekuperatorius.jpg','Sumontuotas rekuperatorius su ortakiais',1600,2842),
+ '04':('04-testo-matavimo-iranga.jpg','„testo" oro srauto matavimo įranga',1600,901),
+ '05':('05-toshiba-servisas.jpg','Toshiba šilumos siurblio servisas',1600,901),
+ '06':('06-oro-srauto-matavimas.jpg','Oro srauto matavimas balansuojant vėdinimą',1600,2842),
+ '07':('07-trane-agregatas.jpg','TRANE vėdinimo agregatas techninėje patalpoje',1600,900),
+}
+def photo(key,caption=None,cls=""):
+    fn,alt,w,h=IMG[key]
+    cap=f'<figcaption>{caption}</figcaption>' if caption else ''
+    extra=(" "+cls) if cls else ""
+    return (f'<figure class="photo{extra}">'
+            f'<img src="img/{fn}" alt="{alt}" width="{w}" height="{h}" loading="lazy" '
+            f'onerror="this.closest(&#39;figure&#39;).style.display=&#39;none&#39;">{cap}</figure>')
+def gallery(keys,captions=None,kick="Mūsų darbai",title="Realūs mūsų darbai",sub="Nuotraukos iš tikrų Kraulis darbų."):
+    caps=captions or {}
+    cells="".join(photo(k,caps.get(k),"thermal" if k=="01" else "") for k in keys)
+    return (f'<section class="gallery"><div class="wrap"><div class="sh"><div>'
+            f'<span class="kick">{kick}</span><h2>{title}</h2></div><p>{sub}</p></div>'
+            f'<div class="gwrap">{cells}</div></div></section>')
+
+# ---- Social proof: 6 realios verbatim citatos (content-review) + realus agregatas.
+# 7-os citatos NĖRA -> nekurta (Audrius/PM). Charles M. — anglų k. (lang="en").
+PASLAUGOS_LT='https://paslaugos.lt/audrius-karnisauskas--kraulis-av4380'
+REVIEWS=[
+ ("Pro meistras — po remonto dar gavau matavimų ataskaitą; nesu matęs, kad kas taip dirbtų Lietuvoje. Rekomenduoju, ačiū Audriau!","Tadas Kaminskas","Rekuperatoriaus remontas · 2026-06",None),
+ ("Darbas atliktas greitai, profesionaliai ir preciziškai. Audrius tiksliai sureguliavo oro srautus ir pakonsultavo apie priežiūrą. Name iškart juntamas geresnis oro balansas.","Danielius Šeštokas","Vėdinimo sistemos remontas · 2026-06",None),
+ ("Meistras jau pirmo vizito metu sutvarkė problemą, kurios nepavyko išspręsti jau kurį laiką. Išsami konsultacija ir naudingi patarimai ateičiai. Geriausios rekomendacijos!","Diana","Kondicionieriaus remontas · 2026-05",None),
+ ("Operatyviai sutvarkė rekuperatoriaus problemą. Rekomenduoju.","Juozas","Rekuperatoriaus remontas · 2026-07",None),
+ ("Very professional and human person. He takes time for you and takes care of everything — rare these days. All at a very reasonable price.","Charles M.","Vėdinimo sistemos montavimas · 2026-06","en"),
+ ("Dėkoju už greitą ir kokybišką paslaugą. Viskas puiku, sėkmės darbuose!","Jolanta","Kondicionieriaus montavimas · 2026-05",None),
+]
+def reviews():
+    cards=""
+    for quote,name,meta,lang in REVIEWS:
+        lg=f' lang="{lang}"' if lang else ''
+        cards+=(f'<figure class="rev"><div class="stars" aria-hidden="true">★★★★★</div>'
+                f'<blockquote{lg}>„{quote}"</blockquote>'
+                f'<figcaption>{name}<span>{meta}</span></figcaption></figure>')
+    return (f'<section class="revs"><div class="wrap"><div class="sh"><div>'
+            f'<span class="kick">Ką sako klientai</span><h2>Tikri klientų atsiliepimai</h2></div>'
+            f'<p class="rating"><span class="stars" aria-hidden="true">★★★★★</span> <strong>5,0</strong> · 7 atsiliepimai</p></div>'
+            f'<div class="revwrap">{cards}</div>'
+            f'<p class="revsrc">Tikri klientų atsiliepimai iš <a href="{PASLAUGOS_LT}" target="_blank" rel="noopener noreferrer">Paslaugos.lt profilio</a> — 5,0 (7 atsiliepimai).</p>'
+            f'</div></section>')
+
+def why():
+    items=[
+      ("Neliekate be serviso","Sumontuojame ir liekame šalia — prižiūrime bei remontuojame, kad įranga tarnautų ilgai."),
+      ("Dirbame su visų pagrindinių gamintojų įranga","Diagnozuojame ir remontuojame net tada, kai įrangą pirkote kitur."),
+      ("Kvalifikacija, kuri svarbi","Ilgametė patirtis; atestuoti darbui su freonu (F-dujos) ir elektra. Kvalifikuotas montavimas gali pailginti gamintojo garantiją, tačiau terminas priklauso nuo konkretaus gamintojo ir modelio."),
+      ("Aiškumas nuo pradžios","Prieš darbus aiškiai suderiname apimtį, eigą ir tolesnius žingsnius."),
+    ]
+    cells="".join(f'<div class="why-item"><span class="cic">{ic("i-prieziura")}</span><b>{h}</b><p>{p}</p></div>' for h,p in items)
+    return (f'<section style="padding-top:0"><div class="wrap"><div class="sh"><div><span class="kick">Kodėl Kraulis</span>'
+            f'<h2>Servisas, kuris nedingsta po pardavimo</h2></div></div>'
+            f'<div class="whygrid">{cells}</div></div></section>')
 
 print("helpers ready")

@@ -1,27 +1,29 @@
 # -*- coding: utf-8 -*-
 import os
-from build_v2 import page, TEL, TELH, MAIL
-from build_v2_content import ic, crumbs, titlebar, chips, cta, btn, faq
+from build_v2 import page, TEL, TELH, MAIL, social_links
+from build_v2_content import ic, crumbs, titlebar, chips, cta, btn, faq, gallery
 H=("Pradžia","index.html")
 
 # ============================ KONTAKTAI
-kont=titlebar("Susisiekime","Turite klausimą apie įrangą, montavimą ar servisą? Skambinkite arba rašykite — patarsime, net jei dar tik renkatės.",
+kont=titlebar("Susisiekime","Turite klausimą apie įrangos parinkimą, montavimą ar servisą? Skambinkite arba rašykite — į užklausas atsakome per 1–2 darbo dienas.",
     kick="Kontaktai",crumb=crumbs(H,("Kontaktai",None)))
 kont+=f'''<section><div class="wrap"><div class="cards">
   <a class="card" href="{TELH}"><span class="cardic">{ic("i-phone")}</span><h3>Telefonas</h3><p class="price" style="font-size:16px">{TEL}</p><p>Skambinkite bendruoju numeriu.</p></a>
   <a class="card" href="mailto:{MAIL}"><span class="cardic">{ic("i-mail")}</span><h3>El. paštas</h3><p class="price" style="font-size:15px">{MAIL}</p><p>Bendras svetainės kontaktas.</p></a>
+  <div class="card" style="cursor:default"><span class="cardic">{ic("i-clock")}</span><h3>Atsakymo terminas</h3><p class="price" style="font-size:15px">1–2 darbo dienos</p><p>Per tiek laiko atsakome į užklausas.</p></div>
+  <div class="card" style="cursor:default"><span class="cardic">{ic("i-map")}</span><h3>Kur dirbame</h3><p class="price" style="font-size:15px">Vilnius + ~100 km</p><p>Montavimo, priežiūros ir remonto paslaugos.</p></div>
 </div></div></section>
 <section style="padding-top:0"><div class="wrap"><div class="layout">
-  <div class="prose"><h2>Kaip pradėti?</h2>
-    <p>Trumpai aprašykite įrangą, pastebėtą problemą arba planuojamą sprendimą. Jei nežinote techninių detalių, pakanka telefono numerio ir poreikio kategorijos.</p>
-    <div class="note">Aptarnavimo teritorija, darbo laikas ir atsakymo terminai bus paskelbti tik patvirtinus galutinę informaciją.</div>
-    <!-- REIKIA_PATVIRTINIMO: teritorija, darbo laikas, SLA ir juridiniai rekvizitai -->
+  <div class="prose"><h2>Kad greičiau padėtume</h2>
+    <p>Nurodykite įrangos tipą ir gamintoją ar modelį, jei žinote, trumpai aprašykite problemą arba poreikį ir parašykite miestą ar rajoną. Jei techninių detalių nežinote, pakanka telefono numerio ir poreikio kategorijos.</p>
+    <div class="note"><strong>Paslaugų teritorija:</strong> Vilnius ir maždaug 100 km spinduliu.</div>
     {chips([("Skambinti",TELH,ic("i-phone")),("Rašyti el. paštu",f"mailto:{MAIL}",ic("i-mail")),("Užpildyti užklausą","Užklausos forma.html",ic("i-arrow"))])}
+    <h2>Sekite mus</h2>{social_links("social dark")}
   </div>
 </div></div></section>'''
 kont+=cta("Susisiekite dėl serviso arba konsultacijos","Aprašykite situaciją ir įrangą arba paskambinkite bendruoju numeriu.",
     [btn("Užpildyti užklausą","Užklausos forma.html"),btn(f"Skambinti {TEL}",TELH,"ghost cta-ghost")])
-page("Kontaktai.html","Kontaktai — Kraulis | +370 610 24999",f"Susisiekite su Kraulis telefonu {TEL} arba el. paštu {MAIL}. Taip pat galite peržiūrėti demonstracinę užklausos formą.",kont,"kontaktai")
+page("Kontaktai.html","Kontaktai — Kraulis ŠVOK servisas Vilniuje | +370 610 24999",f"Susisiekite dėl įrangos parinkimo, montavimo ar serviso. Vilnius + ~100 km. Atsakome per 1–2 darbo dienas. Telefonas {TEL}.",kont,"kontaktai")
 
 # ============================ UŽKLAUSOS FORMA
 FORMJS='''<script>
@@ -118,27 +120,30 @@ g2+=cta("Nežinote, kokios galios reikia?","Parinksime kondicionierių ar šilum
 page("Patarimas - Kaip išsirinkti kondicionierių ar šilumos siurblį.html","Kaip išsirinkti kondicionierių ar šilumos siurblį — Kraulis gidas","Kaip išsirinkti kondicionierių ar šilumos siurblį: galia, oras–oras ir oras–vanduo, SEER/SCOP, veikimas šaltyje, triukšmas.",g2,"patarimai")
 
 # ============================ DUK
-duk=titlebar("Dažni klausimai","Trumpi atsakymai apie demonstracinę užklausos formą, poreikio kategorijas ir susisiekimą.",
+duk=titlebar("Dažni klausimai","Trumpi atsakymai apie montavimą, priežiūrą, remontą, garantiją, aptarnavimo teritoriją ir susisiekimą.",
     kick="DUK",crumb=crumbs(H,("DUK",None)))
 duk+=faq([
+  ("Ar aptarnaujate įrangą, pirktą ne pas jus?","Taip. Diagnozuojame, remontuojame ir prižiūrime visų pagrindinių gamintojų kondicionierius, šilumos siurblius ir rekuperatorius, nepriklausomai nuo to, kur pirkote."),
+  ("Kur teikiate paslaugas?","Montavimo, priežiūros ir remonto paslaugas teikiame Vilniuje ir maždaug 100 km spinduliu."),
+  ("Per kiek laiko atsakote?","Į užklausas atsakome per 1–2 darbo dienas."),
+  ("Kokia darbų garantija?","Savo darbams suteikiame 3–24 mėn. garantiją, priklausomai nuo darbų pobūdžio. Kvalifikuotas montavimas gali pailginti gamintojo garantiją, tačiau tikslus terminas priklauso nuo konkretaus gamintojo ir modelio."),
+  ("Ar montuojate geotermines sistemas?","Taip, geotermines šilumos siurblių sistemas montuojame ir remontuojame."),
   ("Kokią informaciją pateikti užklausoje?","Pakanka telefono numerio ir poreikio kategorijos. Įrangos tipą, modelį bei situacijos aprašymą galima pridėti kaip neprivalomą informaciją."),
   ("Ar demonstracinė forma išsiunčia užklausą?","Ne. Ši prototipo forma tik parodo laukus ir jų būsenas. Kol pateikimas neaktyvus, susisiekite telefonu arba el. paštu."),
-  ("Kaip pasirinkti poreikio kategoriją?","Pasirinkite artimiausią variantą: konsultaciją, montavimą, priežiūrą, remontą, balansavimą arba „Kita“. Tikslų poreikį galima patikslinti pokalbio metu."),
-  ("Ką rašyti, jei nežinau įrangos modelio?","Modelis nėra privalomas. Trumpai aprašykite, ko reikia arba ką pastebėjote, o technines detales galėsite pateikti vėliau."),
-  ("Kaip susisiekti, kol forma neaktyvi?",f"Skambinkite {TEL} arba rašykite {MAIL}. Kontaktų puslapyje pateiktos tiesioginės nuorodos."),
-  ("Kur rasti paslaugų aprašymus?","Paslaugų puslapyje pateiktos montavimo, priežiūros, remonto ir balansavimo kryptys. Galite pasirinkti artimiausią pagal savo situaciją."),
+  ("Kaip susisiekti?",f"Skambinkite {TEL} arba rašykite {MAIL}. Kontaktų puslapyje pateiktos ir Facebook bei Instagram nuorodos."),
 ],title="Klausimai ir atsakymai",kick="DUK")
-duk+='''<!-- REIKIA_PATVIRTINIMO: kainos, teritorija, SLA, garantijos ir gamintojų sąrašas -->'''
+duk+='''<!-- REIKIA_PATVIRTINIMO: kainodaros politika, galutinis gamintojų sąrašas ir e-shop URL -->'''
 duk+=cta("Neradote atsakymo?","Paskambinkite arba parašykite — atsakysime ir patarsime.",
     [btn("Užpildyti užklausą","Užklausos forma.html"),btn(f"Skambinti {TEL}",TELH,"ghost cta-ghost")])
-page("DUK.html","Dažni klausimai (DUK) — Kraulis | Užklausa ir kontaktai","Dažni klausimai apie Kraulis svetainės demonstracinę užklausos formą, poreikio kategorijas ir susisiekimą.",duk,"patarimai")
+page("DUK.html","DUK — garantija, teritorija ir servisas | Kraulis","Atsakymai į dažniausius klausimus apie ŠVOK montavimą, priežiūrą, remontą, garantiją ir aptarnavimo teritoriją.",duk,"patarimai")
 
 # ============================ APIE MUS
-apie=titlebar("ŠVOK sprendimai vienoje aiškioje svetainėje","Šiame prototipe pristatomos įrangos parinkimo, montavimo, priežiūros, remonto ir vėdinimo sistemų balansavimo paslaugų kryptys.",
+apie=titlebar("Įranga, kuri veikia. Ir žmonės, kurie už ją atsako.","Kraulis — šildymo, vėdinimo ir vėsinimo komanda iš Vilniaus. Parduodame įrangą, ją sumontuojame ir liekame šalia tada, kai pardavimas jau įvykęs.",
     kick="Apie mus",crumb=crumbs(H,("Apie mus",None)))
 apie+=f'''<section><div class="wrap"><div class="prose">
-  <p>Svetainės aprašomoji dalis padeda pasirinkti poreikio kryptį ir pereiti į kontaktą. E. parduotuvė numatyta kaip gretima tos pačios svetainės dalis, tačiau šiame prototipe ji dar neaktyvi.</p>
-  <p><strong>Nežinote, nuo ko pradėti?</strong> Pasirinkite artimiausią paslaugos kategoriją arba susisiekite bendruoju telefonu ir el. paštu.</p>
+  <h2>Mūsų darbo principas</h2><p>Įranga tarnauja ilgai ir taupiai tada, kai ja nuolat rūpinamasi. Todėl neapsiribojame pardavimu — parenkame, sumontuojame, subalansuojame ir prižiūrime.</p>
+  <h2>Turite įrangą, bet negaunate reikiamos pagalbos?</h2><p>Padėsime. Nesvarbu, kur pirkote ir kokia jos istorija — diagnozuojame, remontuojame ir prižiūrime visų pagrindinių gamintojų kondicionierius, šilumos siurblius ir rekuperatorius.</p>
+  <h2>Patirtis ir kvalifikacija</h2><ul><li><strong>Ilgametė patirtis</strong> dirbant su ŠVOK įranga.</li><li>Turime darbams reikalingus <strong>F-dujų ir elektrosaugos atestatus</strong>.</li><li><strong>Geotermines sistemas</strong> montuojame ir remontuojame.</li></ul>
   <h2>Ką darome</h2></div>
   <div class="cards" style="margin-top:20px">
     <span class="card disabled-link" aria-disabled="true"><span class="cardic">{ic("i-shop")}</span><h3>Elektroninė parduotuvė <small>netrukus</small></h3><p>Numatyta kaip gretima svetainės dalis. Galutinė nuoroda dar derinama.</p></span>
@@ -147,13 +152,11 @@ apie+=f'''<section><div class="wrap"><div class="prose">
     <a class="card" href="Paslauga - Rekuperatorių balansavimas.html"><span class="cardic">{ic("i-balans")}</span><h3>Rekuperacijos balansavimas</h3><p>Oro srautų matavimo ir sureguliavimo paslaugos kryptis.</p></a>
   </div>
 </div></section>
-<section style="padding-top:0"><div class="wrap"><div class="prose">
-  <h2>Aiškus kelias pagal poreikį</h2><p>Paslaugų aprašymuose atskiriamos montavimo, priežiūros, remonto ir balansavimo kryptys. Užklausos demonstracijoje galima pasirinkti artimiausią kategoriją.</p>
-  <!-- REIKIA_PATVIRTINIMO: gamintojai, sertifikatai, garantijos, teritorija, patirtis ir pozicionavimo pažadai -->
-</div></div></section>'''
+{gallery(['03','05','06','07'],kick="Mūsų darbai",title="Darbai, kuriuos atliekame",sub="Realios Kraulis darbų nuotraukos — be išgalvotų objektų vietų ar klientų duomenų.")}
+<section style="padding-top:0"><div class="wrap"><div class="note"><strong>Paslaugų teritorija:</strong> Vilnius ir maždaug 100 km spinduliu. Į užklausas atsakome per 1–2 darbo dienas.</div></div></section>'''
 apie+=cta("Pasitarkime dėl jūsų sistemos","Renkatės naują įrangą ar reikia pagalbos su turima — parašykite arba paskambinkite.",
     [btn("Užsakyti servisą","Užklausos forma.html"),btn(f"Skambinti {TEL}",TELH,"ghost cta-ghost")])
-page("Apie mus.html","Apie svetainės paslaugų kryptis — Kraulis","Kraulis svetainės prototipe pristatomos įrangos parinkimo, montavimo, priežiūros, remonto ir balansavimo paslaugų kryptys.",apie,"apie")
+page("Apie mus.html","Apie Kraulis — ŠVOK įranga ir servisas su ilgamete patirtimi | Vilnius","Kraulis — šildymo, vėdinimo ir vėsinimo komanda iš Vilniaus. Parduodame, montuojame ir prižiūrime įrangą; liekame su klientu ir po pardavimo.",apie,"apie")
 
 from build_v2 import OUT as _OUT
 print("ALL pages done. Files:", len([f for f in os.listdir(_OUT) if f.endswith('.html')]))

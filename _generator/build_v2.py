@@ -32,7 +32,11 @@ SPRITE = '''<svg width="0" height="0" style="position:absolute" aria-hidden="tru
 <symbol id="i-shop" viewBox="0 0 24 24"><path d="M5 8h14l-1 10H6z"/><path d="M8.5 8V6.5a3.5 3.5 0 0 1 7 0V8"/></symbol>
 <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
 <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></symbol>
+<symbol id="i-map" viewBox="0 0 24 24"><path d="M12 21s6-5.5 6-11a6 6 0 1 0-12 0c0 5.5 6 11 6 11z"/><circle cx="12" cy="10" r="2"/></symbol>
 <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="i-fb" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.2"/><path d="M14.5 8.2h-1.3a1.8 1.8 0 0 0-1.8 1.8V19"/><path d="M9.7 12.2h4.6"/></symbol>
+<symbol id="i-ig" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4.6"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.6" cy="7.4" r="0.7"/></symbol>
 </defs></svg>'''
 
 # CSS bendrai visiems puslapiams (final-cba + turinio komponentai)
@@ -57,15 +61,24 @@ def header(active,home="index.html"):
     <a class="btn btn-primary" href="Užklausos forma.html">Užsakyti servisą</a></div>
 </div></header>'''
 
+# Socialiniai tinklai — PATVIRTINTA (iš kraulis.lt live, 2026-08-02). Tik paprastos
+# nuorodos: jokių FB/IG embed, SDK, pikselių, feed widget ar sekėjų skaičių (Codex/Audrius).
+FB_URL='https://www.facebook.com/KraulisMB/'; IG_URL='https://www.instagram.com/kraulismb/'
+def social_links(cls="social"):
+    return (f'<div class="{cls}">'
+            f'<a href="{FB_URL}" target="_blank" rel="noopener noreferrer" aria-label="Kraulis Facebook"><svg class="ic" viewBox="0 0 24 24"><use href="#i-fb"/></svg></a>'
+            f'<a href="{IG_URL}" target="_blank" rel="noopener noreferrer" aria-label="Kraulis Instagram"><svg class="ic" viewBox="0 0 24 24"><use href="#i-ig"/></svg></a>'
+            '</div>')
+
 FOOTER=f'''<footer><div class="wrap">
   <div class="foot">
-    <div>{logo('#FBFCFD')}<p>Šildymo, vėdinimo ir vėsinimo sprendimų informacija ir paslaugų užklausos.</p></div>
+    <div>{logo('#FBFCFD')}<p>Šildymo, vėdinimo ir vėsinimo įranga su servisu, kuris nedingsta po pardavimo.</p>
+      <h4 style="margin-top:16px">Sekite mus</h4>{social_links()}</div>
     <div><h4>Paslaugos</h4><a href="Paslauga - Rekuperatorių balansavimas.html">Balansavimas</a><a href="Paslauga - Profilaktinė priežiūra.html">Priežiūra</a><a href="Paslaugos.html">Remontas</a><a href="Paslauga - Įrangos montavimas.html">Montavimas</a></div>
     <div><h4>Informacija</h4><a href="Patarimai.html">Patarimai</a><a href="DUK.html">Dažni klausimai</a><a href="Apie mus.html">Apie mus</a><a href="Kontaktai.html">Kontaktai</a></div>
-    <div><h4>Kontaktai</h4><p class="mono"><a href="{TELH}">{TEL}</a></p><p class="mono"><a href="mailto:{MAIL}">{MAIL}</a></p></div>
+    <div><h4>Kontaktai</h4><p class="mono"><a href="{TELH}">{TEL}</a></p><p class="mono"><a href="mailto:{MAIL}">{MAIL}</a></p><p>Atsakome per 1–2 darbo dienas</p><p>Paslaugos: Vilnius ir ~100 km spinduliu</p></div>
   </div>
-  <!-- REIKIA_PATVIRTINIMO: juridiniai rekvizitai, darbo laikas ir aptarnavimo teritorija -->
-  <div class="foot-b"><span>Informacinės svetainės prototipas</span><span>© 2026 Kraulis</span></div>
+  <div class="foot-b"><span>Kraulis, MB</span><span>© 2026 Kraulis, MB</span></div>
 </div></footer>'''
 
 NAVJS='''<script>
