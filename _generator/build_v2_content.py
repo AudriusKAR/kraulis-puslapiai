@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+from html import escape
 from build_v2 import page, logo, OUT, TEL, TELH, MAIL
 
 def ic(name,cls="ic",style=""):
@@ -107,8 +108,9 @@ def photo(key,caption=None,cls=""):
     fn,alt,w,h=IMG[key]
     cap=f'<figcaption>{caption}</figcaption>' if caption else ''
     extra=(" "+cls) if cls else ""
+    alt_attr=escape(alt, quote=True)
     return (f'<figure class="photo{extra}">'
-            f'<img src="img/{fn}" alt="{alt}" width="{w}" height="{h}" loading="lazy" '
+            f'<img src="img/{fn}" alt="{alt_attr}" width="{w}" height="{h}" loading="lazy" '
             f'onerror="this.closest(&#39;figure&#39;).style.display=&#39;none&#39;">{cap}</figure>')
 def gallery(keys,captions=None,kick="Mūsų darbai",title="Realūs mūsų darbai",sub="Nuotraukos iš tikrų Kraulis darbų."):
     caps=captions or {}
