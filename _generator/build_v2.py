@@ -5,7 +5,9 @@ import io, os
 # Generatorius gyvena puslapiai/_generator/ ; išvestis -> puslapiai/site-v2/
 OUT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "site-v2"))
 os.makedirs(OUT, exist_ok=True)
-TEL='+370 610 24999'; TELH='tel:+37061024999'; MAIL='info@kraulis.lt'
+TEL='+370 610 24999'; TELH='tel:+37061024999'; MAIL='audrius@kraulis.lt'  # viešas patvirtintas kontaktas (PM/Codex 2026-08-02)
+# Prototipo HTML generuojamas tik iš _generator/ šaltinių. Nevykdyti rankinių
+# pataisų site-v2/ kataloge, nes kitas generavimas jas perrašys.
 
 def logo(color, cls="logo"):
     M=('<path fill-rule="evenodd" fill="{c}" d="M175,31 L26,180 L57,180 L57,302 L293,302 L293,180 L324,180 Z M175,72 L81,166 L81,275 L269,275 L269,166 Z"/>'
@@ -36,11 +38,16 @@ SPRITE = '''<svg width="0" height="0" style="position:absolute" aria-hidden="tru
 # CSS bendrai visiems puslapiams (final-cba + turinio komponentai)
 CSS = open(os.path.join(os.path.dirname(__file__),'v2_css.txt'),encoding='utf-8').read()
 
-NAV=[("E-parduotuvė","#","shop"),("Įranga","index.html#kategorijos","iranga"),("Paslaugos","Paslaugos.html","paslaugos"),
+NAV=[("E-parduotuvė",None,"shop"),("Įranga","index.html#kategorijos","iranga"),("Paslaugos","Paslaugos.html","paslaugos"),
      ("Patarimai","Patarimai.html","patarimai"),("Apie mus","Apie mus.html","apie"),("Kontaktai","Kontaktai.html","kontaktai")]
 
 def header(active,home="index.html"):
-    links="".join('<a href="%s"%s%s>%s</a>'%(h,(' data-todo="%s"'%k) if h=='#' else '',' aria-current="page"' if k==active else '',t) for t,h,k in NAV)
+    def navitem(t,h,k):
+        if h is None:
+            return f'<span class="nav-disabled" aria-disabled="true">{t}<small>netrukus</small></span>'
+        current=' aria-current="page"' if k==active else ''
+        return f'<a href="{h}"{current}>{t}</a>'
+    links="".join(navitem(t,h,k) for t,h,k in NAV)
     return f'''<a class="skip" href="#main">Pereiti prie turinio</a>
 <header><div class="wrap hd">
   <a href="{home}" aria-label="Kraulis pradžia">{logo('#24303E')}</a>
@@ -52,12 +59,13 @@ def header(active,home="index.html"):
 
 FOOTER=f'''<footer><div class="wrap">
   <div class="foot">
-    <div>{logo('#FBFCFD')}<p>Šildymo, vėdinimo ir vėsinimo įranga su servisu, kuris lieka ir po pardavimo.</p></div>
+    <div>{logo('#FBFCFD')}<p>Šildymo, vėdinimo ir vėsinimo sprendimų informacija ir paslaugų užklausos.</p></div>
     <div><h4>Paslaugos</h4><a href="Paslauga - Rekuperatorių balansavimas.html">Balansavimas</a><a href="Paslauga - Profilaktinė priežiūra.html">Priežiūra</a><a href="Paslaugos.html">Remontas</a><a href="Paslauga - Įrangos montavimas.html">Montavimas</a></div>
     <div><h4>Informacija</h4><a href="Patarimai.html">Patarimai</a><a href="DUK.html">Dažni klausimai</a><a href="Apie mus.html">Apie mus</a><a href="Kontaktai.html">Kontaktai</a></div>
-    <div><h4>Kontaktai</h4><p class="mono"><a href="{TELH}">{TEL}</a></p><p class="mono"><a href="mailto:{MAIL}">{MAIL}</a></p><p>I–V 8.00–17.00</p><p>Servisas: Vilnius ir apylinkės</p><p>Prekės: visa Lietuva</p></div>
+    <div><h4>Kontaktai</h4><p class="mono"><a href="{TELH}">{TEL}</a></p><p class="mono"><a href="mailto:{MAIL}">{MAIL}</a></p></div>
   </div>
-  <div class="foot-b"><span>Kraulis, MB · Įmonės kodas 307605802 · Vilnius</span><span>© 2026 Kraulis, MB</span></div>
+  <!-- REIKIA_PATVIRTINIMO: juridiniai rekvizitai, darbo laikas ir aptarnavimo teritorija -->
+  <div class="foot-b"><span>Informacinės svetainės prototipas</span><span>© 2026 Kraulis</span></div>
 </div></footer>'''
 
 NAVJS='''<script>
@@ -69,8 +77,6 @@ n.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&isOpen()){set(false);b.focus()}});
 document.addEventListener('click',function(e){if(isOpen()&&!n.contains(e.target)&&!b.contains(e.target))set(false)});
 if(mq.addEventListener)mq.addEventListener('change',function(){if(!mq.matches)set(false)});
-/* Placeholder (dar neįgyvendintos) nuorodos: nepažymėk veikiančiomis, neversk į puslapio viršų. */
-document.querySelectorAll('a[data-todo]').forEach(function(a){a.setAttribute('aria-disabled','true');if(!a.getAttribute('title'))a.setAttribute('title','Nuoroda bus prijungta Verskis.lt versijoje');a.addEventListener('click',function(e){e.preventDefault();});});
 })();
 </script>'''
 

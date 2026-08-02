@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kontaktai — Kraulis | +370 610 24999</title>
-<meta name="description" content="Susisiekite su Kraulis: telefonas +370 610 24999, el. paštas info@kraulis.lt. Servisas Vilniuje ir apylinkėse, prekės — visoje Lietuvoje.">
+<meta name="description" content="Susisiekite su Kraulis telefonu +370 610 24999 arba el. paštu audrius@kraulis.lt. Taip pat galite peržiūrėti demonstracinę užklausos formą.">
 <meta name="robots" content="noindex"><!-- TODO: gamybinėje Verskis.lt versijoje pašalinti noindex -->
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -39,6 +39,9 @@
   nav.main a{font-size:14.5px;color:var(--navy);text-decoration:none;font-weight:500}
   nav.main a:hover{color:var(--sky-deep)}
   nav.main a[aria-current="page"]{color:var(--sky-deep);font-weight:600}
+  .nav-disabled{display:inline-flex;align-items:center;gap:6px;font-size:14.5px;color:var(--steel);cursor:not-allowed}
+  .nav-disabled small,.disabled-link{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--sky-deep)}
+  .disabled-link{display:inline-flex;align-items:center;border:1px solid var(--cloud);border-radius:999px;padding:5px 9px;cursor:not-allowed}
   .hd-right{display:flex;align-items:center;gap:16px}
   .hd-tel{font-family:'IBM Plex Mono',monospace;font-size:13.5px;color:var(--navy);text-decoration:none;white-space:nowrap}
   .burger{display:none;background:none;border:1.5px solid var(--line);border-radius:9px;padding:8px 10px;cursor:pointer;color:var(--navy)}
@@ -90,6 +93,7 @@
   .cats .hd2 a{font-family:'Archivo',sans-serif;font-weight:700;font-size:14px;text-decoration:none;color:var(--navy)}
   .catgrid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--white)}
   .cat{display:flex;flex-direction:column;gap:12px;padding:22px 20px;text-decoration:none;color:inherit;border-right:1px solid var(--line);transition:background .18s}
+  .cat-disabled{cursor:not-allowed;opacity:.88}
   .cat:last-child{border-right:none}.cat:hover{background:var(--paper)}
   .cat .cic .ic{width:40px;height:40px;stroke-width:1.5;color:var(--navy)}
   .cat b{font-family:'Archivo',sans-serif;font-weight:700;font-size:16px;color:var(--navy)}
@@ -194,6 +198,16 @@
   .consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--steel)}
   .consent input{width:18px;height:18px;margin-top:2px;flex:none;accent-color:var(--sky-deep)}
   .form-status{font-size:14.5px;margin-top:12px}
+  .opt{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:6px 0 12px}
+  .opt legend{padding:0 8px;font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--steel)}
+  .demo-badge{display:flex;gap:8px;align-items:center;background:var(--mist);border:1px solid var(--cloud);border-radius:10px;padding:10px 13px;font-size:13.5px;color:var(--navy);margin-bottom:16px}
+  .demo-badge .ic{color:var(--sky-deep);flex:none}
+  .err-msg{display:none;gap:6px;align-items:center;color:#B02A1E;font-size:13px;margin-top:2px}
+  .err-msg .ic{color:#C0392B;flex:none}
+  .field.err input,.field.err select,.field.err textarea{border-color:#C0392B;box-shadow:0 0 0 3px rgba(192,57,43,.14)}
+  .field.err .err-msg{display:flex}
+  .form-status.demo{background:var(--mist);border:1px solid var(--cloud);border-radius:8px;padding:10px 12px;color:var(--navy)}
+  .form-status.err{color:#B02A1E}
 
   /* compact navy CTA */
   .cta{background:var(--navy);border-radius:18px;padding:clamp(30px,4vw,48px);display:flex;justify-content:space-between;align-items:center;gap:26px;flex-wrap:wrap;position:relative;overflow:hidden}
@@ -217,6 +231,7 @@
   @media(max-width:860px){
     nav.main{position:fixed;inset:66px 0 auto 0;flex-direction:column;align-items:stretch;gap:0;background:var(--white);border-bottom:1px solid var(--line);padding:8px 24px 16px;box-shadow:var(--shadow);transform:translateY(-130%);visibility:hidden;transition:transform .28s var(--ease),visibility .28s;max-height:calc(100dvh - 66px);overflow:auto}
     nav.main a{padding:14px 0;border-bottom:1px solid var(--line-soft);font-size:16px}
+    nav.main .nav-disabled{padding:14px 0;border-bottom:1px solid var(--line-soft);font-size:16px}
     nav.main.open{transform:translateY(0);visibility:visible}
     .burger{display:inline-flex}.hd-tel{display:none}
     .hero .hgrid{grid-template-columns:1fr;gap:22px}.instr{order:-1;max-width:440px}
@@ -252,37 +267,34 @@
 <a class="skip" href="#main">Pereiti prie turinio</a>
 <header><div class="wrap hd">
   <a href="index.html" aria-label="Kraulis pradžia"><svg class="logo" viewBox="14 19 322 343.7654345654346" role="img" aria-label="Kraulis"><path fill-rule="evenodd" fill="#24303E" d="M175,31 L26,180 L57,180 L57,302 L293,302 L293,180 L324,180 Z M175,72 L81,166 L81,275 L269,275 L269,166 Z"/><path fill="#24303E" d="M151,149 L133,177 L145,177 L145,243 L157,243 L157,177 L169,177 Z"/><path fill="#24303E" d="M199,243 L181,215 L193,215 L193,149 L205,149 L205,215 L217,215 Z"/><g transform="translate(53.416,350.152) scale(0.02358,-0.02358)"><path fill="#24303E" d="M152 1466H605V912L1080 1466H1682L1148 913L1706 0H1148L839 603L605 358V0H152ZM1862 0V1466H2617Q2827 1466 2938.0 1430.0Q3049 1394 3117.0 1296.5Q3185 1199 3185 1059Q3185 937 3133.0 848.5Q3081 760 2990 705Q2932 670 2831 647Q2912 620 2949 593Q2974 575 3021.5 516.0Q3069 457 3085 425L3304 0H2792L2550 448Q2504 535 2468 561Q2419 595 2357 595H2317V0ZM2317 872H2508Q2539 872 2628 892Q2673 901 2701.5 938.0Q2730 975 2730 1023Q2730 1094 2685.0 1132.0Q2640 1170 2516 1170H2317ZM4351 242H3835L3764 0H3301L3852 1466H4346L4897 0H4423ZM4256 559 4094 1086 3933 559ZM5996 1466H6448V592Q6448 462 6407.5 346.5Q6367 231 6280.5 144.5Q6194 58 6099 23Q5967 -26 5782 -26Q5675 -26 5548.5 -11.0Q5422 4 5337.0 48.5Q5252 93 5181.5 175.0Q5111 257 5085 344Q5043 484 5043 592V1466H5495V571Q5495 451 5561.5 383.5Q5628 316 5746 316Q5863 316 5929.5 382.5Q5996 449 5996 571ZM6748 1466H7201V361H7908V0H6748ZM8132 1466H8586V0H8132ZM8832 485 9263 512Q9277 407 9320 352Q9390 263 9520 263Q9617 263 9669.5 308.5Q9722 354 9722 414Q9722 471 9672 516Q9622 561 9440 601Q9142 668 9015 779Q8887 890 8887 1062Q8887 1175 8952.5 1275.5Q9018 1376 9149.5 1433.5Q9281 1491 9510 1491Q9791 1491 9938.5 1386.5Q10086 1282 10114 1054L9687 1029Q9670 1128 9615.5 1173.0Q9561 1218 9465 1218Q9386 1218 9346.0 1184.5Q9306 1151 9306 1103Q9306 1068 9339 1040Q9371 1011 9491 986Q9788 922 9916.5 856.5Q10045 791 10103.5 694.0Q10162 597 10162 477Q10162 336 10084.0 217.0Q10006 98 9866.0 36.5Q9726 -25 9513 -25Q9139 -25 8995.0 119.0Q8851 263 8832 485Z"/></g></svg></a>
-  <nav class="main" id="mainnav" aria-label="Pagrindinė navigacija"><a href="#" data-todo="shop">E-parduotuvė</a><a href="index.html#kategorijos">Įranga</a><a href="Paslaugos.html">Paslaugos</a><a href="Patarimai.html">Patarimai</a><a href="Apie mus.html">Apie mus</a><a href="Kontaktai.html" aria-current="page">Kontaktai</a><a class="navcta" href="Užklausos forma.html">Užsakyti servisą</a></nav>
+  <nav class="main" id="mainnav" aria-label="Pagrindinė navigacija"><span class="nav-disabled" aria-disabled="true">E-parduotuvė<small>netrukus</small></span><a href="index.html#kategorijos">Įranga</a><a href="Paslaugos.html">Paslaugos</a><a href="Patarimai.html">Patarimai</a><a href="Apie mus.html">Apie mus</a><a href="Kontaktai.html" aria-current="page">Kontaktai</a><a class="navcta" href="Užklausos forma.html">Užsakyti servisą</a></nav>
   <div class="hd-right"><a class="hd-tel" href="tel:+37061024999">+370 610 24999</a>
     <button class="burger" type="button" aria-expanded="false" aria-controls="mainnav" aria-label="Atverti meniu"><svg class="ic" style="width:22px;height:22px" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
     <a class="btn btn-primary" href="Užklausos forma.html">Užsakyti servisą</a></div>
 </div></header>
 <main id="main">
 <section class="titlebar"><div class="wrap"><div class="inner"><div class="crumbs"><a href="index.html">Pradžia</a> / <span>Kontaktai</span></div><span class="kick">Kontaktai</span><h1>Susisiekime</h1><p class="lead">Turite klausimą apie įrangą, montavimą ar servisą? Skambinkite arba rašykite — patarsime, net jei dar tik renkatės.</p></div></div></section><section><div class="wrap"><div class="cards">
-  <a class="card" href="tel:+37061024999"><span class="cardic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-phone"/></svg></span><h3>Telefonas</h3><p class="price" style="font-size:16px">+370 610 24999</p><p>Dažnai padedame jau telefonu.</p></a>
-  <a class="card" href="mailto:info@kraulis.lt"><span class="cardic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-mail"/></svg></span><h3>El. paštas</h3><p class="price" style="font-size:15px">info@kraulis.lt</p><p>Bendras svetainės kontaktas.</p></a>
-  <div class="card" style="cursor:default"><span class="cardic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-prieziura"/></svg></span><h3>Darbo laikas</h3><p class="mono" style="color:var(--navy)">I–V 8.00–17.00</p><p>Servisas — Vilnius ir apylinkės.</p></div>
+  <a class="card" href="tel:+37061024999"><span class="cardic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-phone"/></svg></span><h3>Telefonas</h3><p class="price" style="font-size:16px">+370 610 24999</p><p>Skambinkite bendruoju numeriu.</p></a>
+  <a class="card" href="mailto:audrius@kraulis.lt"><span class="cardic"><svg class="ic" viewBox="0 0 24 24"><use href="#i-mail"/></svg></span><h3>El. paštas</h3><p class="price" style="font-size:15px">audrius@kraulis.lt</p><p>Bendras svetainės kontaktas.</p></a>
 </div></div></section>
-<section style="padding-top:0"><div class="wrap"><div class="layout aside">
-  <div class="prose"><h2>Kur dirbame?</h2>
-    <p>Montavimo, priežiūros ir remonto paslaugas teikiame <strong>Vilniuje ir apylinkėse</strong>. E-parduotuvės prekes pristatome <strong>visoje Lietuvoje</strong>.</p>
-    <p>Sugedo įranga ar tiesiog negaunate reikiamos pagalbos? Skambinkite — dažnai padedame jau telefonu, o jei reikia, atvykstame diagnostikai.</p>
-    <div class="note">Į užklausas paprastai atsakome per 1–2 darbo dienas. Skubūs darbai derinami individualiai.</div>
-    <div class="chips"><a class="chip" href="tel:+37061024999"><svg class="ic" viewBox="0 0 24 24"><use href="#i-phone"/></svg>Skambinti</a><a class="chip" href="mailto:info@kraulis.lt"><svg class="ic" viewBox="0 0 24 24"><use href="#i-mail"/></svg>Rašyti el. paštu</a><a class="chip" href="Užklausos forma.html"><svg class="ic" viewBox="0 0 24 24"><use href="#i-arrow"/></svg>Užpildyti užklausą</a></div>
+<section style="padding-top:0"><div class="wrap"><div class="layout">
+  <div class="prose"><h2>Kaip pradėti?</h2>
+    <p>Trumpai aprašykite įrangą, pastebėtą problemą arba planuojamą sprendimą. Jei nežinote techninių detalių, pakanka telefono numerio ir poreikio kategorijos.</p>
+    <div class="note">Aptarnavimo teritorija, darbo laikas ir atsakymo terminai bus paskelbti tik patvirtinus galutinę informaciją.</div>
+    <!-- REIKIA_PATVIRTINIMO: teritorija, darbo laikas, SLA ir juridiniai rekvizitai -->
+    <div class="chips"><a class="chip" href="tel:+37061024999"><svg class="ic" viewBox="0 0 24 24"><use href="#i-phone"/></svg>Skambinti</a><a class="chip" href="mailto:audrius@kraulis.lt"><svg class="ic" viewBox="0 0 24 24"><use href="#i-mail"/></svg>Rašyti el. paštu</a><a class="chip" href="Užklausos forma.html"><svg class="ic" viewBox="0 0 24 24"><use href="#i-arrow"/></svg>Užpildyti užklausą</a></div>
   </div>
-  <aside class="side"><div class="card" style="cursor:default"><h3>Rekvizitai</h3>
-    <p style="font-size:14px;line-height:1.7;color:var(--steel)">Kraulis, MB<br>Įmonės kodas: 307605802<br>Reg. adresas: Naugarduko g. 68-3, 03203 Vilnius<br>Korespondencijai: Žirnių g. 6, 02120 Vilnius<br>Bankas: „Swedbank“<br><span class="mono" style="font-size:13px">LT22 7300 0102 0138 5725</span></p>
-  </div></aside>
-</div></div></section><section><div class="wrap"><div class="cta"><div><h2>Užsakykite servisą arba konsultaciją</h2><p>Aprašykite situaciją ir įrangą — grįšime su aiškiu tolesniu žingsniu.</p></div><div class="cta-acts"><a class="btn btn-primary" href="Užklausos forma.html">Užpildyti užklausą</a><a class="btn btn-ghost cta-ghost" href="tel:+37061024999">Skambinti +370 610 24999</a></div></div></div></section>
+</div></div></section><section><div class="wrap"><div class="cta"><div><h2>Susisiekite dėl serviso arba konsultacijos</h2><p>Aprašykite situaciją ir įrangą arba paskambinkite bendruoju numeriu.</p></div><div class="cta-acts"><a class="btn btn-primary" href="Užklausos forma.html">Užpildyti užklausą</a><a class="btn btn-ghost cta-ghost" href="tel:+37061024999">Skambinti +370 610 24999</a></div></div></div></section>
 </main>
 <footer><div class="wrap">
   <div class="foot">
-    <div><svg class="logo" viewBox="14 19 322 343.7654345654346" role="img" aria-label="Kraulis"><path fill-rule="evenodd" fill="#FBFCFD" d="M175,31 L26,180 L57,180 L57,302 L293,302 L293,180 L324,180 Z M175,72 L81,166 L81,275 L269,275 L269,166 Z"/><path fill="#FBFCFD" d="M151,149 L133,177 L145,177 L145,243 L157,243 L157,177 L169,177 Z"/><path fill="#FBFCFD" d="M199,243 L181,215 L193,215 L193,149 L205,149 L205,215 L217,215 Z"/><g transform="translate(53.416,350.152) scale(0.02358,-0.02358)"><path fill="#FBFCFD" d="M152 1466H605V912L1080 1466H1682L1148 913L1706 0H1148L839 603L605 358V0H152ZM1862 0V1466H2617Q2827 1466 2938.0 1430.0Q3049 1394 3117.0 1296.5Q3185 1199 3185 1059Q3185 937 3133.0 848.5Q3081 760 2990 705Q2932 670 2831 647Q2912 620 2949 593Q2974 575 3021.5 516.0Q3069 457 3085 425L3304 0H2792L2550 448Q2504 535 2468 561Q2419 595 2357 595H2317V0ZM2317 872H2508Q2539 872 2628 892Q2673 901 2701.5 938.0Q2730 975 2730 1023Q2730 1094 2685.0 1132.0Q2640 1170 2516 1170H2317ZM4351 242H3835L3764 0H3301L3852 1466H4346L4897 0H4423ZM4256 559 4094 1086 3933 559ZM5996 1466H6448V592Q6448 462 6407.5 346.5Q6367 231 6280.5 144.5Q6194 58 6099 23Q5967 -26 5782 -26Q5675 -26 5548.5 -11.0Q5422 4 5337.0 48.5Q5252 93 5181.5 175.0Q5111 257 5085 344Q5043 484 5043 592V1466H5495V571Q5495 451 5561.5 383.5Q5628 316 5746 316Q5863 316 5929.5 382.5Q5996 449 5996 571ZM6748 1466H7201V361H7908V0H6748ZM8132 1466H8586V0H8132ZM8832 485 9263 512Q9277 407 9320 352Q9390 263 9520 263Q9617 263 9669.5 308.5Q9722 354 9722 414Q9722 471 9672 516Q9622 561 9440 601Q9142 668 9015 779Q8887 890 8887 1062Q8887 1175 8952.5 1275.5Q9018 1376 9149.5 1433.5Q9281 1491 9510 1491Q9791 1491 9938.5 1386.5Q10086 1282 10114 1054L9687 1029Q9670 1128 9615.5 1173.0Q9561 1218 9465 1218Q9386 1218 9346.0 1184.5Q9306 1151 9306 1103Q9306 1068 9339 1040Q9371 1011 9491 986Q9788 922 9916.5 856.5Q10045 791 10103.5 694.0Q10162 597 10162 477Q10162 336 10084.0 217.0Q10006 98 9866.0 36.5Q9726 -25 9513 -25Q9139 -25 8995.0 119.0Q8851 263 8832 485Z"/></g></svg><p>Šildymo, vėdinimo ir vėsinimo įranga su servisu, kuris lieka ir po pardavimo.</p></div>
+    <div><svg class="logo" viewBox="14 19 322 343.7654345654346" role="img" aria-label="Kraulis"><path fill-rule="evenodd" fill="#FBFCFD" d="M175,31 L26,180 L57,180 L57,302 L293,302 L293,180 L324,180 Z M175,72 L81,166 L81,275 L269,275 L269,166 Z"/><path fill="#FBFCFD" d="M151,149 L133,177 L145,177 L145,243 L157,243 L157,177 L169,177 Z"/><path fill="#FBFCFD" d="M199,243 L181,215 L193,215 L193,149 L205,149 L205,215 L217,215 Z"/><g transform="translate(53.416,350.152) scale(0.02358,-0.02358)"><path fill="#FBFCFD" d="M152 1466H605V912L1080 1466H1682L1148 913L1706 0H1148L839 603L605 358V0H152ZM1862 0V1466H2617Q2827 1466 2938.0 1430.0Q3049 1394 3117.0 1296.5Q3185 1199 3185 1059Q3185 937 3133.0 848.5Q3081 760 2990 705Q2932 670 2831 647Q2912 620 2949 593Q2974 575 3021.5 516.0Q3069 457 3085 425L3304 0H2792L2550 448Q2504 535 2468 561Q2419 595 2357 595H2317V0ZM2317 872H2508Q2539 872 2628 892Q2673 901 2701.5 938.0Q2730 975 2730 1023Q2730 1094 2685.0 1132.0Q2640 1170 2516 1170H2317ZM4351 242H3835L3764 0H3301L3852 1466H4346L4897 0H4423ZM4256 559 4094 1086 3933 559ZM5996 1466H6448V592Q6448 462 6407.5 346.5Q6367 231 6280.5 144.5Q6194 58 6099 23Q5967 -26 5782 -26Q5675 -26 5548.5 -11.0Q5422 4 5337.0 48.5Q5252 93 5181.5 175.0Q5111 257 5085 344Q5043 484 5043 592V1466H5495V571Q5495 451 5561.5 383.5Q5628 316 5746 316Q5863 316 5929.5 382.5Q5996 449 5996 571ZM6748 1466H7201V361H7908V0H6748ZM8132 1466H8586V0H8132ZM8832 485 9263 512Q9277 407 9320 352Q9390 263 9520 263Q9617 263 9669.5 308.5Q9722 354 9722 414Q9722 471 9672 516Q9622 561 9440 601Q9142 668 9015 779Q8887 890 8887 1062Q8887 1175 8952.5 1275.5Q9018 1376 9149.5 1433.5Q9281 1491 9510 1491Q9791 1491 9938.5 1386.5Q10086 1282 10114 1054L9687 1029Q9670 1128 9615.5 1173.0Q9561 1218 9465 1218Q9386 1218 9346.0 1184.5Q9306 1151 9306 1103Q9306 1068 9339 1040Q9371 1011 9491 986Q9788 922 9916.5 856.5Q10045 791 10103.5 694.0Q10162 597 10162 477Q10162 336 10084.0 217.0Q10006 98 9866.0 36.5Q9726 -25 9513 -25Q9139 -25 8995.0 119.0Q8851 263 8832 485Z"/></g></svg><p>Šildymo, vėdinimo ir vėsinimo sprendimų informacija ir paslaugų užklausos.</p></div>
     <div><h4>Paslaugos</h4><a href="Paslauga - Rekuperatorių balansavimas.html">Balansavimas</a><a href="Paslauga - Profilaktinė priežiūra.html">Priežiūra</a><a href="Paslaugos.html">Remontas</a><a href="Paslauga - Įrangos montavimas.html">Montavimas</a></div>
     <div><h4>Informacija</h4><a href="Patarimai.html">Patarimai</a><a href="DUK.html">Dažni klausimai</a><a href="Apie mus.html">Apie mus</a><a href="Kontaktai.html">Kontaktai</a></div>
-    <div><h4>Kontaktai</h4><p class="mono"><a href="tel:+37061024999">+370 610 24999</a></p><p class="mono"><a href="mailto:info@kraulis.lt">info@kraulis.lt</a></p><p>I–V 8.00–17.00</p><p>Servisas: Vilnius ir apylinkės</p><p>Prekės: visa Lietuva</p></div>
+    <div><h4>Kontaktai</h4><p class="mono"><a href="tel:+37061024999">+370 610 24999</a></p><p class="mono"><a href="mailto:audrius@kraulis.lt">audrius@kraulis.lt</a></p></div>
   </div>
-  <div class="foot-b"><span>Kraulis, MB · Įmonės kodas 307605802 · Vilnius</span><span>© 2026 Kraulis, MB</span></div>
+  <!-- REIKIA_PATVIRTINIMO: juridiniai rekvizitai, darbo laikas ir aptarnavimo teritorija -->
+  <div class="foot-b"><span>Informacinės svetainės prototipas</span><span>© 2026 Kraulis</span></div>
 </div></footer>
 <script>
 (function(){var b=document.querySelector('.burger'),n=document.getElementById('mainnav');if(!b||!n)return;
@@ -293,8 +305,6 @@ n.addEventListener('click',function(e){if(e.target.closest('a'))set(false)});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&isOpen()){set(false);b.focus()}});
 document.addEventListener('click',function(e){if(isOpen()&&!n.contains(e.target)&&!b.contains(e.target))set(false)});
 if(mq.addEventListener)mq.addEventListener('change',function(){if(!mq.matches)set(false)});
-/* Placeholder (dar neįgyvendintos) nuorodos: nepažymėk veikiančiomis, neversk į puslapio viršų. */
-document.querySelectorAll('a[data-todo]').forEach(function(a){a.setAttribute('aria-disabled','true');if(!a.getAttribute('title'))a.setAttribute('title','Nuoroda bus prijungta Verskis.lt versijoje');a.addEventListener('click',function(e){e.preventDefault();});});
 })();
 </script>
 </body>

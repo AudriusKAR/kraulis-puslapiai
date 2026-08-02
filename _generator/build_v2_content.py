@@ -33,8 +33,8 @@ def process(steps,kick="Kaip dirbame",title="Trys žingsniai",sub=None):
         s+=f'<div class="pstep"><span class="pn">0{i}</span><div class="pstep-content"><h3>{h}</h3><p>{p}</p></div></div>'
     sp=f'<p>{sub}</p>' if sub else ''
     return f'<section><div class="wrap"><div class="sh"><div><span class="kick">{kick}</span><h2>{title}</h2></div>{sp}</div><div class="process">{s}</div></div></section>'
-def priespo(kick="Skaidrumas",h2="Matuojame. Reguliuojame. Dokumentuojame.",
-            p="Po rekuperacijos balansavimo gaunate matavimų ataskaitą su oro srautų reikšmėmis prieš ir po reguliavimo — kiekviename taške.",
+def priespo(kick="Balansavimo pavyzdys",h2="Oro srautų matavimo ir reguliavimo kryptis",
+            p="Pavyzdinė diagrama parodo, kaip galima vizualizuoti oro srautų reikšmes prieš ir po reguliavimo. Konkreti darbų ir ataskaitos apimtis derinama individualiai.",
             link=("Apie balansavimą","Paslauga - Rekuperatorių balansavimas.html")):
     return f'''<section><div class="wrap"><div class="sig">
   <div class="txt"><span class="kick">{kick}</span><h2>{h2}</h2><p>{p}</p>{btn(link[0],link[1],"primary",True)}</div>
@@ -63,30 +63,30 @@ DIVIDER='<div class="divide"><svg viewBox="0 0 180 38" fill="none"><path d="M0 1
 
 # service datasheet rows (reused)
 def datasheet():
-    rows=[("i-remontas","Remontas","Nešaldo, teka, triukšmauja ar klaidos — surandame priežastį ir sutvarkome.","diagnostika nuo 69 €","Paslaugos.html"),
-          ("i-balans","Rekuperatorių balansavimas","Oro srautų matavimas kiekviename taške. Su ataskaita „prieš / po“.","nuo 149 €","Paslauga - Rekuperatorių balansavimas.html"),
-          ("i-prieziura","Profilaktinė priežiūra","Patikra, valymas, susidėvėjimo įvertinimas — ilgesnis tarnavimas.","nuo 99 €","Paslauga - Profilaktinė priežiūra.html"),
-          ("i-montavimas","Įrangos montavimas","Parinkimas → montavimas → paleidimas ir sureguliavimas.","pagal sprendimą","Paslauga - Įrangos montavimas.html")]
+    rows=[("i-remontas","Remontas","Gedimo požymiai, diagnostikos eiga ir galimi tolesni veiksmai.","Paslaugos.html"),
+          ("i-balans","Rekuperatorių balansavimas","Oro srautų matavimo ir reguliavimo paslaugos apžvalga.","Paslauga - Rekuperatorių balansavimas.html"),
+          ("i-prieziura","Profilaktinė priežiūra","Patikros, valymo ir susidėvėjimo įvertinimo eiga.","Paslauga - Profilaktinė priežiūra.html"),
+          ("i-montavimas","Įrangos montavimas","Parinkimo, montavimo, paleidimo ir sureguliavimo eiga.","Paslauga - Įrangos montavimas.html")]
     r=""
-    for icn,h,p,pr,href in rows:
-        r+=f'<a class="srow" href="{href}"><span class="sic">{ic(icn)}</span><h3>{h}</h3><p>{p}</p><span class="rt"><span class="price">{pr}</span>{ic("i-arrow","ic ar","width:20px;height:20px")}</span></a>'
+    for icn,h,p,href in rows:
+        r+=f'<a class="srow" href="{href}"><span class="sic">{ic(icn)}</span><h3>{h}</h3><p>{p}</p><span class="rt">{ic("i-arrow","ic ar","width:20px;height:20px")}</span></a>'
     return f'<div class="svc-wrap">{r}</div>'
 
 CATPANEL=f'''<div class="wrap cats" id="kategorijos">
-  <div class="hd2"><span class="t">Įranga · pasirinkite kategoriją</span><a href="#" data-todo="eshop-visa"><!-- TODO: e-parduotuvės nuoroda (Verskis) -->Visa e-parduotuvė →</a></div>
+  <div class="hd2"><span class="t">E-parduotuvės kategorijų vieta</span><span class="disabled-link" aria-disabled="true">E-parduotuvė netrukus</span></div>
   <div class="catgrid">
-    <a class="cat" href="#" data-todo="cat-rekuperatoriai"><!-- TODO: kategorijos nuoroda --><span class="cic">{ic("i-rekup")}</span><b>Rekuperatoriai</b><span>Šviežias oras be šilumos nuostolių</span><span class="go">Žiūrėti {ic("i-arrow","ic","width:13px;height:13px")}</span></a>
-    <a class="cat" href="#" data-todo="cat-kondicionieriai"><span class="cic">{ic("i-kond")}</span><b>Kondicionieriai</b><span>Vėsina vasarą, šildo žiemą</span><span class="go">Žiūrėti {ic("i-arrow","ic","width:13px;height:13px")}</span></a>
-    <a class="cat" href="#" data-todo="cat-silumos-siurbliai"><span class="cic">{ic("i-shiluma")}</span><b>Šilumos siurbliai</b><span>Oras–oras ir oras–vanduo sprendimai.</span><span class="go">Žiūrėti {ic("i-arrow","ic","width:13px;height:13px")}</span></a>
-    <a class="cat" href="#" data-todo="cat-priedai"><span class="cic">{ic("i-priedai")}</span><b>Priedai ir montavimo medžiagos</b><span>Montavimo medžiagos, priedai ir dalys.</span><span class="go">Žiūrėti {ic("i-arrow","ic","width:13px;height:13px")}</span></a>
+    <span class="cat cat-disabled"><span class="cic">{ic("i-rekup")}</span><b>Rekuperatoriai</b><span>Kategorijos peržiūros vieta</span><span class="go">Netrukus</span></span>
+    <span class="cat cat-disabled"><span class="cic">{ic("i-kond")}</span><b>Kondicionieriai</b><span>Kategorijos peržiūros vieta</span><span class="go">Netrukus</span></span>
+    <span class="cat cat-disabled"><span class="cic">{ic("i-shiluma")}</span><b>Šilumos siurbliai</b><span>Kategorijos peržiūros vieta</span><span class="go">Netrukus</span></span>
+    <span class="cat cat-disabled"><span class="cic">{ic("i-priedai")}</span><b>Priedai ir montavimo medžiagos</b><span>Kategorijos peržiūros vieta</span><span class="go">Netrukus</span></span>
   </div></div>'''
 
-CLIMATE=f'''<section style="padding-top:0"><div class="wrap"><div class="sh"><div><span class="kick">Ką sprendžiame</span><h2>Keturi gero mikroklimato parametrai</h2></div></div>
+CLIMATE=f'''<section style="padding-top:0"><div class="wrap"><div class="sh"><div><span class="kick">Sistemos vertinimo kryptys</span><h2>Keturi mikroklimato parametrai</h2></div></div>
   <div class="climate">
     <div class="cl">{ic("i-airflow")}<div><b>Oro srautas</b><span>Šviežias, tolygiai paskirstytas</span></div></div>
     <div class="cl">{ic("i-temp")}<div><b>Temperatūra</b><span>Šiluma tada, kai reikia</span></div></div>
     <div class="cl">{ic("i-cooling")}<div><b>Vėsinimas</b><span>Vėsu per karščius, tyliai</span></div></div>
-    <div class="cl">{ic("i-energy")}<div><b>Efektyvumas</b><span>Sureguliuota naudoja mažiau</span></div></div>
+    <div class="cl">{ic("i-energy")}<div><b>Efektyvumas</b><span>Vertinamas pagal sistemos duomenis</span></div></div>
   </div></div></section>'''
 
 FINAL_CTA=cta("Renkate įrangą ar reikia serviso?","Padėsime pasirinkti tinkamą sprendimą, sumontuoti įrangą arba sutvarkyti jau veikiančią sistemą.",
