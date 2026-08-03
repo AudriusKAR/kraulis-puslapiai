@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kraulis — dizaino kryptys (koncepcija, ne produkcija)</title>
+<meta name="description" content="Trys naujos vizualinės kryptys Kraulis svetainei: šiluma, iliustracijų sistema, emocinis herojus. Peržiūros koncepcija.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ NAUJA sistema — jokio ryšio su senu brandbooku ============ */
+  :root{
+    --font-head:'Fraunces',Georgia,serif;        /* šilta, charakteringa antraštė */
+    --font-body:'Inter',system-ui,sans-serif;    /* aiškus, greitas tekstas */
+    --r:18px; --r-sm:12px;
+    --ease:cubic-bezier(.22,1,.36,1);
+    --shadow:0 18px 44px rgba(40,25,15,.10);
+    --shadow-sm:0 6px 18px rgba(40,25,15,.08);
+  }
+  /* --- Kryptis A: Namų jaukumas (terakota + kreminė) --- */
+  .dir-a{
+    --bg:#FCF7F0; --surface:#FFFFFF; --ink:#26201A; --muted:#5A4F45;
+    --cta:#B4491E; --cta-hover:#9E3F19; --cta-ink:#FFFFFF;
+    --accent:#0E6E60; --soft:#FBE9D6; --amber:#F4C25E; --line:#E7D8C6;
+  }
+  /* --- Kryptis B: Švarus oras (šalavijo žalia + smėlis) --- */
+  .dir-b{
+    --bg:#F3EFE4; --surface:#FBF9F2; --ink:#22271E; --muted:#55564A;
+    --cta:#356049; --cta-hover:#284C39; --cta-ink:#FFFFFF;
+    --accent:#A5471A; --soft:#E4EBDC; --amber:#E7B94E; --line:#DCDCCB;
+  }
+  /* --- Kryptis C: Drąsus modernus (vienas ryškus akcentas, erdvė) --- */
+  .dir-c{
+    --bg:#F6F5F2; --surface:#FFFFFF; --ink:#1A1A1A; --muted:#565043;
+    --cta:#CE3E1B; --cta-hover:#B5341410; --cta-hover:#AE3315; --cta-ink:#FFFFFF;
+    --accent:#C23A18; --soft:#ECE9E3; --amber:#F0B429; --line:#E3E0D9;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--font-body);background:#EFE7DB;color:#26201A;line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+
+  /* Meta juosta (paaiškina, kad tai koncepcija) */
+  .meta{background:#241C15;color:#F5EBDD;padding:14px 0}
+  .meta .wrap{display:flex;gap:14px;align-items:center;flex-wrap:wrap;font-size:13.5px}
+  .meta b{color:#F4C25E}
+  .meta .tag{font-family:var(--font-body);font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1px solid #4a3d2f;border-radius:999px;padding:4px 10px;color:#E8D9C4}
+
+  .intro{padding:clamp(40px,7vw,72px) 0 clamp(20px,3vw,30px);background:#EFE7DB}
+  .intro h1{font-family:var(--font-head);font-weight:900;font-size:clamp(30px,5.4vw,52px);line-height:1.02;letter-spacing:-.02em;color:#2A2018;max-width:16ch}
+  .intro .lead{font-size:clamp(16px,2vw,19px);color:#4a3f34;max-width:60ch;margin-top:18px}
+  .intro .lead b{color:#B4491E}
+  .why{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px}
+  .why div{background:#FBF6EE;border:1px solid #E4D6C4;border-radius:var(--r-sm);padding:16px 18px}
+  .why h3{font-family:var(--font-head);font-weight:600;font-size:16px;color:#2A2018;margin-bottom:4px}
+  .why p{font-size:14px;color:#5A4F45;line-height:1.5}
+  @media(max-width:720px){.why{grid-template-columns:1fr}}
+
+  /* Kryptis blokas */
+  .dir{padding:clamp(30px,5vw,52px) 0;background:var(--bg);color:var(--ink)}
+  .dir h2{font-family:var(--font-head)}
+  .dir-label{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+  .dir-label .n{font-family:var(--font-head);font-weight:900;font-size:clamp(24px,3.4vw,34px);color:var(--ink);letter-spacing:-.01em}
+  .dir-label .mood{font-size:13px;letter-spacing:.13em;text-transform:uppercase;color:var(--cta);font-weight:600}
+  .dir-desc{color:var(--muted);font-size:15px;max-width:64ch;margin-bottom:18px}
+
+  /* Spalvų juosta */
+  .swatches{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+  .sw{display:flex;flex-direction:column;gap:5px;align-items:center;font-size:11px;color:var(--muted)}
+  .sw i{width:52px;height:40px;border-radius:9px;border:1px solid rgba(0,0,0,.10);display:block}
+  .sw code{font-family:var(--font-body);font-size:10.5px;letter-spacing:.02em}
+
+  /* Rendered mini-hero */
+  .hero{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:0;align-items:stretch}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr}}
+  .hero-copy{padding:clamp(24px,3.4vw,42px)}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+  .eyebrow::before{content:"";width:22px;height:2px;background:var(--accent);border-radius:2px}
+  .hero h3.title{font-family:var(--font-head);font-weight:900;font-size:clamp(27px,4vw,42px);line-height:1.03;letter-spacing:-.02em;color:var(--ink);margin:14px 0}
+  .hero h3.title em{font-style:italic;color:var(--cta)}
+  .hero .sub{font-size:16.5px;color:var(--muted);max-width:44ch}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0 24px}
+  .chips span{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:500;color:var(--ink);background:var(--soft);border-radius:999px;padding:7px 13px}
+  .chips span svg{width:15px;height:15px;stroke:var(--cta);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--font-body);font-weight:700;font-size:15.5px;text-decoration:none;padding:14px 26px;border-radius:12px;border:none;cursor:pointer;transition:transform .12s var(--ease),background .2s}
+  .btn-primary{background:var(--cta);color:var(--cta-ink);box-shadow:var(--shadow-sm)}
+  .btn-primary:hover{background:var(--cta-hover)}
+  .btn-primary:active{transform:translateY(1px) scale(.99)}
+  .btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .link-lite{font-weight:600;color:var(--ink);text-decoration:none;font-size:15px;border-bottom:2px solid var(--amber);padding-bottom:2px}
+  a:focus-visible,.btn:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:10px}
+
+  .hero-art{background:linear-gradient(160deg,var(--soft),var(--surface));display:flex;align-items:center;justify-content:center;padding:20px;min-height:280px}
+  .hero-art svg{width:100%;height:auto;max-width:420px}
+
+  /* Trust juosta po herojumi */
+  .trust{display:flex;gap:20px;flex-wrap:wrap;align-items:center;padding:14px clamp(24px,3.4vw,42px);border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+  .trust .stars{color:var(--amber);letter-spacing:2px;font-size:15px}
+  .trust b{color:var(--ink)}
+  .a11y{font-size:12.5px;color:var(--muted);margin-top:14px}
+  .a11y b{color:var(--cta)}
+
+  /* Iliustracijų + ikonų sistema */
+  .system{background:#241C15;color:#F5EBDD;padding:clamp(38px,6vw,64px) 0}
+  .system h2{font-family:var(--font-head);font-weight:700;font-size:clamp(24px,3.4vw,34px);color:#fff}
+  .system p.k{font-size:13px;letter-spacing:.13em;text-transform:uppercase;color:#F4C25E;font-weight:600;margin-bottom:8px}
+  .system .lead{color:#D9C9B4;max-width:64ch;margin-top:8px}
+  .icons{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:30px}
+  @media(max-width:760px){.icons{grid-template-columns:repeat(3,1fr)}}
+  @media(max-width:440px){.icons{grid-template-columns:repeat(2,1fr)}}
+  .icard{background:#2E2419;border:1px solid #43341f;border-radius:var(--r-sm);padding:18px 12px;text-align:center}
+  .icard svg{width:44px;height:44px;stroke:#F4C25E;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;margin:0 auto 10px}
+  .icard span{font-size:12.5px;color:#E4D4BE;display:block;line-height:1.35}
+
+  /* Realios nuotraukos — šiltas rėminimas */
+  .photos{background:#EFE7DB;padding:clamp(38px,6vw,64px) 0}
+  .photos h2{font-family:var(--font-head);font-weight:700;font-size:clamp(23px,3.2vw,32px);color:#2A2018}
+  .photos .lead{color:#5A4F45;max-width:64ch;margin-top:8px}
+  .pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+  @media(max-width:760px){.pgrid{grid-template-columns:1fr 1fr}}
+  @media(max-width:480px){.pgrid{grid-template-columns:1fr}}
+  figure.pf{background:#fff;border:1px solid #E4D6C4;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-sm)}
+  figure.pf .imgwrap{aspect-ratio:4/3;overflow:hidden;background:#EADFCF}
+  figure.pf img{width:100%;height:100%;object-fit:cover}
+  figure.pf figcaption{padding:12px 15px;font-size:13.5px;color:#5A4F45}
+  figure.pf figcaption b{color:#2A2018;display:block;font-family:var(--font-head);font-weight:600;font-size:15px}
+
+  /* Atsiliepimai (realūs) */
+  .revs{background:#FBF6EE;padding:clamp(38px,6vw,60px) 0}
+  .revs h2{font-family:var(--font-head);font-weight:700;font-size:clamp(23px,3.2vw,32px);color:#2A2018}
+  .revs .agg{color:#5A4F45;margin-top:6px;font-size:14.5px}
+  .revs .agg .stars{color:#C8890F;letter-spacing:1px}
+  .rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+  @media(max-width:820px){.rgrid{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.rgrid{grid-template-columns:1fr}}
+  .rev{background:#fff;border:1px solid #E9DDCB;border-radius:var(--r);padding:20px}
+  .rev .stars{color:#C8890F;letter-spacing:2px;font-size:15px}
+  .rev blockquote{font-size:14.5px;color:#3a332b;margin:10px 0 14px;line-height:1.55}
+  .rev figcaption{font-size:13px;color:#5A4F45}
+  .rev figcaption b{color:#2A2018;display:block;font-size:14.5px}
+
+  footer{background:#241C15;color:#CDBFAD;padding:36px 0;font-size:13.5px}
+  footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+  footer a{color:#F4C25E;text-decoration:none;font-weight:600}
+  footer .disc{max-width:52ch;color:#A99A85;font-size:12.5px}
+
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<!-- META -->
+<div class="meta"><div class="wrap">
+  <span class="tag">Koncepcija</span>
+  <span><b>Ne produkcija.</b> Tai vizualinių krypčių peržiūra — Audrius renkasi 1 kryptį, tada darome pilnus puslapius.</span>
+</div></div>
+
+<!-- INTRO -->
+<section class="intro"><div class="wrap">
+  <h1>Naujas vaizdas. Parduodam ne „paslaugas“ — parduodam <span style="color:#B4491E">komfortą.</span></h1>
+  <p class="lead">Senas šaltas korporatyvinis mėlynas — lauk. Čia trys šiltos kryptys, kiekviena su <b>emociniu herojumi, sava iliustracijų sistema ir aiškiu vienu CTA.</b> Turinys tikras (nuotraukos, atsiliepimai, faktai iš registro); iliustracijos — sava sistema, nieko nemeluoja.</p>
+  <div class="why">
+    <div><h3>Problema</h3><p>Ankstesnis variantas emociškai šaltas ir per panašus į seną kraulis.lt — lankytojas nejaučia jokios šilumos.</p></div>
+    <div><h3>Hipotezė</h3><p>Šilta spalva + žmogiškas herojus + dosnus tarpas per pirmas 3 s perteikia „patikimi žmonės sutvarkys“, todėl daugiau užklausų.</p></div>
+    <div><h3>Ribos</h3><p>Kiekvienas spalvos tokenas praeina WCAG kontrastą; vienas aiškus pagrindinis CTA — kad drąsa parduotų, ne tik gražiai atrodytų.</p></div>
+  </div>
+</div></section>
+
+<!-- =================== KRYPTIS A =================== -->
+<section class="dir dir-a"><div class="wrap">
+  <div class="dir-label"><span class="n">A</span><span class="mood">Namų jaukumas · terakota + kreminė</span></div>
+  <p class="dir-desc">Šilčiausia, žmogiškiausia. Terakota = šiluma ir energija; gilus žalsvai mėlynas akcentas = švarus oras ir patikimumas. Rekomenduoju kaip pagrindinę.</p>
+  <div class="swatches">
+    <div class="sw"><i style="background:#FCF7F0"></i><code>Kreminė</code></div>
+    <div class="sw"><i style="background:#B4491E"></i><code>Terakota</code></div>
+    <div class="sw"><i style="background:#0E6E60"></i><code>Žalsva</code></div>
+    <div class="sw"><i style="background:#F4C25E"></i><code>Gintaras</code></div>
+    <div class="sw"><i style="background:#FBE9D6"></i><code>Persikas</code></div>
+    <div class="sw"><i style="background:#26201A"></i><code>Rašalas</code></div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Šiluma · švarus oras · ramybė</span>
+        <h3 class="title">Namai, kuriuose gera kvėpuoti — <em>ir vasarą, ir žiemą.</em></h3>
+        <p class="sub">Šildymo, vėdinimo ir vėsinimo sistemos Vilniuje ir ~100 km spinduliu. Sumontuojam, prižiūrim ir neapleidžiam po darbų — servisas lieka su jumis.</p>
+        <div class="chips">
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Ilgametė patirtis</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Atestuoti darbai: F-dujos, elektrosauga</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Vilnius + ~100 km</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Atsakom per 1–2 darbo dienas</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#">Gauti pasiūlymą <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="link-lite" href="#">Skambinti: +370 610 24999</a>
+        </div>
+      </div>
+      <div class="hero-art"><svg viewBox="0 0 420 320" role="img" aria-label="Jaukūs namai su šildymo, vėdinimo ir vėsinimo įranga — šiltas ir švarus oras" xmlns="http://www.w3.org/2000/svg">
+  <rect x="6" y="8" width="408" height="292" rx="26" fill="var(--soft)"/>
+  <circle cx="340" cy="64" r="23" fill="var(--amber)"/>
+  <g fill="none" stroke="var(--cta)" stroke-width="3" stroke-linecap="round">
+    <line x1="340" y1="26" x2="340" y2="35"/><line x1="376" y1="42" x2="369" y2="49"/>
+    <line x1="388" y1="64" x2="379" y2="64"/><line x1="304" y1="42" x2="311" y2="49"/>
+  </g>
+  <path d="M244 104c0-7 11-7 11 0 0-7 11-7 11 0 0 8-11 15-11 15s-11-7-11-15z" fill="var(--cta)"/>
+  <g fill="none" stroke="var(--ink)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M58 150 L170 74 L282 150"/><path d="M84 138 L84 250 L256 250 L256 138"/>
+  </g>
+  <rect x="150" y="198" width="40" height="52" rx="4" fill="var(--surface)" stroke="var(--ink)" stroke-width="2.4"/>
+  <circle cx="182" cy="226" r="2.6" fill="var(--cta)"/>
+  <rect x="100" y="168" width="40" height="40" rx="4" fill="var(--amber)" opacity=".55" stroke="var(--ink)" stroke-width="2.2"/>
+  <path d="M120 168 v40 M100 188 h40" stroke="var(--ink)" stroke-width="1.8" opacity=".7"/>
+  <rect x="204" y="166" width="44" height="16" rx="7" fill="var(--surface)" stroke="var(--cta)" stroke-width="2.6"/>
+  <g fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="1 8">
+    <path d="M212 188 q-10 16 4 30"/><path d="M224 188 q-8 18 6 32"/><path d="M236 188 q-6 18 8 32"/>
+  </g>
+  <path d="M100 250 h18 l-3 13 h-12 z" fill="var(--cta)"/>
+  <g fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round">
+    <path d="M109 250 v-15"/><path d="M109 240 q-11 -5 -15 -16"/><path d="M109 238 q11 -6 15 -18"/>
+  </g>
+  <rect x="300" y="216" width="56" height="34" rx="7" fill="var(--surface)" stroke="var(--ink)" stroke-width="2.4"/>
+  <circle cx="328" cy="233" r="11" fill="none" stroke="var(--cta)" stroke-width="2.4"/>
+  <path d="M328 224 v18 M319 233 h18" stroke="var(--cta)" stroke-width="2" stroke-linecap="round"/>
+  <path d="M40 250 H392" stroke="var(--ink)" stroke-width="2.6" stroke-linecap="round" opacity=".45"/>
+</svg></div>
+    </div>
+    <div class="trust">
+      <span class="stars">★★★★★</span>
+      <span><b>5,0</b> · 7 atsiliepimai · Paslaugos.lt</span>
+      <span>· Servisas ir po pardavimo</span>
+    </div>
+  </div>
+  <p class="a11y"><b>Prieinamumas:</b> tekstas ant kreminės 15,1:1 · baltas ant terakotos CTA 5,4:1 · žalsvas tekstas 5,8:1 — visi ≥ WCAG AA.</p>
+</div></section>
+
+<!-- =================== KRYPTIS B =================== -->
+<section class="dir dir-b"><div class="wrap">
+  <div class="dir-label"><span class="n">B</span><span class="mood">Švarus oras · šalavijo žalia + smėlis</span></div>
+  <p class="dir-desc">Ramesnė, „eko“ ir sveikatos pojūtis. Šalavijo žalia = švarus oras, natūralumas, ramybė; šilta terakota lieka gyvu akcentu ir CTA šiluma.</p>
+  <div class="swatches">
+    <div class="sw"><i style="background:#F3EFE4"></i><code>Smėlis</code></div>
+    <div class="sw"><i style="background:#356049"></i><code>Šalavijas</code></div>
+    <div class="sw"><i style="background:#A5471A"></i><code>Terakota</code></div>
+    <div class="sw"><i style="background:#E7B94E"></i><code>Gintaras</code></div>
+    <div class="sw"><i style="background:#E4EBDC"></i><code>Lapas</code></div>
+    <div class="sw"><i style="background:#22271E"></i><code>Girios</code></div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Švarus oras · sveiki namai</span>
+        <h3 class="title">Tvanku vasarą, brangu žiemą? <em>Grąžinam komfortą.</em></h3>
+        <p class="sub">Subalansuota vėdinimo ir klimato sistema — mažiau drėgmės, dulkių ir tvankumo, tolygi šiluma visame name. Patikrinam, sureguliuojam, prižiūrim.</p>
+        <div class="chips">
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Ilgametė patirtis</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Oro srautų matavimai su ataskaita</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Vilnius + ~100 km</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Atsakymas per 1–2 d. d.</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#">Noriu švaraus oro <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="link-lite" href="#">arba skambinkite +370 610 24999</a>
+        </div>
+      </div>
+      <div class="hero-art"><svg viewBox="0 0 420 320" role="img" aria-label="Jaukūs namai su šildymo, vėdinimo ir vėsinimo įranga — šiltas ir švarus oras" xmlns="http://www.w3.org/2000/svg">
+  <rect x="6" y="8" width="408" height="292" rx="26" fill="var(--soft)"/>
+  <circle cx="340" cy="64" r="23" fill="var(--amber)"/>
+  <g fill="none" stroke="var(--cta)" stroke-width="3" stroke-linecap="round">
+    <line x1="340" y1="26" x2="340" y2="35"/><line x1="376" y1="42" x2="369" y2="49"/>
+    <line x1="388" y1="64" x2="379" y2="64"/><line x1="304" y1="42" x2="311" y2="49"/>
+  </g>
+  <path d="M244 104c0-7 11-7 11 0 0-7 11-7 11 0 0 8-11 15-11 15s-11-7-11-15z" fill="var(--cta)"/>
+  <g fill="none" stroke="var(--ink)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M58 150 L170 74 L282 150"/><path d="M84 138 L84 250 L256 250 L256 138"/>
+  </g>
+  <rect x="150" y="198" width="40" height="52" rx="4" fill="var(--surface)" stroke="var(--ink)" stroke-width="2.4"/>
+  <circle cx="182" cy="226" r="2.6" fill="var(--cta)"/>
+  <rect x="100" y="168" width="40" height="40" rx="4" fill="var(--amber)" opacity=".55" stroke="var(--ink)" stroke-width="2.2"/>
+  <path d="M120 168 v40 M100 188 h40" stroke="var(--ink)" stroke-width="1.8" opacity=".7"/>
+  <rect x="204" y="166" width="44" height="16" rx="7" fill="var(--surface)" stroke="var(--cta)" stroke-width="2.6"/>
+  <g fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="1 8">
+    <path d="M212 188 q-10 16 4 30"/><path d="M224 188 q-8 18 6 32"/><path d="M236 188 q-6 18 8 32"/>
+  </g>
+  <path d="M100 250 h18 l-3 13 h-12 z" fill="var(--cta)"/>
+  <g fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round">
+    <path d="M109 250 v-15"/><path d="M109 240 q-11 -5 -15 -16"/><path d="M109 238 q11 -6 15 -18"/>
+  </g>
+  <rect x="300" y="216" width="56" height="34" rx="7" fill="var(--surface)" stroke="var(--ink)" stroke-width="2.4"/>
+  <circle cx="328" cy="233" r="11" fill="none" stroke="var(--cta)" stroke-width="2.4"/>
+  <path d="M328 224 v18 M319 233 h18" stroke="var(--cta)" stroke-width="2" stroke-linecap="round"/>
+  <path d="M40 250 H392" stroke="var(--ink)" stroke-width="2.6" stroke-linecap="round" opacity=".45"/>
+</svg></div>
+    </div>
+    <div class="trust">
+      <span class="stars">★★★★★</span>
+      <span><b>5,0</b> · 7 atsiliepimai · Paslaugos.lt</span>
+      <span>· Servisas ir po pardavimo</span>
+    </div>
+  </div>
+  <p class="a11y"><b>Prieinamumas:</b> tekstas ant smėlio 13,3:1 · baltas ant šalavijo CTA 7,2:1 · terakotos tekstas 5,2:1 — visi ≥ WCAG AA.</p>
+</div></section>
+
+<!-- =================== KRYPTIS C =================== -->
+<section class="dir dir-c"><div class="wrap">
+  <div class="dir-label"><span class="n">C</span><span class="mood">Drąsus modernus · vienas ryškus akcentas</span></div>
+  <p class="dir-desc">Erdvu, švaru, drąsu. Beveik baltas fonas, tamsus rašalas ir vienas ryškus šiltas akcentas — jauna, moderni energija, kuri išsiskiria iš konkurentų.</p>
+  <div class="swatches">
+    <div class="sw"><i style="background:#F6F5F2"></i><code>Popierius</code></div>
+    <div class="sw"><i style="background:#CE3E1B"></i><code>Akcentas</code></div>
+    <div class="sw"><i style="background:#1A1A1A"></i><code>Rašalas</code></div>
+    <div class="sw"><i style="background:#F0B429"></i><code>Gintaras</code></div>
+    <div class="sw"><i style="background:#ECE9E3"></i><code>Migla</code></div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Vienas skambutis · viskas sutvarkyta</span>
+        <h3 class="title">Klimatu namuose pasirūpina <em>žmonės</em>, o ne tik įranga.</h3>
+        <p class="sub">Nuo montavimo iki serviso — viena patikima komanda visai ŠVOK įrangai. Aiškiai, laiku ir be streso.</p>
+        <div class="chips">
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Ilgametė patirtis</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Atestuoti specialistai</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Vilnius + ~100 km</span>
+          <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg> Atsakymas per 1–2 d. d.</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#">Gauti pasiūlymą <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="link-lite" href="#">arba skambinkite +370 610 24999</a>
+        </div>
+      </div>
+      <div class="hero-art"><svg viewBox="0 0 420 320" role="img" aria-label="Jaukūs namai su šildymo, vėdinimo ir vėsinimo įranga — šiltas ir švarus oras" xmlns="http://www.w3.org/2000/svg">
+  <rect x="6" y="8" width="408" height="292" rx="26" fill="var(--soft)"/>
+  <circle cx="340" cy="64" r="23" fill="var(--amber)"/>
+  <g fill="none" stroke="var(--cta)" stroke-width="3" stroke-linecap="round">
+    <line x1="340" y1="26" x2="340" y2="35"/><line x1="376" y1="42" x2="369" y2="49"/>
+    <line x1="388" y1="64" x2="379" y2="64"/><line x1="304" y1="42" x2="311" y2="49"/>
+  </g>
+  <path d="M244 104c0-7 11-7 11 0 0-7 11-7 11 0 0 8-11 15-11 15s-11-7-11-15z" fill="var(--cta)"/>
+  <g fill="none" stroke="var(--ink)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M58 150 L170 74 L282 150"/><path d="M84 138 L84 250 L256 250 L256 138"/>
+  </g>
+  <rect x="150" y="198" width="40" height="52" rx="4" fill="var(--surface)" stroke="var(--ink)" stroke-width="2.4"/>
+  <circle cx="182" cy="226" r="2.6" fill="var(--cta)"/>
+  <rect x="100" y="168" width="40" height="40" rx="4" fill="var(--amber)" opacity=".55" stroke="var(--ink)" stroke-width="2.2"/>
+  <path d="M120 168 v40 M100 188 h40" stroke="var(--ink)" stroke-width="1.8" opacity=".7"/>
+  <rect x="204" y="166" width="44" height="16" rx="7" fill="var(--surface)" stroke="var(--cta)" stroke-width="2.6"/>
+  <g fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="1 8">
+    <path d="M212 188 q-10 16 4 30"/><path d="M224 188 q-8 18 6 32"/><path d="M236 188 q-6 18 8 32"/>
+  </g>
+  <path d="M100 250 h18 l-3 13 h-12 z" fill="var(--cta)"/>
+  <g fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round">
+    <path d="M109 250 v-15"/><path d="M109 240 q-11 -5 -15 -16"/><path d="M109 238 q11 -6 15 -18"/>
+  </g>
+  <rect x="300" y="216" width="56" height="34" rx="7" fill="var(--surface)" stroke="var(--ink)" stroke-width="2.4"/>
+  <circle cx="328" cy="233" r="11" fill="none" stroke="var(--cta)" stroke-width="2.4"/>
+  <path d="M328 224 v18 M319 233 h18" stroke="var(--cta)" stroke-width="2" stroke-linecap="round"/>
+  <path d="M40 250 H392" stroke="var(--ink)" stroke-width="2.6" stroke-linecap="round" opacity=".45"/>
+</svg></div>
+    </div>
+    <div class="trust">
+      <span class="stars">★★★★★</span>
+      <span><b>5,0</b> · 7 atsiliepimai · Paslaugos.lt</span>
+      <span>· Servisas ir po pardavimo</span>
+    </div>
+  </div>
+  <p class="a11y"><b>Prieinamumas:</b> tekstas ant popieriaus 16,0:1 · baltas ant akcento CTA 4,9:1 · akcento tekstas 4,9:1 — visi ≥ WCAG AA.</p>
+</div></section>
+
+<!-- =================== ILIUSTRACIJŲ SISTEMA =================== -->
+<section class="system"><div class="wrap">
+  <p class="k">Iliustracijų + ikonų sistema</p>
+  <h2>Šilta linijinė sistema — ne šaltos stock ikonos</h2>
+  <p class="lead">Viena rankų braižo linijinė šeima, atspalvį paimanti iš pasirinktos krypties. Inline SVG = greita, aštru kiekviename ekrane, prieinama (kiekviena su tekstiniu pavadinimu), 0 sunkių paveikslėlių. Herojaus scena aukščiau naudoja tą pačią kalbą.</p>
+  <div class="icons">
+    <div class="icard"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="14" width="32" height="20" rx="4"/><circle cx="24" cy="24" r="6"/><path d="M24 18v12M18 24h12"/></svg><span>Šilumos siurbliai</span></div>
+    <div class="icard"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6v36M14 12l20 24M34 12L14 36"/><path d="M24 6l-4 5M24 6l4 5M24 42l-4-5M24 42l4-5"/></svg><span>Kondicionavimas</span></div>
+    <div class="icard"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 22L24 10l16 12"/><path d="M12 20v18h24V20"/><path d="M17 29h9M17 29l3-3M17 29l3 3"/><path d="M31 34h-9M31 34l-3-3M31 34l-3 3"/></svg><span>Rekuperacija</span></div>
+    <div class="icard"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M11 21L24 11l13 10"/><path d="M15 20v9h18v-9"/><path d="M8 35c4-4 8 4 12 0s8 4 12 0 8 4 8 0"/><path d="M8 41c4-4 8 4 12 0s8 4 12 0 8 4 8 0"/></svg><span>Geoterminės</span></div>
+    <div class="icard"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M10 34a14 14 0 1 1 28 0"/><path d="M24 34l9-9"/><circle cx="24" cy="34" r="2.6"/></svg><span>Matavimai / balansas</span></div>
+    <div class="icard"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M31 13a6 6 0 0 0-8 7L10 33a3 3 0 0 0 4 4l13-13a6 6 0 0 0 7-8l-4 4-3-1-1-3z"/><path d="M34 31c1.4-1.9 4.8-1 4.8 1.4 0 2-3.4 3.9-4.8 4.8-1.4-.9-4.8-2.8-4.8-4.8 0-2.4 3.4-3.3 4.8-1.4z"/></svg><span>Servisas ir priežiūra</span></div>
+  </div>
+</div></section>
+
+<!-- =================== REALIOS NUOTRAUKOS =================== -->
+<section class="photos"><div class="wrap">
+  <h2>Realūs darbai — šiltai įrėminti</h2>
+  <p class="lead">Tikros Kraulis darbų nuotraukos (SHA sutampa su šaltiniu) minkštose kortelėse su šiltu rėmu — ne šaltoje techninėje juostoje. Prieš/po ir žmonių kadrai sustiprintų šilumą dar labiau (laukiam Audriaus medžiagos).</p>
+  <div class="pgrid">
+    <figure class="pf"><div class="imgwrap"><img src="../content-review/img/02-olimpia-lauko-blokas.jpg" alt="Sumontuotas Olimpia Splendid kondicionieriaus lauko blokas ant mūrinės sienos" loading="lazy"></div><figcaption><b>Švarus montavimas</b>Kondicionieriaus lauko blokas — tvarkinga instaliacija.</figcaption></figure>
+    <figure class="pf"><div class="imgwrap"><img src="../content-review/img/06-oro-srauto-matavimas.jpg" alt="Specialistas matuoja oro srautą prie lubų difuzoriaus" loading="lazy"></div><figcaption><b>Matavimai su ataskaita</b>Oro srautų matavimas prie difuzoriaus.</figcaption></figure>
+    <figure class="pf"><div class="imgwrap"><img src="../content-review/img/05-toshiba-servisas.jpg" alt="Toshiba šilumos siurblio servisas su vakuuminiu siurbliu ir manometrais" loading="lazy"></div><figcaption><b>Profesionalus servisas</b>Toshiba šilumos siurblio priežiūra.</figcaption></figure>
+  </div>
+</div></section>
+
+<!-- =================== ATSILIEPIMAI (REALŪS) =================== -->
+<section class="revs"><div class="wrap">
+  <h2>Ką sako klientai</h2>
+  <p class="agg"><span class="stars">★★★★★</span> <b>5,0</b> · 7 atsiliepimai · Paslaugos.lt — tikri žmonės, kuriems jau padėjome.</p>
+  <div class="rgrid">
+    <figure class="rev"><div class="stars">★★★★★</div><blockquote>Pro meistras — po remonto dar gavau matavimų ataskaitą; nesu matęs, kad kas taip dirbtų Lietuvoje. Rekomenduoju, ačiū Audriau!</blockquote><figcaption><b>Tadas Kaminskas</b>Rekuperatoriaus remontas · 2026-06</figcaption></figure>
+    <figure class="rev"><div class="stars">★★★★★</div><blockquote>Darbas atliktas greitai, profesionaliai ir preciziškai. Audrius tiksliai sureguliavo oro srautus ir pakonsultavo apie priežiūrą.</blockquote><figcaption><b>Danielius Šeštokas</b>Vėdinimo sistemos remontas · 2026-06</figcaption></figure>
+    <figure class="rev"><div class="stars">★★★★★</div><blockquote>Meistras jau pirmo vizito metu sutvarkė problemą, kurios nepavyko išspręsti kurį laiką. Išsami konsultacija. Geriausios rekomendacijos!</blockquote><figcaption><b>Diana</b>Kondicionieriaus remontas · 2026-05</figcaption></figure>
+    <figure class="rev"><div class="stars">★★★★★</div><blockquote>Operatyviai sutvarkė rekuperatoriaus problemą. Rekomenduoju.</blockquote><figcaption><b>Juozas</b>Rekuperatoriaus remontas · 2026-07</figcaption></figure>
+    <figure class="rev" lang="en"><div class="stars">★★★★★</div><blockquote>Very professional and human person. He takes time for you and takes care of everything — rare these days. All at a very reasonable price.</blockquote><figcaption><b>Charles M.</b>Vėdinimo sistemos montavimas · 2026-06</figcaption></figure>
+    <figure class="rev"><div class="stars">★★★★★</div><blockquote>Dėkoju už greitą ir kokybišką paslaugą. Viskas puiku, sėkmės darbuose!</blockquote><figcaption><b>Jolanta</b>Kondicionieriaus montavimas · 2026-05</figcaption></figure>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div>
+    <div style="font-family:var(--font-head);font-weight:700;font-size:18px;color:#F5EBDD">Kraulis</div>
+    <p class="disc">Dizaino krypčių koncepcija (noindex). Nuotraukos ir atsiliepimai — tikri, iš registro. Iliustracijos — sava sistema. Kainos / e-shop / forma sprendžiami vėliau.</p>
+  </div>
+  <div style="text-align:right">
+    <a href="https://facebook.com/KraulisMB/" target="_blank" rel="noopener noreferrer" aria-label="Kraulis Facebook (atsidaro naujame lange)">Facebook</a> · <a href="https://instagram.com/kraulismb/" target="_blank" rel="noopener noreferrer" aria-label="Kraulis Instagram (atsidaro naujame lange)">Instagram</a><br>
+    <span style="color:#A99A85">+370 610 24999</span>
+  </div>
+</div></footer>
+
+</body>
+</html>
