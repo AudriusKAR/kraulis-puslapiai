@@ -396,6 +396,20 @@ footer .fcol{display:flex;flex-direction:column;gap:4px}
 const form=document.getElementById('uzklausa');
 const statusEl=document.getElementById('status');
 const setInvalid=(id,bad)=>document.getElementById(id).classList.toggle('invalid',bad);
+
+// Paslaugos kortelė → progresinės formos „Poreikio kategorija" preselektas
+// (kvalifikuotos užklausos signalas: žinom, kurios paslaugos žmogus norėjo).
+document.querySelectorAll('a.svc').forEach(a=>{
+  a.addEventListener('click',()=>{
+    const t=(a.querySelector('b')?.textContent||'').toLowerCase();
+    let k='';
+    if(t.includes('montav')) k='Montavimas';
+    else if(t.includes('priežiūr')||t.includes('balansav')) k='Priežiūra';
+    else if(t.includes('remont')) k='Remontas';
+    const sel=document.getElementById('cat');
+    if(k && sel && [...sel.options].some(o=>o.value===k)){ sel.value=k; sel.parentElement.classList.remove('invalid'); }
+  });
+});
 form.addEventListener('submit',e=>{
   e.preventDefault();
   const tel=document.getElementById('tel'), cat=document.getElementById('cat'), sut=document.getElementById('sutikimas');
