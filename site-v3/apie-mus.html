@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="lt" data-bg="warm">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apie Kraulis — ŠVOK įranga ir servisas su ilgamete patirtimi | Vilnius</title>
+<meta name="description" content="Kraulis — šildymo, vėdinimo ir vėsinimo komanda Vilniuje. Parenkam, sumontuojam, prižiūrim; atestuoti darbai (F-dujos, elektrosauga), servisas po darbų. Atsakom per 1–2 darbo dienas.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* KRAULIS — Apie mus · B v2 šviesi sistema (kaip homepage/paslaugos). Staging/noindex.
+   Ribos: 0 kainų · „ilgametė patirtis" (be konkretaus metų skaičiaus) · be gamintojų sąrašo. */
+:root{
+  --font:'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --bg:#FAF8F3; --surface:#FFFFFF; --panel:#EDF2E9; --footer:#EAEFE6;
+  --ink:#1C2A22; --muted:#55564A;
+  --cta:#356049; --cta-hover:#284C39; --cta-ink:#FFFFFF;
+  --accent:#A5471A; --soft:#E4EBDC; --amber:#E7B94E; --star:#9E5A16;
+  --line:#E4E2D8; --logo:#1C3A57;
+  --r:18px; --r-sm:12px; --ease:cubic-bezier(.22,1,.36,1);
+  --shadow:0 18px 44px rgba(30,35,20,.08); --shadow-sm:0 6px 18px rgba(30,35,20,.06);
+}
+[data-bg="white"]{ --bg:#FFFFFF; --panel:#F4F7F1; --footer:#F2F5EF; --line:#EAE8DF; }
+[data-bg="cool"]{ --bg:#F5F7F6; --panel:#EAF0EC; --footer:#E9EEEA; --line:#E4E7E3; }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--ink);line-height:1.62;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .3s var(--ease)}
+img{max-width:100%;display:block}
+h1,h2,h3{font-family:var(--font);font-weight:800;letter-spacing:-.02em;line-height:1.1}
+a{color:var(--cta)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(18px,4vw,40px)}
+.skip{position:absolute;left:-999px;top:0;background:var(--cta);color:#fff;padding:10px 16px;border-radius:0 0 10px 0;z-index:80}
+.skip:focus{left:0}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
+.bgbar{background:var(--panel);border-bottom:1px solid var(--line);font-size:13px}
+.bgbar .wrap{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding-block:8px}
+.bgbar span{color:var(--muted)}
+.bgbar button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:5px 12px;border-radius:999px}
+.bgbar button[aria-pressed="true"]{background:var(--cta);color:#fff;border-color:var(--cta);font-weight:600}
+.site-head{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.site-head .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:10px}
+.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{height:46px;width:auto}
+.nav{display:flex;align-items:center;gap:6px}
+.nav a,.nav .na{font-size:15px;font-weight:600;color:var(--ink);text-decoration:none;padding:8px 12px;border-radius:8px;white-space:nowrap}
+.nav a:hover,.nav a[aria-current="page"]{background:var(--panel);color:var(--cta)}
+.nav .na{color:var(--muted);cursor:default;display:inline-flex;align-items:center;gap:6px}
+.nav .na::after{content:"netrukus";font-size:10px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:1px 6px}
+.head-actions{display:flex;align-items:center;gap:10px}
+.head-call{display:none;align-items:center;gap:7px;color:var(--ink);text-decoration:none;font-weight:700;font-size:15px}
+.head-call .dot{width:9px;height:9px;border-radius:50%;background:var(--cta)}
+.menu-btn{display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font:inherit;font-weight:600;color:var(--ink);cursor:pointer}
+.menu-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+@media(min-width:960px){ .menu-btn{display:none} .head-call{display:inline-flex} }
+@media(max-width:959px){
+  .nav{position:fixed;inset:0 0 0 auto;width:min(82vw,320px);flex-direction:column;align-items:stretch;gap:2px;background:var(--surface);border-left:1px solid var(--line);padding:74px 16px 24px;transform:translateX(100%);transition:transform .25s var(--ease);box-shadow:var(--shadow);overflow:auto}
+  .nav.open{transform:translateX(0)}
+  .nav a,.nav .na{padding:12px 12px;border-radius:10px;font-size:16px}
+  .nav-backdrop{position:fixed;inset:0;background:rgba(20,25,18,.35);opacity:0;pointer-events:none;transition:opacity .25s;z-index:55}
+  .nav-backdrop.open{opacity:1;pointer-events:auto}
+}
+.btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--font);font-weight:700;font-size:15.5px;text-decoration:none;padding:13px 24px;border-radius:12px;border:2px solid transparent;cursor:pointer;transition:transform .12s var(--ease),background .2s}
+.btn-primary{background:var(--cta);color:var(--cta-ink);box-shadow:var(--shadow-sm)}
+.btn-primary:hover{background:var(--cta-hover)}
+.btn-sm{padding:9px 16px;font-size:14.5px}
+.btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.link-lite{font-weight:700;color:var(--ink);text-decoration:none;font-size:15px;border-bottom:2px solid var(--amber);padding-bottom:2px}
+.arrow-link{display:inline-flex;align-items:center;gap:7px;font-weight:700;color:var(--cta);text-decoration:none;font-size:15px}
+.arrow-link svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.arrow-link.na{color:var(--muted);cursor:default}
+.arrow-link.na::after{content:"netrukus";font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:1px 6px}
+.crumb{font-size:13px;color:var(--muted);padding-top:16px}
+.crumb a{color:var(--muted);text-decoration:none}
+.crumb a:hover{color:var(--cta)}
+.section{padding:clamp(34px,5vw,60px) 0}
+.section h2{font-size:clamp(23px,3.2vw,32px);color:var(--ink)}
+.section .lead{color:var(--muted);max-width:64ch;margin-top:10px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--cta)}
+.eyebrow::before{content:"";width:22px;height:2px;background:var(--cta);border-radius:2px}
+.page-hero{padding:clamp(20px,3vw,36px) 0 clamp(16px,2vw,24px)}
+.page-hero h1{font-size:clamp(30px,4.6vw,46px);color:var(--ink);margin:10px 0 12px;max-width:20ch}
+.page-hero .value{font-size:clamp(17px,2.2vw,22px);color:var(--accent);font-weight:700;max-width:30ch;margin-bottom:10px}
+.page-hero .intro{font-size:clamp(16px,1.9vw,18px);color:var(--muted);max-width:62ch}
+.two{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,44px);align-items:start;margin-top:8px}
+@media(max-width:820px){.two{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:clamp(22px,3vw,30px)}
+.card h2{font-size:clamp(20px,2.6vw,26px);margin-bottom:8px}
+.card p{color:var(--muted)}
+.klist{list-style:none;display:grid;gap:12px;margin-top:8px}
+.klist li{display:flex;gap:12px;align-items:flex-start}
+.klist svg{width:22px;height:22px;stroke:var(--cta);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto;margin-top:2px}
+.klist b{color:var(--ink);display:block;font-size:15px}
+.klist span{color:var(--muted);font-size:14px}
+.do-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+@media(max-width:760px){.do-grid{grid-template-columns:1fr}}
+.do{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);padding:20px;display:flex;flex-direction:column;gap:8px}
+.do svg{width:28px;height:28px;stroke:var(--cta);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.do b{font-weight:700;font-size:16px;color:var(--ink)}
+.do span{font-size:14px;color:var(--muted)}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:24px}
+@media(max-width:620px){.pgrid{grid-template-columns:1fr 1fr}}
+figure.pf{margin:0;border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;background:var(--panel)}
+figure.pf img{width:100%;height:100%;aspect-ratio:4/3;object-fit:cover}
+.cta-band{background:var(--panel)}
+.cta-band .wrap{padding-block:clamp(28px,4vw,48px)}
+.cta-band h2{font-size:clamp(23px,3.2vw,32px)}
+.cta-band p{color:var(--muted);margin:10px 0 20px;max-width:56ch}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+footer{background:var(--footer);border-top:1px solid var(--line);padding:38px 0 28px;font-size:14px;color:var(--muted)}
+footer .cols{display:flex;justify-content:space-between;gap:28px;flex-wrap:wrap}
+footer .fcol{display:flex;flex-direction:column;gap:6px}
+footer .fcol b{color:var(--ink);font-size:15px;margin-bottom:2px}
+footer a{color:var(--cta);text-decoration:none;font-weight:600}
+footer .brandline{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+footer .brandline img{height:40px}
+footer .disc{color:var(--muted);font-size:12px;margin-top:18px;padding-top:14px;border-top:1px solid var(--line);max-width:70ch}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<a class="skip" href="#turinys">Pereiti prie turinio</a>
+
+<div class="bgbar" role="group" aria-label="Fono versijos peržiūra"><div class="wrap">
+  <span>Fono versija:</span>
+  <button type="button" data-bg="white" aria-pressed="false">Grynai balta</button>
+  <button type="button" data-bg="warm" aria-pressed="true">Šiltai balta</button>
+  <button type="button" data-bg="cool" aria-pressed="false">Vėsi šviesi</button>
+</div></div>
+
+<header class="site-head"><div class="wrap">
+  <a class="brand" href="index.html" aria-label="Kraulis — pradžia">
+    <img src="../content-review/img/kraulis-logo.png" alt="Kraulis" width="120" height="128">
+  </a>
+  <nav class="nav" id="nav" aria-label="Pagrindinė navigacija">
+    <a href="index.html">Pradžia</a>
+    <a href="paslaugos.html">Paslaugos</a>
+    <a href="apie-mus.html" aria-current="page">Apie mus</a>
+    <a href="kontaktai.html">Kontaktai</a>
+    <span class="na" role="link" aria-disabled="true">Patarimai</span>
+    <span class="na" role="link" aria-disabled="true">E-parduotuvė</span>
+  </nav>
+  <div class="head-actions">
+    <a class="head-call" href="tel:+37061024999"><span class="dot" aria-hidden="true"></span>+370 610 24999</a>
+    <a class="btn btn-primary btn-sm" href="kontaktai.html#uzklausa">Noriu komfortiško oro</a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg> Meniu
+    </button>
+  </div>
+</div></header>
+<div class="nav-backdrop" id="navBackdrop" hidden></div>
+
+<nav class="wrap crumb" aria-label="Naršymo kelias">
+  <a href="index.html">Pradžia</a> › <span aria-current="page">Apie mus</span>
+</nav>
+
+<main id="turinys">
+<section class="page-hero"><div class="wrap">
+  <span class="eyebrow">Apie mus</span>
+  <p class="value">Įranga, kuri veikia. Ir žmonės, kurie už ją atsako.</p>
+  <h1>Rūpinamės jūsų namų mikroklimatu</h1>
+  <p class="intro">Kraulis — šildymo, vėdinimo ir vėsinimo komanda Vilniuje ir ~100 km spinduliu. Parenkam, sumontuojam, subalansuojam ir prižiūrim — ir neapleidžiam po pardavimo.</p>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <div class="two">
+    <div class="card">
+      <h2>Mūsų darbo principas</h2>
+      <p>Įranga tarnauja ilgai, kai ja nuolat rūpinamasi. Todėl dirbam visą ciklą: parenkam pagal jūsų namus, tvarkingai sumontuojam, subalansuojam oro srautus ir reguliariai prižiūrim. Servisas lieka su jumis ir po darbų.</p>
+    </div>
+    <div class="card">
+      <h2>Turite įrangą, bet negaunate pagalbos?</h2>
+      <p>Diagnozuojam, remontuojam ir prižiūrim kondicionierius, šilumos siurblius ir rekuperatorius. Nesvarbu, kur pirkote — padedam susitvarkyti.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="section" style="background:var(--surface);border-block:1px solid var(--line)"><div class="wrap">
+  <span class="eyebrow">Patirtis ir kvalifikacija</span>
+  <h2>Kodėl galima pasitikėti</h2>
+  <ul class="klist" style="margin-top:22px;grid-template-columns:repeat(2,1fr);display:grid;gap:16px">
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="m9 12 2 2 4-4"/></svg><span><b>Atestuoti darbai</b>F-dujos (freonas) ir elektrosauga.</span></li>
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg><span><b>Ilgametė patirtis</b>Realūs sumontuoti ir prižiūrimi ŠVOK objektai.</span></li>
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h4l2 5 4-10 2 5h4"/></svg><span><b>Servisas po darbų</b>Nepaliekam kliento be serviso — tai principas.</span></li>
+    <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span><b>Vilnius ir ~100 km</b>Atvykstam ir atsakom per 1–2 darbo dienas.</span></li>
+  </ul>
+</div></section>
+
+<section class="section"><div class="wrap">
+  <span class="eyebrow">Ką darome</span>
+  <h2>Nuo montavimo iki serviso</h2>
+  <div class="do-grid">
+    <div class="do"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11 12 3l9 8"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/></svg><b>Montavimas</b><span>Naujos sistemos parinkimas, montavimas ir suderinimas.</span><a class="arrow-link" href="paslaugos.html">Paslaugos <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    <div class="do"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="9" rx="3"/><path d="M6 19c0-2 2-2 2-4M12 19c0-2 2-2 2-4M18 15v4"/></svg><b>Priežiūra ir remontas</b><span>Kondicionieriai, šilumos siurbliai, rekuperatoriai.</span><a class="arrow-link" href="paslaugos.html">Paslaugos <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    <div class="do"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18c3-4 6 4 9 0s6 4 8 0"/><path d="M4 12c3-4 6 4 9 0s6 4 8 0"/><path d="M4 6c3-4 6 4 9 0s6 4 8 0"/></svg><b>Rekuperacijos balansavimas</b><span>Oro srautų matavimas ir derinimas.</span><a class="arrow-link" href="paslaugos.html">Paslaugos <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </div>
+  <p style="margin-top:20px"><span class="arrow-link na" role="link" aria-disabled="true">Įranga parduotuvėje</span></p>
+</div></section>
+
+<section class="section" style="background:var(--surface);border-block:1px solid var(--line)"><div class="wrap">
+  <span class="eyebrow">Mūsų darbai</span>
+  <h2>Keletas mūsų darbų</h2>
+  <p class="lead">Keletas realių Kraulio darbų — daugiau pridėsim, kai turėsim naujų.</p>
+  <div class="pgrid">
+    <figure class="pf"><img src="../content-review/img/02-olimpia-lauko-blokas.jpg" alt="Sumontuotas kondicionieriaus lauko blokas ant sienos" loading="lazy"></figure>
+    <figure class="pf"><img src="../content-review/img/03-rekuperatorius.jpg" alt="Sumontuotas rekuperatorius su ortakiais patalpoje" loading="lazy"></figure>
+    <figure class="pf"><img src="../content-review/img/05-toshiba-servisas.jpg" alt="Toshiba šilumos siurblio servisas su manometrais" loading="lazy"></figure>
+    <figure class="pf"><img src="../content-review/img/06-oro-srauto-matavimas.jpg" alt="Oro srauto matavimas prie lubų difuzoriaus" loading="lazy"></figure>
+    <figure class="pf"><img src="../content-review/img/07-trane-agregatas.jpg" alt="Sumontuotas Trane vėdinimo agregatas" loading="lazy"></figure>
+    <figure class="pf"><img src="../content-review/img/01-termovizija-kondicionierius.jpg" alt="Termovizinė kondicionieriaus patikra" loading="lazy"></figure>
+  </div>
+</div></section>
+
+<section class="cta-band"><div class="wrap">
+  <span class="eyebrow">Pradžia</span>
+  <h2>Pasirūpinsim ir jūsų namais</h2>
+  <p>Palikit telefoną arba parašykite — susisieksim ir pasakysim, ko reikia. Atsakom per 1–2 darbo dienas.</p>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="kontaktai.html#uzklausa">Noriu komfortiško oro</a>
+    <a class="link-lite" href="tel:+37061024999">Skambinti: +370 610 24999</a>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div class="cols">
+    <div class="fcol">
+      <div class="brandline"><img src="../content-review/img/kraulis-logo.png" alt="Kraulis" width="40" height="43"></div>
+      <span>Šildymas, vėdinimas, vėsinimas</span>
+      <span>Vilnius ir ~100 km spinduliu</span>
+    </div>
+    <div class="fcol">
+      <b>Kontaktai</b>
+      <a href="tel:+37061024999">+370 610 24999</a>
+      <a href="mailto:audrius@kraulis.lt">audrius@kraulis.lt</a>
+      <a href="kontaktai.html">Kontaktų puslapis →</a>
+    </div>
+    <div class="fcol">
+      <b>Sekite</b>
+      <a href="https://facebook.com/KraulisMB/" target="_blank" rel="noopener noreferrer" aria-label="Kraulis Facebook (atsidaro naujame lange)">Facebook ↗</a>
+      <a href="https://instagram.com/kraulismb/" target="_blank" rel="noopener noreferrer" aria-label="Kraulis Instagram (atsidaro naujame lange)">Instagram ↗</a>
+    </div>
+  </div>
+  <p class="disc">Prototipas (staging, noindex) — ne kraulis.lt produkcija. Nuotraukos — tikri Kraulio darbai. Kainos ir „nemokama" nenaudojamos iki patvirtinimo. Logotipas — kraulis.lt.</p>
+</div></footer>
+
+<script>
+const root=document.documentElement;
+document.querySelectorAll('.bgbar [data-bg]').forEach(b=>{
+  b.addEventListener('click',()=>{ root.setAttribute('data-bg',b.dataset.bg);
+    document.querySelectorAll('.bgbar [data-bg]').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); });
+});
+const nav=document.getElementById('nav'), mb=document.getElementById('menuBtn'), bd=document.getElementById('navBackdrop');
+function setMenu(open){ nav.classList.toggle('open',open); bd.hidden=!open; bd.classList.toggle('open',open); mb.setAttribute('aria-expanded',String(open)); }
+mb.addEventListener('click',()=>setMenu(!nav.classList.contains('open')));
+bd.addEventListener('click',()=>setMenu(false));
+nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') setMenu(false); });
+</script>
+</body>
+</html>
